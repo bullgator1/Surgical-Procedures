@@ -81,15 +81,25 @@
   #search::placeholder { color: var(--ink-faint); }
 
   .nav { padding: 8px 0 24px; flex: 1; }
-  .nav-section { margin-top: 8px; }
+  .nav-section { margin-top: 2px; }
   .nav-section-head {
     font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--ink-faint); padding: 12px 24px 6px; display: flex; align-items: center; gap: 8px;
+    color: var(--ink-faint); padding: 11px 22px 11px 18px; display: flex; align-items: center; gap: 8px;
+    width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+    transition: color .12s, background .12s;
   }
-  .nav-section-head::after { content: ""; flex: 1; height: 1px; background: var(--line-soft); }
+  .nav-section-head:hover { color: var(--ink); background: var(--paper); }
+  .nav-section-head.is-best { color: var(--accent); }
+  .nav-section-head.is-best .nsh-count { color: var(--accent); border-color: var(--accent-soft); }
+  .nsh-caret { font-size: 9px; color: var(--ink-faint); transition: transform .18s; transform: rotate(90deg); display: inline-block; width: 9px; }
+  .nav-section.collapsed .nsh-caret { transform: rotate(0deg); }
+  .nsh-label { flex: 1; }
+  .nsh-count { font-size: 10px; color: var(--ink-faint); background: var(--paper); border: 1px solid var(--line-soft); border-radius: 999px; padding: 1px 7px; letter-spacing: 0; }
+  .nav-section-items { overflow: hidden; }
+  .nav-section.collapsed .nav-section-items { display: none; }
   .nav-item {
     display: block; width: 100%; text-align: left; background: none; border: none; cursor: pointer;
-    padding: 8px 24px 8px 26px; font-family: var(--sans); font-size: 13.5px; color: var(--ink-soft);
+    padding: 8px 24px 8px 30px; font-family: var(--sans); font-size: 13.5px; color: var(--ink-soft);
     border-left: 2px solid transparent; transition: background .12s, color .12s, border-color .12s; line-height: 1.3;
   }
   .nav-item:hover { background: var(--paper); color: var(--ink); }
@@ -115,6 +125,38 @@
   .welcome .stat-row { margin-top: 32px; display: flex; gap: 32px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
   .stat .num { font-family: var(--serif); font-size: 30px; color: var(--accent); line-height: 1; }
   .stat .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-top: 6px; }
+
+  /* minimal landing prompt + how-to button + build stamp */
+  .welcome-prompt { font-size: 15px; color: var(--ink-faint); }
+  .howto-btn {
+    margin-top: 30px; background: none; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 9px 16px; font-family: var(--sans); font-size: 13px; color: var(--ink-soft); cursor: pointer;
+    transition: background .12s, color .12s, border-color .12s;
+  }
+  .howto-btn:hover { background: var(--paper-2); color: var(--accent); border-color: var(--accent-soft); }
+  .build-stamp { margin-top: 26px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--ink-faint); opacity: 0.7; }
+
+  /* How-to overlay panel */
+  .howto-panel {
+    position: fixed; inset: 0; background: rgba(26,29,33,0.4); z-index: 80;
+    display: none; align-items: flex-start; justify-content: center; padding: 6vh 18px 18px; overflow-y: auto;
+  }
+  .howto-panel.open { display: flex; }
+  .howto-card {
+    background: var(--paper-2); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+    max-width: 680px; width: 100%; padding: 32px 34px 28px; position: relative; animation: fade .25s ease;
+  }
+  .howto-card .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .howto-card h2 { font-family: var(--serif); font-weight: 500; font-size: 28px; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .howto-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 14px; }
+  .howto-card .pillars { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin: 20px 0; }
+  .howto-card .howto-foot { font-size: 12px; color: var(--ink-faint); border-top: 1px solid var(--line-soft); padding-top: 14px; margin-top: 18px; }
+  .howto-close {
+    position: absolute; top: 16px; right: 18px; background: none; border: none; font-size: 26px;
+    line-height: 1; color: var(--ink-faint); cursor: pointer; padding: 2px 6px;
+  }
+  .howto-close:hover { color: var(--accent); }
+  @media (max-width: 560px){ .howto-card .pillars { grid-template-columns: 1fr; } .howto-card { padding: 26px 22px; } }
 
   /* ---------- PROCEDURE VIEW ---------- */
   .proc { animation: fade .35s ease; }
@@ -186,7 +228,7 @@
 
   @media (max-width: 860px) {
     .app { grid-template-columns: 1fr; }
-    .sidebar { position: fixed; left: 0; top: 0; width: 300px; transform: translateX(-100%); transition: transform .25s; z-index: 50; box-shadow: var(--shadow); }
+    .sidebar { position: fixed; left: 0; top: 0; width: 86%; max-width: 340px; height: 100%; transform: translateX(-100%); transition: transform .25s; z-index: 60; box-shadow: var(--shadow); background: var(--paper-2); -webkit-overflow-scrolling: touch; }
     .sidebar.open { transform: none; }
     .topbar-mobile { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--line); background: var(--paper-2); position: sticky; top: 0; z-index: 40; }
     .topbar-mobile button { background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 7px 11px; font-size: 18px; cursor: pointer; line-height: 1; }
@@ -195,7 +237,10 @@
     .welcome h2 { font-size: 28px; }
     .welcome .pillars { grid-template-columns: 1fr; }
     .proc-head h2 { font-size: 26px; }
-    .scrim { position: fixed; inset: 0; background: rgba(26,29,33,0.3); z-index: 45; }
+    /* scrim dims the content while the drawer is open; sits below the sidebar (z 55 < 60).
+       The .app stacking-context trap is removed on mobile (below) so this ordering holds. */
+    .scrim { position: fixed; inset: 0; background: rgba(26,29,33,0.35); z-index: 55; }
+    .app { z-index: auto; }
   }
 </style>
 </head>
@@ -854,7 +899,8 @@ const PROCEDURES = [
   recall: {
     pimps: [
       "**Epidural hematoma classic course:** loss of consciousness → a **lucid interval** → neurologic deterioration; CT shows a **lenticular (lens-shaped)** clot ('Epidural = LEnticular'), often with an ipsilateral blown pupil. Contrast: subdural is crescent-shaped.",
-      "**Cushing's triad** of raised ICP: **hypertension, bradycardia, and irregular respirations** — a late, ominous sign demanding immediate ICP control."
+      "**Cushing's triad** of raised ICP: **hypertension, bradycardia, and irregular respirations** — a late, ominous sign demanding immediate ICP control.",
+      "**Basilar skull fracture** is suggested by **raccoon eyes** (periorbital ecchymosis), **Battle's sign** (mastoid ecchymosis), and CSF oto/rhinorrhea — avoid blind nasal instrumentation (NG/nasal airway) for fear of intracranial passage."
     ],
     mnemonics: [
       "**Glasgow Coma Scale** = Eyes (4) + Verbal (5) + Motor (6), range 3–15 ('4 eyes' for eye-opening); GCS ≤8 generally means intubate."
@@ -1937,7 +1983,13 @@ const PROCEDURES = [
     },
   recall: {
     pimps: [
-      "**Virchow's triad** (thrombosis risk): **stasis, endothelial injury, and a hypercoagulable state** — the framework behind perioperative VTE and arterial/graft thrombosis."
+      "**Virchow's triad** (thrombosis risk): **stasis, endothelial injury, and a hypercoagulable state** — the framework behind perioperative VTE and arterial/graft thrombosis.",
+      "**AAA repair threshold:** elective repair generally at **>5.5 cm**, or for rapid growth, symptoms, or distal embolization — and regardless of size if ruptured/symptomatic.",
+      "**Blue toe syndrome:** sudden painful cyanotic toes from **atheroembolism** off a proximal plaque — distal emboli with pulses still present."
+    ],
+    mnemonics: [
+      "**The 6 P's of acute arterial occlusion: Pain, Pallor, Paralysis, Paresthesia, Poikilothermia (Polar/cold), and Pulselessness** — the limb-ischemia checklist every surgeon expects you to rattle off.",
+      "**Leriche syndrome** (aortoiliac occlusive disease) — 'CIA': **Claudication (buttock/thigh), Impotence, and Atrophy** of the legs."
     ]
   },
     source: "Jaffe 5e (2014), Cardiovascular Surgery §6.3, p. 428–463 (abdominal aorta; infrainguinal bypass; arterial embolectomy; lumbar sympathectomy; venous surgery; portal hypertension; AV/permanent vascular access; vein stripping/ablation)."
@@ -2049,6 +2101,12 @@ const PROCEDURES = [
         "Watch for RV failure/pulmonary edema (overhydration), atrial fibrillation, air leak, and bleeding."
       ]
     },
+  recall: {
+    pimps: [
+      "**Pancoast tumor** (apical/superior sulcus) classically produces **Horner's syndrome** (miosis, anhidrosis, ptosis) plus C8–T1 arm pain/weakness from brachial-plexus and sympathetic-chain invasion.",
+      "**Most common thyroid cancer is papillary** ('Papillary = Popular,' ~80%) — recognized by **psammoma bodies** on histology (a classic surgeon's-eye pathology zinger)."
+    ]
+  },
     source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 281–292 (lobectomy/pneumonectomy; wedge resection; shared OLV considerations)."
   },
   {
@@ -2259,6 +2317,12 @@ const PROCEDURES = [
         "SVC-syndrome patients may have ongoing airway edema."
       ]
     },
+  recall: {
+    pimps: [
+      "**Pancoast (superior sulcus) tumor:** an apical lung tumor invading the brachial plexus, sympathetic chain, and vertebral bodies → arm pain, hand weakness, and **Horner's syndrome**.",
+      "**Horner's syndrome** (cervical sympathetic injury) — 'MAP': **Miosis, Anhidrosis (ipsilateral face), Ptosis**."
+    ]
+  },
     source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 308–319 (excision of mediastinal tumor; mediastinoscopy)."
   },
   {
@@ -2363,6 +2427,11 @@ const PROCEDURES = [
         "Watch for air leak, bleeding, and pneumothorax."
       ]
     },
+  recall: {
+    pimps: [
+      "**The classic thoracic-surgeon joke — 'the four birds of the chest':** the **azygos** vein, the **hemiazygos** vein, the **'esopha-goose'** (esophagus), the **thoracic duck** (thoracic duct), and the **'vagoose'** (vagus nerve). The thoracic duct is the real one to remember — injury → **chylothorax**."
+    ]
+  },
     source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 326–329."
   },
   {
@@ -2573,6 +2642,11 @@ const PROCEDURES = [
         "Most discharged from recovery (minimal pain)."
       ]
     },
+  recall: {
+    pimps: [
+      "**Zenker's diverticulum:** a false pharyngoesophageal (pulsion) diverticulum herniating through **Killian's triangle** at the upper esophageal sphincter → dysphagia, regurgitation of undigested food, halitosis, and a neck mass — a classic aspiration-risk airway. Diagnosis: barium swallow."
+    ]
+  },
     source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 181–195 (laryngoscopy/bronchoscopy/esophagoscopy; panendoscopy; operative microlaryngoscopy; airway laser surgery; Zenker's diverticulectomy). Overlaps the Thoracic bronchoscopy entry (p. 320) — this is the head-and-neck/laser-focused version."
   },
   {
@@ -2625,6 +2699,12 @@ const PROCEDURES = [
         "Watch for bleeding, subcutaneous emphysema, and tube obstruction."
       ]
     },
+  recall: {
+    anatomy: [
+      "**The thyroid isthmus crosses the trachea anteriorly (≈2nd–4th rings)** and is often divided during tracheostomy — bleeding here and the high-riding innominate artery below are the vascular hazards.",
+      "**Recurrent laryngeal nerves** sit in the tracheoesophageal grooves — bilateral injury causes airway obstruction; relevant whenever the trachea/neck is dissected."
+    ]
+  },
     source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 190–195 (tracheotomy/tracheostomy; cricothyroidotomy)."
   },
   {
@@ -2678,6 +2758,12 @@ const PROCEDURES = [
         "Watch for bleeding, flap compromise, and airway/stoma issues."
       ]
     },
+  recall: {
+    anatomy: [
+      "**Recurrent laryngeal nerves** run in the **tracheoesophageal grooves** and dive behind the cricothyroid muscle — the nerves obsessively protected in thyroid/neck surgery. **Unilateral injury → hoarseness; bilateral injury → airway obstruction** (the post-extubation stridor emergency you must anticipate).",
+      "**Ligament of Berry** tethers the thyroid to the trachea (and sits right by the RLN); the **Delphian node** is the midline pre-laryngeal node that can flag laryngeal/thyroid malignancy."
+    ]
+  },
     source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 203–223 (partial/total laryngectomy; glossectomy; neck dissection and free-flap reconstruction; lymph node biopsy)."
   },
   {
@@ -2783,6 +2869,12 @@ const PROCEDURES = [
         "Watch for hematoma and nerve deficit."
       ]
     },
+  recall: {
+    pimps: [
+      "**Most common benign salivary tumor is the pleomorphic adenoma** (benign mixed tumor, ~66%; 'Pleomorphic = Popular'), usually in the **parotid** — slow-growing and well-delineated.",
+      "**Warthin's tumor** is the second most common benign salivary tumor — almost always parotid, can be bilateral, rarely malignant."
+    ]
+  },
     source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 224–234 (parotidectomy; submandibular gland excision)."
   },
   {
@@ -3799,7 +3891,11 @@ const PROCEDURES = [
     },
   recall: {
     pimps: [
-      "**Hamman's sign/crunch:** a crunching sound synchronous with the heartbeat on auscultation, from air in the mediastinum — seen with **Boerhaave's syndrome** (esophageal perforation) and pneumomediastinum."
+      "**Hamman's sign/crunch:** a crunching sound synchronous with the heartbeat on auscultation, from air in the mediastinum — seen with **Boerhaave's syndrome** (esophageal perforation) and pneumomediastinum.",
+      "**Boerhaave's syndrome:** full-thickness esophageal rupture from forceful vomiting → **Hamman's crunch** and mediastinitis (a surgical emergency). Contrast the **Mallory-Weiss tear:** a mucosal tear at the GE junction after retching → upper-GI bleeding (usually self-limited).",
+      "**Achalasia** shows a **'bird's-beak'** tapering on barium swallow (failure of LES relaxation) — the dilated, food-retaining esophagus is the aspiration risk you're managing.",
+      "**Mendelson's syndrome:** chemical aspiration pneumonitis from gastric contents — the reason these reflux/obstruction patients get full-stomach precautions and a secured airway.",
+      "**The 'four birds of the chest'** (thoracic-surgeon classic): azygos, hemiazygos, 'esopha-goose,' thoracic duck (thoracic duct), and 'vagoose' (vagus) — duct injury causes chylothorax."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.1, p. 482–491, 585–588 (esophagostomy; diverticulectomy; perforation; esophagomyotomy/Heller; fundoplication; laparoscopic fundoplication and Heller myotomy; shared esophageal anesthetic considerations p. 494)."
@@ -3857,7 +3953,8 @@ const PROCEDURES = [
     },
   recall: {
     pimps: [
-      "**Artery of Adamkiewicz** (great radicular artery) is the dominant supply to the lower anterior spinal cord — its watershed territory is why thoracoabdominal/aortic and esophageal mobilization carry anterior-spinal-syndrome (paraplegia) risk."
+      "**Artery of Adamkiewicz** (great radicular artery) is the dominant supply to the lower anterior spinal cord — its watershed territory is why thoracoabdominal/aortic and esophageal mobilization carry anterior-spinal-syndrome (paraplegia) risk.",
+      "**The most common cause of esophageal perforation is iatrogenic** (instrumentation, classically the cervical esophagus) — relevant whenever you pass an OG/TEE/bougie in these patients."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.1, p. 492–504; minimally invasive esophagectomy shares these considerations. OLV/DLT technique cross-references Thoracic Surgery p. 285."
@@ -4037,7 +4134,9 @@ const PROCEDURES = [
     ],
     pimps: [
       "**Rovsing's sign:** LLQ palpation produces RLQ pain (appendicitis).",
-      "**Psoas sign:** pain on hip extension (retrocecal/retroperitoneal appendix). **Obturator sign:** pain on internal rotation of the flexed hip (pelvic appendix)."
+      "**Psoas sign:** pain on hip extension (retrocecal/retroperitoneal appendix). **Obturator sign:** pain on internal rotation of the flexed hip (pelvic appendix).",
+      "**Carcinoid triad** (carcinoid syndrome, usually with hepatic mets) — 'FDR': **Flushing, Diarrhea, and Right-sided heart failure** (tricuspid/pulmonary fibrosis); watch for intraop carcinoid crisis — octreotide is the rescue.",
+      "**Polyposis syndromes:** **Peutz-Jeghers** = hamartomatous GI polyps + buccal/perioral **pigmentation** ('Peutz = Pigmentation'); **Gardner's** = colonic adenomas (FAP variant) + osteomas, sebaceous cysts, and desmoids ('SOD')."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.3, p. 521–533, 640–649, and §7.2 ostomy p. 526–528 (appendectomy; Meckel's; small-bowel resection; enterolysis; enteric fistulae; ostomy procedures; exploratory/staging laparotomy; intraabdominal/retroperitoneal tumor; subphrenic abscess; shared intestinal/peritoneal considerations p. 534)."
@@ -4096,6 +4195,13 @@ const PROCEDURES = [
   recall: {
     pearls: [
       "**Hartmann's procedure:** resection of the diseased segment with an **end colostomy and a stapled/oversewn rectal stump** (no primary anastomosis) — the go-to for complicated/perforated diverticulitis or obstructing left-sided lesions; reversal is a later second operation."
+    ],
+    pimps: [
+      "**Ogilvie's syndrome:** acute massive colonic dilatation **without** mechanical obstruction (pseudo-obstruction) — risks cecal perforation; neostigmine can decompress.",
+      "**Gardner's syndrome** (FAP variant): colonic adenomas with near-certain malignant potential, plus osteomas, sebaceous cysts, and desmoid tumors ('A Gardner plants SOD')."
+    ],
+    anatomy: [
+      "**Ligament of Treitz** (duodenojejunal flexure) is the great divide: bleeding **proximal** = upper GI bleed, **distal** = lower GI bleed (the vast majority of lower GI bleeds are colonic)."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.4, p. 539–548, 602 (total proctocolectomy; partial colectomy; colostomy; stoma closure/peristomal hernia; laparoscopic bowel resection; shared large-bowel considerations p. 546)."
@@ -4214,7 +4320,8 @@ const PROCEDURES = [
     },
   recall: {
     pimps: [
-      "**Pringle maneuver:** temporary occlusion of the porta hepatis to control inflow when the liver parenchyma is actively bleeding — if bleeding continues despite Pringle, suspect hepatic-vein/IVC (retrohepatic) injury."
+      "**Pringle maneuver:** temporary occlusion of the porta hepatis to control inflow when the liver parenchyma is actively bleeding — if bleeding continues despite Pringle, suspect hepatic-vein/IVC (retrohepatic) injury.",
+      "**Budd-Chiari syndrome:** hepatic-vein outflow thrombosis → painful hepatomegaly, ascites, and portal hypertension (a cause of the sick liver patient you may meet)."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.5, p. 563–567 (hepatic resection; hepatorrhaphy; shared hepatic considerations p. 567). Cirrhosis/portal HTN evaluation cross-references p. 448."
@@ -4278,7 +4385,9 @@ const PROCEDURES = [
     pimps: [
       "**Murphy's sign:** arrest of inspiration on palpation under the right costal margin (inflamed gallbladder meets the hand) — acute cholecystitis.",
       "**Courvoisier's law:** a palpable, **nontender** enlarged gallbladder with jaundice suggests malignant distal CBD obstruction (e.g. pancreatic cancer), not stones.",
-      "**Charcot's triad** of ascending cholangitis: **fever/chills, jaundice, and RUQ pain.** **Reynolds' pentad** adds **#4 mental-status change and #5 shock/sepsis** → suppurative cholangitis (a drainage emergency)."
+      "**Charcot's triad** of ascending cholangitis: **fever/chills, jaundice, and RUQ pain.** **Reynolds' pentad** adds **#4 mental-status change and #5 shock/sepsis** → suppurative cholangitis (a drainage emergency).",
+      "**Mirizzi syndrome:** a stone impacted in the cystic duct/Hartmann's pouch extrinsically compresses the common hepatic duct → obstructive jaundice (a cholecystectomy trap).",
+      "**Klatskin tumor:** a cholangiocarcinoma at the **confluence of the right and left hepatic ducts** — a hilar bile-duct cancer presenting with painless obstructive jaundice."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.5, p. 572–591 (open and laparoscopic cholecystectomy; CBD exploration; biliary drainage; sphincteroplasty; bile-duct tumor; choledochal cyst; shared biliary considerations p. 580)."
@@ -4340,7 +4449,9 @@ const PROCEDURES = [
     ],
     pimps: [
       "**Whipple's triad** of insulinoma: (1) hypoglycemia (glucose <50), (2) symptoms of hypoglycemia (mental-status change/vasomotor instability), (3) relief with glucose. Insulinoma is the most common islet-cell tumor.",
-      "**Somatostatinoma** is associated with gallstones (it inhibits gallbladder contraction)."
+      "**Somatostatinoma** is associated with gallstones (it inhibits gallbladder contraction).",
+      "**The Whipple (pancreaticoduodenectomy)** removes the pancreatic head + duodenum (± distal stomach) and reconstructs with pancreatico-, choledocho-, and gastro-jejunostomy — the long, fluid-shifting case behind the entry.",
+      "**Hemorrhagic pancreatitis signs: Cullen's** (periumbilical bruising) and **Grey-Turner's** (flank bruising) — retroperitoneal blood tracking to the skin."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.6, p. 624–632 (operative drainage for pancreatitis; pseudocyst drainage; longitudinal pancreaticojejunostomy; pancreatectomy; Whipple resection; shares biliary considerations p. 580)."
@@ -4460,10 +4571,14 @@ const PROCEDURES = [
       "**Hypercalcemia symptoms:** 'stones, bones, abdominal groans, and psychiatric overtones'; ECG shows a **short QT** (and prolonged PR)."
     ],
     pimps: [
-      "**Chvostek's = CHeek:** facial-muscle twitch on tapping the facial nerve in hypocalcemia (the post-thyroid/parathyroid complication to watch)."
+      "**Chvostek's = CHeek:** facial-muscle twitch on tapping the facial nerve in hypocalcemia (the post-thyroid/parathyroid complication to watch).",
+      "**Most common thyroid cancer is papillary** ('Papillary = Popular,' ~80%), identified by **psammoma bodies** and Orphan-Annie nuclei; it spreads lymphatically and has the best prognosis. (Medullary arises from parafollicular C cells → calcitonin, MEN-II.)"
     ],
     pearls: [
       "**MEN syndromes** (screen before adrenal/thyroid/parathyroid surgery): **MEN-I = '3 Ps'** (Pituitary, Pancreatic, Parathyroid); **MEN-IIa** = medullary thyroid cancer + pheochromocytoma + hyperparathyroidism; **MEN-IIb** = medullary thyroid cancer + pheo + mucosal neuromas + marfanoid habitus."
+    ],
+    anatomy: [
+      "**Recurrent laryngeal nerve** lives in the tracheoesophageal groove — the structure you protect; **unilateral injury → hoarseness, bilateral → airway obstruction** (watch for post-extubation stridor). The **superior laryngeal (external) branch** supplies the cricothyroid ('the high-note nerve')."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.11 Endocrine, p. 670–682 (thyroglossal duct cyst; thyroidectomy; parathyroidectomy)."
@@ -4695,6 +4810,11 @@ const PROCEDURES = [
         "Watch for anastomotic disruption, hyperkalemia, delayed graft function; protect fistula."
       ]
     },
+  recall: {
+    pimps: [
+      "**Four types of rejection by timing:** **hyperacute** (immediate, in the OR — preformed antibodies; treatment is to remove the graft), **accelerated acute** (7–10 days), **acute** (weeks–months, T-cell mediated), and **chronic** (months–years)."
+    ]
+  },
     source: "Jaffe 5e (2014), General Surgery §7.13 Transplantation, p. 694–704 (cadaveric and living-donor kidney transplantation; kidney/pancreas transplantation; transplant nephrectomy). Live-donor nephrectomy and the urology renal-transplant context overlap Urology §9.0."
   },
   {
@@ -4748,6 +4868,11 @@ const PROCEDURES = [
         "Monitor for primary nonfunction, vascular thrombosis, and metabolic derangement."
       ]
     },
+  recall: {
+    pimps: [
+      "**Rejection timing:** **hyperacute** (immediate intraoperative, preformed antibody → explant), **accelerated acute** (7–10 d), **acute** (weeks–months, T-cell mediated, usually steroid-responsive), and **chronic** (months–years)."
+    ]
+  },
     source: "Jaffe 5e (2014), General Surgery §7.13 Transplantation, p. 705–719 (orthotopic and living-donor liver transplantation). Note: this is the standalone hepatic transplant entry; the CV heart/lung-transplant entry is separate."
   },
   {
@@ -4856,7 +4981,9 @@ const PROCEDURES = [
   recall: {
     pimps: [
       "**Beck's triad** of cardiac tamponade: **JVD, muffled heart sounds, and hypotension** (often with pulsus paradoxus and Kussmaul's sign) — the bedside picture that should trigger immediate decompression.",
-      "**Kehr's sign** (left shoulder pain) points to splenic injury/hemoperitoneum in the trauma patient."
+      "**Kehr's sign** (left shoulder pain) points to splenic injury/hemoperitoneum in the trauma patient.",
+      "**Most common intra-abdominal organ injured in penetrating trauma is the small bowel** (in blunt trauma, spleen/liver lead).",
+      "**Basilar skull fracture signs: 'raccoon eyes'** (periorbital bruising) and **Battle's sign** (mastoid bruising) — a relative contraindication to nasal tubes/NG (cribriform-plate risk)."
     ]
   },
     source: "Jaffe 5e (2014), General Surgery §7.14 Trauma, p. 730–751 (tube thoracostomy; ED thoracotomy; neck-trauma exploration; chest trauma — tamponade/great-vessel/tracheobronchial; abdominal trauma — damage control/hepatic-splenic/vascular). Chest-trauma airway/OLV overlaps Thoracic and Cardiovascular sections."
@@ -6025,6 +6152,11 @@ const PROCEDURES = [
         "Watch for hypothermia, ongoing bleeding, sepsis, and graft/flap viability."
       ]
     },
+  recall: {
+    pimps: [
+      "**Curling's ulcer:** a stress gastric/duodenal ulcer after major **burn** injury ('Curling's = curling-iron burn'). (Contrast **Cushing's ulcer:** stress ulcer after CNS injury/raised ICP.)"
+    ]
+  },
     source: "Jaffe 5e (2014), Plastic and Reconstructive Surgery §11.0, p. 1162–1174 (pressure sore reconstruction; free skin graft for burn wound with tangential excision)."
   },
 {
@@ -6669,7 +6801,9 @@ const PROCEDURES = [
   recall: {
     pimps: [
       "**Intussusception:** 'currant-jelly' stools + colicky abdominal pain (± a palpable sausage-shaped mass) in a young child — the classic telescoping-bowel presentation; air/contrast enema is both diagnostic and often therapeutic.",
-      "**Necrotizing enterocolitis (NEC):** a premature neonate with abdominal distension and **pneumatosis intestinalis** (air in the bowel wall) on film — the dreaded neonatal GI emergency."
+      "**Necrotizing enterocolitis (NEC):** a premature neonate with abdominal distension and **pneumatosis intestinalis** (air in the bowel wall) on film — the dreaded neonatal GI emergency.",
+      "**The most common congenital heart defect is the VSD** — ~80% involve the membranous septum, producing a left-to-right shunt and pulmonary overcirculation (the shunt physiology you balance intraoperatively).",
+      "**Pyloric stenosis:** projectile non-bilious vomiting in a ~3–6-week-old with a palpable 'olive' and a **'string sign'** on imaging; the metabolic signature is **hypochloremic, hypokalemic metabolic alkalosis** — a **medical** emergency, not surgical: rehydrate and correct the alkalosis BEFORE the OR (alkalosis predisposes to postoperative apnea)."
     ]
   },
     source: "Jaffe 5e (2014), Pediatric Surgery §12.0, p. 1326–1354 (omphalocele/gastroschisis; congenital diaphragmatic hernia; tracheoesophageal fistula; pediatric bronchoscopy/esophagoscopy). Adult thoracic/foregut technique cross-references Thoracic and General Surgery."
@@ -6823,57 +6957,336 @@ function groupBySection(list){
   return map;
 }
 
+/* ============================================================
+   SEARCH SYNONYMS + COLLAPSIBLE NAV  (added feature)
+   ------------------------------------------------------------
+   SYNONYM_GROUPS: each inner array is a set of equivalent search
+   terms. If the user's query contains ANY term in a group, the
+   search also matches entries containing ANY OTHER term in that
+   group. This lets lay/alternate terms ("nose job", "windpipe",
+   "kidney stone") find the right procedure without editing all
+   122 data objects. Purely additive to the literal substring match.
+   ============================================================ */
+const SYNONYM_GROUPS = [
+  // --- Ophthalmic ---
+  ["nose job","rhinoplasty","nasal reshaping"],
+  ["lazy eye","crossed eyes","strabismus","squint"],
+  ["cataract","lens replacement","iol"],
+  ["glaucoma","trabeculectomy","eye pressure"],
+  ["droopy eyelid","ptosis","eyelid lift","blepharoplasty"],
+  ["tear duct","dcr","dacryocystorhinostomy","blocked tear duct"],
+  ["eye removal","enucleation","evisceration"],
+  ["detached retina","retinal detachment","vitrectomy","scleral buckle"],
+  ["corneal transplant","keratoplasty","cornea graft"],
+  // --- Airway / ENT ---
+  ["windpipe","trachea","tracheal","tracheostomy","tracheotomy"],
+  ["voice box","larynx","laryngeal","laryngectomy"],
+  ["tonsils","tonsillectomy","adenoids","adenoidectomy","t&a"],
+  ["sinus","nasal surgery","fess","endoscopic sinus"],
+  ["ear surgery","mastoid","tympanoplasty","otologic","acoustic neuroma","cochlear"],
+  ["sleep apnea","osa","uppp","snoring surgery"],
+  ["salivary","parotid","parotidectomy","submandibular"],
+  ["scope the airway","laryngoscopy","panendoscopy","bronchoscopy"],
+  ["jaw joint","tmj","temporomandibular"],
+  // --- Neuro ---
+  ["brain aneurysm","cerebral aneurysm","clipping","berry aneurysm"],
+  ["brain tumor","craniotomy tumor","glioma","meningioma resection"],
+  ["head bleed","subdural","epidural hematoma","brain trauma","hematoma evacuation"],
+  ["pituitary","transsphenoidal","sella"],
+  ["shunt","vp shunt","hydrocephalus","ventriculoperitoneal"],
+  ["trigeminal neuralgia","microvascular decompression","mvd","tic douloureux"],
+  ["chiari","craniocervical decompression"],
+  ["deep brain stimulator","dbs","parkinson surgery","stereotactic"],
+  ["neck of spine","cervical spine","acdf","cervical fusion"],
+  ["carotid","endarterectomy","cea","neck artery"],
+  // --- Cardiac / vascular ---
+  ["heart bypass","cabg","coronary bypass","bypass surgery"],
+  ["heart valve","aortic valve","mitral valve","valve replacement","tavr"],
+  ["pacemaker","defibrillator","icd","crt"],
+  ["aneurysm of aorta","aortic aneurysm","aaa","triple a","evar","tevar"],
+  ["leg bypass","peripheral vascular","claudication","fem-pop","pad"],
+  ["bypass machine","cardiopulmonary bypass","cpb","heart-lung machine","on pump"],
+  ["cardioversion","ablation","af ablation","ep study","lead extraction"],
+  // --- Thoracic ---
+  ["lung removal","lobectomy","pneumonectomy","wedge resection","lung cancer surgery"],
+  ["pectus","sunken chest","funnel chest","chest wall"],
+  ["collapsed lung surgery","pleural","empyema","decortication"],
+  ["mediastinal mass","mediastinoscopy","anterior mediastinal"],
+  ["keyhole chest surgery","vats","thoracoscopic"],
+  ["thymus","thymectomy","myasthenia"],
+  ["chest tube","tube thoracostomy"],
+  ["needle decompression","needle thoracostomy","tension pneumothorax"],
+  // --- Urology ---
+  ["prostate","turp","prostatectomy","enlarged prostate","bph"],
+  ["kidney stone","stone extraction","ureteroscopy","lithotripsy","staghorn"],
+  ["kidney removal","nephrectomy","renal tumor"],
+  ["bladder removal","cystectomy","urinary diversion","bladder cancer surgery"],
+  ["scope the bladder","cystoscopy","transurethral"],
+  ["testicle","scrotal","orchiectomy","testicular torsion","circumcision","penile"],
+  // --- OB/Gyn ---
+  ["c-section","cesarean","csection","delivery surgery"],
+  ["hysterectomy","uterus removal","womb removal"],
+  ["d&c","dilation and curettage","d&e","miscarriage procedure"],
+  ["tubal","ectopic","fibroid","myomectomy","ovarian cyst","adnexal"],
+  ["prolapse","incontinence sling","colporrhaphy","sacrocolpopexy","bladder sling"],
+  ["egg retrieval","ivf","tvor","fertility"],
+  // --- GI / General ---
+  ["heartburn surgery","reflux surgery","fundoplication","nissen","gerd","hiatal hernia"],
+  ["swallowing","achalasia","myotomy","esophageal diverticulum","zenker"],
+  ["food pipe removal","esophagectomy","esophageal cancer surgery"],
+  ["stomach ulcer","peptic ulcer","gastric resection","perforated ulcer","gastrectomy"],
+  ["weight loss surgery","bariatric","gastric bypass","gastric sleeve","roux-en-y"],
+  ["appendix","appendectomy","appendicitis"],
+  ["small bowel","bowel resection","enterolysis","obstruction surgery","ostomy"],
+  ["colon surgery","colectomy","colostomy","proctocolectomy","bowel cancer surgery"],
+  ["hemorrhoids","fistula","fissure","rectal prolapse","anal surgery"],
+  ["liver resection","hepatectomy","liver tumor surgery"],
+  ["gallbladder","cholecystectomy","gallstones","lap chole","cholecystitis","bile duct"],
+  ["pancreas","whipple","pancreatectomy","pancreatitis surgery","pseudocyst"],
+  ["spleen","splenectomy","splenic"],
+  ["thyroid","thyroidectomy","goiter"],
+  ["parathyroid","parathyroidectomy","hypercalcemia surgery"],
+  ["adrenal","adrenalectomy","pheochromocytoma","pheo","conn","cushing"],
+  ["hernia","inguinal hernia","groin hernia","femoral hernia","incisional hernia"],
+  ["breast","mastectomy","lumpectomy","sentinel node","breast cancer surgery"],
+  ["kidney transplant","pancreas transplant","renal transplant"],
+  ["liver transplant","hepatic transplant"],
+  ["organ donor","procurement","living donor","donor nephrectomy"],
+  ["trauma","gunshot","stab wound","ed thoracotomy","damage control","tamponade"],
+  // --- Plastics ---
+  ["facelift","necklift","rhytidectomy","browlift"],
+  ["tummy tuck","abdominoplasty","body lift","arm lift","brachioplasty"],
+  ["breast aug","augmentation","breast lift","mastopexy","breast reduction","implants"],
+  ["facial fracture","le fort","mandible fracture","jaw fracture","orthognathic"],
+  ["free flap","microsurgery","replantation","reattach finger","tram","diep"],
+  ["breast reconstruction","reconstruction after mastectomy"],
+  ["pressure sore","bedsore","burn graft","skin graft","decubitus"],
+  // --- Orthopedic ---
+  ["hand surgery","carpal tunnel","trigger finger","wrist surgery","dupuytren","ganglion"],
+  ["shoulder surgery","rotator cuff","shoulder replacement","shoulder scope"],
+  ["spine fusion","laminectomy","discectomy","scoliosis","back surgery"],
+  ["hip replacement","total hip","hip fracture","broken hip"],
+  ["knee replacement","total knee","acl","knee scope","meniscus"],
+  ["broken leg","tibia fracture","im nail","external fixator"],
+  ["ankle surgery","foot surgery","ankle fracture"],
+  ["amputation","below knee","above knee","bka","aka"],
+  // --- Pediatric / neonatal ---
+  ["cleft lip","cleft palate","palatoplasty","craniosynostosis"],
+  ["congenital heart","tetralogy","tof","vsd","asd","pda","coarctation","transposition","hypoplastic left heart"],
+  ["pyloric stenosis","gastroschisis","omphalocele","tef","diaphragmatic hernia","cdh","intussusception","nec"],
+  ["pediatric eye","strabismus","rop"],
+  // --- Out-of-OR / remote / office / emergency ---
+  ["ect","electroconvulsive","shock therapy"],
+  ["mri sedation","ct sedation","imaging sedation","scan sedation"],
+  ["tips","portosystemic shunt","variceal bleed"],
+  ["ercp","biliary scope","sphincterotomy"],
+  ["interventional neuro","coiling","thrombectomy","stroke intervention"],
+  ["cric","cricothyrotomy","surgical airway","front of neck"],
+  ["pericardiocentesis","pericardial tap","drain the heart"],
+  ["io access","intraosseous","venous cutdown"],
+  ["office sedation","office anesthesia","dental sedation","laser facial"]
+];
+
+/* Build a fast lookup: term -> set of all sibling terms in its group(s). */
+const SYNONYM_INDEX = (() => {
+  const idx = {};
+  SYNONYM_GROUPS.forEach(group => {
+    group.forEach(term => {
+      const t = term.toLowerCase();
+      if(!idx[t]) idx[t] = new Set();
+      group.forEach(other => idx[t].add(other.toLowerCase()));
+    });
+  });
+  return idx;
+})();
+
+/* Expand a raw query into the query itself plus any synonym terms whose
+   key is a substring of the query (or vice-versa). Returns an array of
+   lowercased needles; a procedure matches if its haystack contains ANY needle. */
+function expandQuery(raw){
+  const q = raw.trim().toLowerCase();
+  if(!q) return [];
+  const needles = new Set([q]);
+  // exact group hit
+  if(SYNONYM_INDEX[q]) SYNONYM_INDEX[q].forEach(t => needles.add(t));
+  // partial: any synonym KEY that the query contains, or that contains the query (>=3 chars)
+  if(q.length >= 3){
+    Object.keys(SYNONYM_INDEX).forEach(key => {
+      if(q.includes(key) || key.includes(q)){
+        SYNONYM_INDEX[key].forEach(t => needles.add(t));
+      }
+    });
+  }
+  return [...needles];
+}
+
+/* Sections the user has manually collapsed/expanded (overrides the default). */
+const navCollapsed = {};
+
+/* Score how directly a procedure matches the query needles.
+   Higher = more direct. Name/tag hits rank above buried mentions. */
+function matchScore(p, needles){
+  const name = p.name.toLowerCase();
+  const tags = p.tags.join(" ").toLowerCase();
+  const section = p.section.toLowerCase();
+  const flags = p.flags.join(" ").toLowerCase();
+  const recall = p.recall ? Object.values(p.recall).flat().join(" ").toLowerCase() : "";
+  const summary = p.technique.summary.toLowerCase();
+  let score = 0;
+  for(const n of needles){
+    if(name.includes(n)) score += (name.startsWith(n) ? 120 : 100);  // name hit = strongest
+    if(tags.includes(n)) score += 40;
+    if(section.includes(n)) score += 25;
+    if(flags.includes(n)) score += 12;
+    if(recall.includes(n)) score += 10;
+    if(summary.includes(n)) score += 6;
+  }
+  return score;
+}
+
 function renderNav(filter=""){
   const nav = document.getElementById('nav');
   const f = filter.trim().toLowerCase();
-  const matches = PROCEDURES.filter(p => {
-    if(!f) return true;
+  const searching = f.length > 0;
+  const needles = expandQuery(filter);     // synonym-expanded terms (empty when no query)
+
+  let matches = PROCEDURES.filter(p => {
+    if(!searching) return true;
     const hay = (p.name + " " + p.section + " " + p.tags.join(" ") + " " +
-      p.flags.join(" ") + " " + p.technique.summary).toLowerCase();
-    return hay.includes(f);
+      p.flags.join(" ") + " " + p.technique.summary + " " +
+      (p.recall ? Object.values(p.recall).flat().join(" ") : "")).toLowerCase();
+    return needles.some(n => hay.includes(n));
   });
+
   if(matches.length === 0){
     nav.innerHTML = `<div class="nav-empty">No procedures match “${filter}”.</div>`;
     return;
   }
-  const groups = groupBySection(matches);
-  let html = "";
-  Object.keys(groups).forEach(sec => {
-    html += `<div class="nav-section"><div class="nav-section-head">${sec}</div>`;
-    groups[sec].forEach(p => {
-      const active = p.id === currentId ? " active" : "";
-      html += `<button class="nav-item${active}" data-id="${p.id}">
+
+  const itemHTML = p => {
+    const active = p.id === currentId ? " active" : "";
+    return `<button class="nav-item${active}" data-id="${p.id}">
         ${p.name}<span class="ni-sub">p. ${p.page} · ${p.snapshot.anesthesia}</span>
       </button>`;
+  };
+
+  let html = "";
+
+  if(searching){
+    // Rank by directness. Show the strongest hits in a "Best matches" group first,
+    // then the remainder grouped by section (so tangential mentions fall lower).
+    const scored = matches.map(p => ({ p, s: matchScore(p, needles) }))
+                          .sort((a,b) => b.s - a.s);
+    const top = scored.filter(x => x.s >= 100).map(x => x.p);   // direct name-level hits
+    const topIds = new Set(top.map(p => p.id));
+    const rest = scored.filter(x => !topIds.has(x.p.id)).map(x => x.p);
+
+    if(top.length){
+      html += `<div class="nav-section" data-sec="__best__">
+        <button class="nav-section-head is-best" data-sec="__best__">
+          <span class="nsh-caret">▸</span>
+          <span class="nsh-label">Best matches</span>
+          <span class="nsh-count">${top.length}</span>
+        </button>
+        <div class="nav-section-items">${top.map(itemHTML).join("")}</div>
+      </div>`;
+    }
+    if(rest.length){
+      const restGroups = groupBySection(rest);
+      Object.keys(restGroups).forEach(sec => {
+        html += `<div class="nav-section" data-sec="${sec}">
+          <button class="nav-section-head" data-sec="${sec}">
+            <span class="nsh-caret">▸</span>
+            <span class="nsh-label">${sec}</span>
+            <span class="nsh-count">${restGroups[sec].length}</span>
+          </button>
+          <div class="nav-section-items">${restGroups[sec].map(itemHTML).join("")}</div>
+        </div>`;
+      });
+    }
+  } else {
+    // No search: clean collapsible TOC, sections collapsed by default.
+    const groups = groupBySection(matches);
+    Object.keys(groups).forEach(sec => {
+      const collapsed = (sec in navCollapsed ? navCollapsed[sec] : true);
+      html += `<div class="nav-section${collapsed ? " collapsed" : ""}" data-sec="${sec}">
+        <button class="nav-section-head" data-sec="${sec}">
+          <span class="nsh-caret">▸</span>
+          <span class="nsh-label">${sec}</span>
+          <span class="nsh-count">${groups[sec].length}</span>
+        </button>
+        <div class="nav-section-items">${groups[sec].map(itemHTML).join("")}</div>
+      </div>`;
     });
-    html += `</div>`;
-  });
+  }
   nav.innerHTML = html;
+
+  // procedure click
   nav.querySelectorAll('.nav-item').forEach(b => {
     b.addEventListener('click', () => { selectProcedure(b.dataset.id); closeMobileNav(); });
   });
+  // section header toggles collapse
+  nav.querySelectorAll('.nav-section-head').forEach(h => {
+    h.addEventListener('click', () => {
+      const sec = h.dataset.sec;
+      const wrap = nav.querySelector(`.nav-section[data-sec="${CSS.escape(sec)}"]`);
+      wrap.classList.toggle('collapsed');
+      if(sec !== "__best__") navCollapsed[sec] = wrap.classList.contains('collapsed');
+    });
+  });
 }
 
+/* Build stamp — bump on each delivery so "am I on the latest?" is a one-glance check. */
+const BUILD_VERSION = "2026-05-22 · build R7";
+
+/* Default landing: quiet prompt that defers to the sidebar (the real landing).
+   The full explainer lives in the How-to-use panel, opened from the corner button. */
 function renderWelcome(){
   const c = document.getElementById('content');
   c.innerHTML = `
-    <div class="welcome">
+    <div class="welcome welcome-min">
       <div class="kicker">Anesthesiologist's bench reference</div>
       <h2>Surgical procedures, read through an anesthetic lens.</h2>
-      <p>Pick a procedure from the left to see what the case demands of you: the patient population and why they need it, what the surgeon actually does and the critical steps, the physiologic consequences, and concrete pre / intra / post management.</p>
-      <p>Built primarily from <em>Jaffe's Anesthesiologist's Manual of Surgical Procedures</em> (5e, 2014), with room to fold in newer editions and journal updates.</p>
+      <p class="welcome-prompt">Search or pick a procedure from the list to begin.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="num">${PROCEDURES.length}</div><div class="lbl">Procedures</div></div>
+        <div class="stat"><div class="num">${Object.keys(groupBySection(PROCEDURES)).length}</div><div class="lbl">Sections</div></div>
+        <div class="stat"><div class="num">5e</div><div class="lbl">Jaffe edition</div></div>
+      </div>
+      <button class="howto-btn" id="howtoBtn">How to use this app</button>
+      <div class="build-stamp">${BUILD_VERSION}</div>
+    </div>`;
+  const hb = document.getElementById('howtoBtn');
+  if(hb) hb.addEventListener('click', openHowTo);
+}
+
+/* The original explainer, now an on-demand dismissible panel. */
+function openHowTo(){
+  let panel = document.getElementById('howtoPanel');
+  if(panel){ panel.classList.add('open'); return; }
+  panel = document.createElement('div');
+  panel.id = 'howtoPanel';
+  panel.className = 'howto-panel open';
+  panel.innerHTML = `
+    <div class="howto-card">
+      <button class="howto-close" aria-label="Close">×</button>
+      <div class="kicker">How to use this app</div>
+      <h2>Surgical procedures, read through an anesthetic lens.</h2>
+      <p>Search by procedure (lay terms work too — “nose job”, “windpipe”, “tummy tuck”) or browse the collapsible list on the left. Each entry answers what the case demands of you: who presents and why, what the surgeon actually does and the critical steps, the physiologic consequences, and concrete pre / intra / post management.</p>
+      <p>Many entries also carry an <b>“Across the Drapes”</b> aside — the surgeon's-eye pearls, eponyms, and classic pimp-question answers, so you can speak up when the resident is stumped.</p>
       <div class="pillars">
         <div class="pillar-card"><span class="pc-dot" style="background:var(--rose)"></span><h4>Patient &amp; comorbidities</h4><p>Who presents for this and the coexisting disease that shapes the plan.</p></div>
         <div class="pillar-card"><span class="pc-dot" style="background:var(--gold)"></span><h4>Surgical technique</h4><p>Critical steps and the moments that matter to anesthesia.</p></div>
         <div class="pillar-card"><span class="pc-dot" style="background:var(--slate)"></span><h4>Physiologic implications</h4><p>What the procedure does to the patient's physiology.</p></div>
         <div class="pillar-card"><span class="pc-dot" style="background:var(--teal)"></span><h4>Peri-op management</h4><p>Specific pre-, intra-, and post-operative concerns.</p></div>
       </div>
-      <div class="stat-row">
-        <div class="stat"><div class="num">${PROCEDURES.length}</div><div class="lbl">Procedures</div></div>
-        <div class="stat"><div class="num">${Object.keys(groupBySection(PROCEDURES)).length}</div><div class="lbl">Sections</div></div>
-        <div class="stat"><div class="num">5e</div><div class="lbl">Jaffe edition</div></div>
-      </div>
+      <p class="howto-foot">Built primarily from <em>Jaffe's Anesthesiologist's Manual of Surgical Procedures</em> (5e, 2014), with surgeon's-eye recall from <em>Surgical Recall</em> (8e). A study/clinical-prep reference — not a substitute for the primary text or institutional protocol. Verify drug doses independently.</p>
+      <div class="build-stamp">${BUILD_VERSION}</div>
     </div>`;
+  document.body.appendChild(panel);
+  const close = () => panel.classList.remove('open');
+  panel.querySelector('.howto-close').addEventListener('click', close);
+  panel.addEventListener('click', e => { if(e.target === panel) close(); });
 }
 
 function renderProcedure(p){
