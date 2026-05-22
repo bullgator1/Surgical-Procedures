@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anesthesia Procedure Reference</title>
+<!-- App icon. NOTE: iOS "Add to Home Screen" requires apple-touch-icon to be a real,
+     hosted FILE (a data: URI is ignored on iOS). When this app is served over http(s),
+     place the PNGs (apple-touch-icon.png etc.) next to index.html and iOS will use them.
+     The inline favicon below still works for the browser tab and the local double-click case. -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="167x167" href="icon-167.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icon-152.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<!-- Inline favicon (works for local file / browser tab without any external file): -->
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Anesthesia Ref">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#2d7a69">
 <style>
   /* ============================================================
      ANESTHESIA PROCEDURE REFERENCE
@@ -7456,7 +7470,7 @@ function renderNav(filter=""){
 }
 
 /* Build stamp — bump on each delivery so "am I on the latest?" is a one-glance check. */
-const BUILD_VERSION = "2026-05-22 · build R8";
+const BUILD_VERSION = "2026-05-22 · build R10";
 
 /* Default landing: quiet prompt that defers to the sidebar (the real landing).
    The full explainer lives in the How-to-use panel, opened from the corner button. */
