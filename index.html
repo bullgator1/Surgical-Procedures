@@ -85,14 +85,38 @@
   }
   .brand .sub { font-size: 12px; color: var(--ink-faint); margin-top: 6px; }
 
-  .search-wrap { padding: 16px 20px 12px; border-bottom: 1px solid var(--line-soft); }
+  .search-wrap { padding: 16px 20px 12px; border-bottom: 1px solid var(--line-soft); position: relative; }
   #search {
-    width: 100%; padding: 9px 12px; border: 1px solid var(--line);
+    width: 100%; padding: 9px 34px 9px 12px; border: 1px solid var(--line);
     border-radius: var(--radius); font-family: var(--sans); font-size: 13.5px;
     background: var(--paper); color: var(--ink); transition: border-color .15s, box-shadow .15s;
   }
   #search:focus { outline: none; border-color: var(--accent-soft); box-shadow: 0 0 0 3px rgba(138,51,36,0.08); background: #fff; }
   #search::placeholder { color: var(--ink-faint); }
+  /* hide native search clear (we provide our own) */
+  #search::-webkit-search-cancel-button, #landSearch::-webkit-search-cancel-button { -webkit-appearance: none; }
+  /* clear (×) button — shared by sidebar and landing search */
+  .land-clear {
+    position: absolute; top: 50%; transform: translateY(-50%); right: 30px;
+    width: 22px; height: 22px; border-radius: 50%; border: none;
+    background: var(--line); color: var(--ink-soft); font-size: 16px; line-height: 1;
+    cursor: pointer; display: none; align-items: center; justify-content: center; padding: 0;
+    transition: background .12s, color .12s;
+  }
+  .land-clear:hover { background: var(--accent-soft); color: #fff; }
+
+  /* landing search + inline chapter nav */
+  .land-search-wrap { position: relative; margin: 22px 0 6px; max-width: 560px; }
+  #landSearch {
+    width: 100%; padding: 12px 40px 12px 15px; border: 1px solid var(--line);
+    border-radius: var(--radius); font-family: var(--sans); font-size: 15px;
+    background: var(--paper-2); color: var(--ink); transition: border-color .15s, box-shadow .15s;
+  }
+  #landSearch:focus { outline: none; border-color: var(--accent-soft); box-shadow: 0 0 0 3px rgba(138,51,36,0.08); background: #fff; }
+  #landSearch::placeholder { color: var(--ink-faint); }
+  .land-search-wrap .land-clear { right: 12px; }
+  .land-nav { max-width: 560px; margin-bottom: 8px; max-height: 46vh; overflow-y: auto;
+    border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 6px 0; }
 
   .nav { padding: 8px 0 24px; flex: 1; }
   .nav-section { margin-top: 2px; }
@@ -268,6 +292,7 @@
     </div>
     <div class="search-wrap">
       <input id="search" type="search" placeholder="Search procedures, e.g. ‘open globe’, ‘OCR’…" autocomplete="off">
+      <button class="land-clear" id="searchClear" aria-label="Clear search" title="Clear">×</button>
     </div>
     <nav class="nav" id="nav"></nav>
   </aside>
@@ -7377,8 +7402,9 @@ function matchScore(p, needles){
   return score;
 }
 
-function renderNav(filter=""){
-  const nav = document.getElementById('nav');
+function renderNav(filter="", navId="nav"){
+  const nav = document.getElementById(navId);
+  if(!nav) return;
   const f = filter.trim().toLowerCase();
   const searching = f.length > 0;
   const needles = expandQuery(filter);     // synonym-expanded terms (empty when no query)
@@ -7470,7 +7496,7 @@ function renderNav(filter=""){
 }
 
 /* Build stamp — bump on each delivery so "am I on the latest?" is a one-glance check. */
-const BUILD_VERSION = "2026-05-22 · build R10";
+const BUILD_VERSION = "2026-05-22 · build R11";
 
 /* Default landing: quiet prompt that defers to the sidebar (the real landing).
    The full explainer lives in the How-to-use panel, opened from the corner button. */
@@ -7480,7 +7506,13 @@ function renderWelcome(){
     <div class="welcome welcome-min">
       <div class="kicker">Anesthesiologist's bench reference</div>
       <h2>Surgical procedures, read through an anesthetic lens.</h2>
-      <p class="welcome-prompt">Search or pick a procedure from the list to begin.</p>
+
+      <div class="land-search-wrap">
+        <input id="landSearch" type="search" placeholder="Search — e.g. ‘open globe’, ‘gallbladder’, ‘nose job’…" autocomplete="off">
+        <button class="land-clear" id="landClear" aria-label="Clear search" title="Clear">×</button>
+      </div>
+      <nav class="nav land-nav" id="landNav"></nav>
+
       <div class="stat-row">
         <div class="stat"><div class="num">${PROCEDURES.length}</div><div class="lbl">Procedures</div></div>
         <div class="stat"><div class="num">${Object.keys(groupBySection(PROCEDURES)).length}</div><div class="lbl">Sections</div></div>
@@ -7491,6 +7523,26 @@ function renderWelcome(){
     </div>`;
   const hb = document.getElementById('howtoBtn');
   if(hb) hb.addEventListener('click', openHowTo);
+
+  // Wire the landing search box + clear button to the SAME render logic, targeting #landNav.
+  const ls = document.getElementById('landSearch');
+  const lc = document.getElementById('landClear');
+  const sync = v => {
+    renderNav(v, 'landNav');                       // render results into the landing nav
+    if(lc) lc.style.display = v ? 'flex' : 'none';  // show clear only when there's text
+  };
+  if(ls){
+    ls.addEventListener('input', e => sync(e.target.value));
+    sync('');                                       // initial: collapsed TOC, clear hidden
+  }
+  if(lc){
+    lc.addEventListener('click', () => {
+      if(ls){ ls.value = ''; ls.focus(); }
+      sync('');
+      // also reset the sidebar search to keep both views consistent
+      const ss = document.getElementById('search'); if(ss){ ss.value=''; renderNav(''); }
+    });
+  }
 }
 
 /* The original explainer, now an on-demand dismissible panel. */
@@ -7607,7 +7659,19 @@ function closeMobileNav(){
 }
 
 /* init */
-document.getElementById('search').addEventListener('input', e => renderNav(e.target.value));
+(function(){
+  const ss = document.getElementById('search');
+  const sc = document.getElementById('searchClear');
+  const syncSide = v => {
+    renderNav(v);
+    if(sc) sc.style.display = v ? 'flex' : 'none';
+  };
+  ss.addEventListener('input', e => syncSide(e.target.value));
+  if(sc){
+    sc.addEventListener('click', () => { ss.value=''; ss.focus(); syncSide(''); });
+    sc.style.display = 'none';
+  }
+})();
 document.getElementById('menuBtn').addEventListener('click', () => {
   const sb = document.getElementById('sidebar');
   sb.classList.add('open');
