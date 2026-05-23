@@ -208,10 +208,10 @@
   .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 100px; background: var(--paper-2); border: 1px solid var(--line); color: var(--ink-soft); }
   .tag.anes { border-color: rgba(31,95,91,0.3); color: var(--teal); background: rgba(31,95,91,0.05); }
 
-  .snapshot { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap: 0; margin: 24px 0 8px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--paper-2); }
-  .snap-cell { padding: 12px 14px; border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .snapshot { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 0; margin: 24px 0 8px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--paper-2); }
+  .snap-cell { padding: 12px 14px; border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); min-width: 0; overflow-wrap: break-word; word-break: break-word; }
   .snap-cell .sc-lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
-  .snap-cell .sc-val { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-top: 3px; line-height: 1.25; }
+  .snap-cell .sc-val { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-top: 3px; line-height: 1.3; overflow-wrap: break-word; }
 
   /* flag / key-concern banner */
   .flags { margin: 26px 0 6px; }
@@ -7302,7 +7302,22 @@ const PILLARS = {
 function groupBySection(list){
   const map = {};
   list.forEach(p => { (map[p.section] = map[p.section] || []).push(p); });
-  return map;
+  // Order sections alphabetically, but pin "OR Essentials" (the reference layer) last.
+  const PIN_LAST = ["OR Essentials"];
+  const keys = Object.keys(map).sort((a, b) => {
+    const ai = PIN_LAST.indexOf(a), bi = PIN_LAST.indexOf(b);
+    if(ai !== -1 || bi !== -1){
+      if(ai !== -1 && bi !== -1) return ai - bi;     // both pinned: keep pin order
+      return ai !== -1 ? 1 : -1;                      // pinned sorts after unpinned
+    }
+    return a.localeCompare(b);
+  });
+  const ordered = {};
+  keys.forEach(k => {
+    // chapters within each section ordered alphabetically by name
+    ordered[k] = map[k].slice().sort((x, y) => x.name.localeCompare(y.name));
+  });
+  return ordered;
 }
 
 /* ============================================================
@@ -7520,7 +7535,7 @@ function renderNav(filter="", navId="nav"){
   const itemHTML = p => {
     const active = p.id === currentId ? " active" : "";
     return `<button class="nav-item${active}" data-id="${p.id}">
-        ${p.name}<span class="ni-sub">p. ${p.page} · ${p.snapshot.anesthesia}</span>
+        ${p.name}<span class="ni-sub">${p.snapshot.anesthesia}</span>
       </button>`;
   };
 
@@ -7579,19 +7594,37 @@ function renderNav(filter="", navId="nav"){
   nav.querySelectorAll('.nav-item').forEach(b => {
     b.addEventListener('click', () => { selectProcedure(b.dataset.id); closeMobileNav(); });
   });
-  // section header toggles collapse
+  // section header toggles collapse.
+  // Browse mode = accordion: opening a section collapses the others (less mobile scrolling).
+  // Search mode = leave all matching sections open so hits across sections stay visible.
   nav.querySelectorAll('.nav-section-head').forEach(h => {
     h.addEventListener('click', () => {
       const sec = h.dataset.sec;
       const wrap = nav.querySelector(`.nav-section[data-sec="${CSS.escape(sec)}"]`);
-      wrap.classList.toggle('collapsed');
-      if(sec !== "__best__") navCollapsed[sec] = wrap.classList.contains('collapsed');
+      const wasCollapsed = wrap.classList.contains('collapsed');
+
+      if(!searching && wasCollapsed){
+        // accordion: collapse every other section, then open this one
+        nav.querySelectorAll('.nav-section').forEach(other => {
+          if(other !== wrap){
+            other.classList.add('collapsed');
+            const osec = other.dataset.sec;
+            if(osec && osec !== "__best__") navCollapsed[osec] = true;
+          }
+        });
+        wrap.classList.remove('collapsed');
+        if(sec !== "__best__") navCollapsed[sec] = false;
+      } else {
+        // tapping an already-open section just closes it (or normal toggle in search)
+        wrap.classList.toggle('collapsed');
+        if(sec !== "__best__") navCollapsed[sec] = wrap.classList.contains('collapsed');
+      }
     });
   });
 }
 
 /* Build stamp — bump on each delivery so "am I on the latest?" is a one-glance check. */
-const BUILD_VERSION = "v1.0 beta · 2026-05-22"  /* internal build R22 (v1.0 beta; icon hrefs de-dashed to match storage) */;
+const BUILD_VERSION = "v1.0 beta · 2026-05-22"  /* internal build R24 (v1.0 beta; accordion nav in browse mode) */;
 
 /* Default landing: quiet prompt that defers to the sidebar (the real landing).
    The full explainer lives in the How-to-use panel, opened from the corner button. */
@@ -7696,7 +7729,7 @@ function renderProcedure(p){
   c.innerHTML = `
     <article class="proc">
       <div class="proc-head">
-        <div class="proc-breadcrumb"><b>${p.section}</b> &nbsp;·&nbsp; Jaffe p. ${p.page}</div>
+        <div class="proc-breadcrumb"><b>${p.section}</b></div>
         <h2>${p.name}</h2>
         <div class="proc-tags">${p.tags.map(t => `<span class="tag${/MAC|GA|GETA|block|Topical|RSI|local/i.test(t)?' anes':''}">${t}</span>`).join("")}</div>
       </div>
