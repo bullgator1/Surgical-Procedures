@@ -261,6 +261,15 @@
   .drapes-body ul { margin: 0 0 4px; padding-left: 18px; }
   .drapes-body li { font-size: 13.5px; color: var(--ink); line-height: 1.5; margin-bottom: 6px; }
   .drapes-body li b { color: var(--gold); }
+  /* Following the Case — optional case-tempo block (anesthesiologist's-seat view). Guarded; absent on most entries. */
+  .caseflow { margin-top: 28px; border: 1px solid var(--line); border-left: 3px solid var(--teal); border-radius: var(--radius); background: var(--paper-2); padding: 0; overflow: hidden; }
+  .caseflow-head { display: flex; align-items: baseline; gap: 10px; padding: 11px 18px; border-bottom: 1px solid var(--line-soft); background: rgba(31,95,91,0.06); }
+  .caseflow-head h3 { font-family: var(--serif); font-weight: 600; font-size: 17px; letter-spacing: -0.01em; color: var(--ink); }
+  .caseflow-head .pill-tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-left: auto; }
+  .caseflow-body { padding: 12px 18px 8px; }
+  .caseflow-body ol { margin: 0; padding-left: 20px; }
+  .caseflow-body li { font-size: 13.5px; color: var(--ink); line-height: 1.55; margin-bottom: 10px; padding-left: 4px; }
+  .caseflow-body li b { color: var(--teal); }
 
   .topbar-mobile { display: none; }
 
@@ -347,6 +356,12 @@ const PROCEDURES = [
         "Watertight closure with 9-0/10-0 nylon or Vicryl, or self-sealing small wound."
       ]
     },
+    caseFlow: [
+      "**Block/topical, prep & drape — settling in:** many patients feel claustrophobic under the drape — tent it, run O2/air underneath, offer a hand to hold. If you're giving any sedation, this (and the block, if one is placed) is the moment for it.",
+      "**Capsulorhexis, then phaco & nuclear cracking — the delicate core of the case:** the surgeon is working microns above an intact posterior capsule. **Breaking the bag (posterior capsule rupture)** turns a 20-minute case into a vitrectomy and an unhappy room. Patient dead still, no sudden stimulation, and this is *not* the moment to ask about the weekend.",
+      "**IOL into the bag, wound hydrated and sealed — home free:** the hard part is done. Easing back into quiet conversation here is the cue that you've been following along, not dozing — and it's when a little more sedation is safe if the patient is restless.",
+      "**Shield on, drape down:** brief case, near-zero pain — but watch for the **startle-movement** on rousing if the patient was lightly sedated."
+    ],
     physiology: [
       "Surgery is intraocular but very short with no blood loss — physiologic stress is low; the dominant concern is **patient stillness and cooperation** under topical anesthesia.",
       "IV sedation paradoxically **increases** adverse events vs topical-only; over-sedation risks sudden movement when roused.",
@@ -1514,7 +1529,7 @@ const PROCEDURES = [
       ],
       post: [
         "Slow protamine reversal, confirm ACT to baseline; limit SBP to 120 to protect the aortotomy.",
-        "Manage post-CPB bleeding by protocol (surgical cause → reversal → platelets/factors → antifibrinolytics)."
+        "**Post-CPB bleeding ladder (Jaffe Table 6.1-3):** rule out surgical cause → more protamine 0.5–1 mg/kg if ACT >150 or aPTT >1.5× control → warm if core <35°C and apply PEEP 5–10 cm H2O → DDAVP 0.3 mcg/kg (prolonged bleeding time) → aminocaproic acid 50 mg/kg then 25 mg/kg/h, or TXA 10 mg/kg then 1 mg/kg/h (elevated D-dimer / teardrop TEG) → platelets 1 U/10 kg (plt <100,000) → FFP 15 mL/kg (PT or aPTT >1.5× control)."
       ]
     },
     source: "Jaffe 5e (2014), Cardiovascular Surgery §6.1, p. 348–354 (CPB conduct, anticoagulation, coagulation management)."
@@ -2685,14 +2700,14 @@ const PROCEDURES = [
       "**The airway is shared with the surgeon and the stimulus is intense but the postop pain is near-zero** — use TIVA (propofol 80–180 + remifentanil 0.1–0.25 mcg/kg/min) with full relaxation; movement/coughing/bucking during endoscopy can be disastrous. Esmolol for breakthrough sympathetic surges (laryngeal/carinal reflexes → severe ↑BP/↑HR; up to 4% myocardial ischemia).",
       "**LASER airway fire precautions are mandatory:** laser-resistant ETT, **FiO2 ≤0.3** (dilute with air/N2/helium), **avoid N2O**, **methylene-blue-tinged saline in the cuff** (instant leak alert), cuff placed deep. Both O2 and N2O promote combustion.",
       "**A floppy/obstructing supraglottic lesion can completely obstruct after induction** (papillomatosis, epiglottic cancer, large polyps) — surgeon present and ready for rigid bronchoscopy or emergency cricothyrotomy/tracheostomy; stridor at rest implies airway ≤4.5 mm.",
-      "Ventilation options when no ETT fits: **jet ventilation** (ensure full chest deflation between puffs; risks barotrauma/pneumothorax) or **intermittent apnea**. Zenker's/obstructing esophageal lesions raise **aspiration risk** (RSI if active reflux; cricoid often ineffective above the cricoid).",
-      "**Laser airway surgery = fire triad in the shared airway:** use a **laser-safe ETT**, keep **FiO2 <30%**, **avoid N2O**, and fill the cuff with saline. Microlaryngoscopy may need a small **5–6 mm microlaryngeal/laser tube** or **jet ventilation** with GA + muscle relaxation."
+      "Ventilation options when no ETT fits: **jet ventilation** (ensure full chest deflation between puffs; risks barotrauma/pneumothorax) or **intermittent apnea**. With jet ventilation for **laser papilloma** resection, aerosolized **HPV can infect OR staff** — special masks for everyone in the room. Zenker's/obstructing esophageal lesions raise **aspiration risk** (RSI if active reflux; cricoid often ineffective above the cricoid)."
     ],
     technique: {
-      summary: "Endoscopic diagnosis/treatment of the upper airway and esophagus — direct/suspension microlaryngoscopy, rigid/flexible bronchoscopy, esophagoscopy, panendoscopy for cancer staging, and CO2/Nd:YAG laser ablation. Includes endoscopic Zenker's diverticulectomy. The scope and the anesthetic share one airway.",
+      summary: "Endoscopic diagnosis/treatment of the upper airway and esophagus — direct/suspension microlaryngoscopy, rigid/flexible bronchoscopy, esophagoscopy, panendoscopy for cancer staging, and CO2/Nd:YAG laser ablation (CO2 vaporizes superficial cord lesions; Nd:YAG coagulates deeper and is used through the bronchoscope suction channel for tumor debulking). Includes endoscopic Zenker's diverticulectomy. The scope and the anesthetic share one airway.",
       steps: [
         "Plan and discuss a backup airway with the surgeon before induction; antisialogogue helpful.",
         "Choose the airway technique: small MLT (5.0 mm) for microlaryngoscopy, large ETT for flexible bronch, jet/apnea for posterior glottic/laser work.",
+        "Rigid bronchoscopy: preoxygenate to FiO2 1.0, then apneic or ventilating-bronchoscope technique with the surgeon working through the rigid scope; remask to FiO2 1.0 between passes; a reinforced ETT helps rigid esophagoscopy.",
         "For laser: laser ETT, FiO2 ≤0.3, no N2O, methylene-blue cuff saline, motionless patient, eyes taped/moist, goggles for all.",
         "Rapid emergence with full return of laryngeal reflexes; document absence of dental damage after DL."
       ]
@@ -2712,7 +2727,8 @@ const PROCEDURES = [
       ],
       intra: [
         "TIVA + full relaxation; chosen airway/ventilation mode; esmolol for sympathetic surges.",
-        "Laser fire precautions; manage jet-ventilation barotrauma risk; surgeon ready for emergency airway."
+        "Laser fire precautions; manage jet-ventilation barotrauma risk; surgeon ready for emergency airway.",
+        "If an airway fire ignites: immediately STOP ventilation and disconnect O2, remove the ETT, and flood the field with saline; then re-establish the airway (mask/re-intubate) and bronchoscope to assess thermal injury. Precautions (FiO2 ≤0.3, no N2O, laser tube, dyed cuff) prevent it; this sequence limits the damage."
       ],
       post: [
         "Rapid emergence with intact reflexes; watch for airway edema, bleeding, laryngospasm, and aspiration.",
@@ -2724,7 +2740,7 @@ const PROCEDURES = [
       "**Zenker's diverticulum:** a false pharyngoesophageal (pulsion) diverticulum herniating through **Killian's triangle** at the upper esophageal sphincter → dysphagia, regurgitation of undigested food, halitosis, and a neck mass — a classic aspiration-risk airway. Diagnosis: barium swallow."
     ]
   },
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 181–195 (laryngoscopy/bronchoscopy/esophagoscopy; panendoscopy; operative microlaryngoscopy; airway laser surgery; Zenker's diverticulectomy). Overlaps the Thoracic bronchoscopy entry (p. 320) — this is the head-and-neck/laser-focused version."
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 181–195 (laryngoscopy/bronchoscopy/esophagoscopy; panendoscopy; operative microlaryngoscopy; airway laser surgery; Zenker's diverticulectomy). Overlaps the Thoracic bronchoscopy entry (p. 320) — this is the head-and-neck/laser-focused version. OR-fire response sequence per standard airway-fire management."
   },
   {
     id: "tracheostomy",
@@ -2782,7 +2798,13 @@ const PROCEDURES = [
       "**Recurrent laryngeal nerves** sit in the tracheoesophageal grooves — bilateral injury causes airway obstruction; relevant whenever the trachea/neck is dissected."
     ]
   },
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 190–195 (tracheotomy/tracheostomy; cricothyroidotomy)."
+    caseFlow: [
+      "**Before induction — is this a failing airway?** if the patient cannot be safely intubated or mask-ventilated, an awake tracheostomy/cricothyroidotomy under local is safer than inducing into apnea. Do not paralyze a critical airway without a surgical plan committed.",
+      "**Dissection down to the trachea:** routine until the trachea is entered — keep FiO2 low and N2O off in case cautery meets the open airway (fire risk).",
+      "**Tracheal entry & tube exchange — THE crux:** as the trachea is opened and the existing ETT withdrawn, the airway is briefly shared/handed off — maintain oxygenation, watch for a lost airway, and **confirm ETCO2 through the new trach tube before committing** and securing it.",
+      "**Secured / runway:** once ETCO2 confirms the trach tube, ventilation is stable; an elective trach returns to ward/ICU on the new airway, while a rescue trach's disposition is dictated by the underlying crisis.",
+    ],
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 190–195 (tracheotomy/tracheostomy; cricothyroidotomy). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "laryngectomy-neck-dissection",
@@ -2841,7 +2863,14 @@ const PROCEDURES = [
       "**Ligament of Berry** tethers the thyroid to the trachea (and sits right by the RLN); the **Delphian node** is the midline pre-laryngeal node that can flag laryngeal/thyroid malignancy."
     ]
   },
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 203–223 (partial/total laryngectomy; glossectomy; neck dissection and free-flap reconstruction; lymph node biopsy)."
+    caseFlow: [
+      "**Awake fiberoptic intubation, surgeon scrubbed:** distorted, irradiated, tumor-laden anatomy — secure the airway awake when indicated, avoiding maneuvers that bleed a friable tumor; the surgeon stands by for urgent tracheostomy.",
+      "**Neck dissection — the reflex beat:** dissection around the carotid sinus and vagus can trigger **sudden bradycardia/hypotension/dysrhythmia** — warn the surgeon to pause, have an anticholinergic ready, and watch for carotid/great-vessel injury.",
+      "**Oro-to-stomal airway conversion — the planned handoff:** at laryngectomy the orotracheal tube is exchanged for a sterile armored tube into the distal trachea/stoma; coordinate the swap and re-confirm ventilation. From here the patient is a permanent neck-breather.",
+      "**Free-flap reconstruction — perfusion goals:** if a radial/jejunal/fibula flap is raised, the long back-half is about flap survival — adequate MAP, normothermia, Hct, and limiting vasoconstrictors.",
+      "**Closure / runway:** long case → ICU with stoma care and ongoing flap monitoring; plan analgesia and a controlled emergence around the new airway.",
+    ],
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 203–223 (partial/total laryngectomy; glossectomy; neck dissection and free-flap reconstruction; lymph node biopsy). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "tonsillectomy-adenoidectomy",
@@ -2894,7 +2923,13 @@ const PROCEDURES = [
         "For secondary bleed (5–10 d): treat as full-stomach emergency, resuscitate, RSI."
       ]
     },
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 207–212."
+    caseFlow: [
+      "**Shared airway under the mouth gag:** a reinforced/RAE tube resists kinking when the self-retaining gag opens — re-confirm breath sounds/ETCO2 after the gag goes in (it can compress or dislodge the tube). Maintain depth; movement here is dangerous.",
+      "**Hemostasis & throat pack:** the surgeon cauterizes the beds; **confirm throat-pack removal** before waking. Much blood loss is swallowed and underestimated, especially in small children.",
+      "**Emergence — laryngospasm watch:** blood and secretions on a reactive airway make this the dangerous moment — suction, extubate per practice (deep vs awake), and position to recover. OSA children obstruct and are opioid-sensitive: go light.",
+      "**The post-tonsillectomy bleed is a different case:** a hypovolemic, swallowed-blood, full-stomach child with a bloody view — resuscitate volume FIRST, then RSI with two suctions, two laryngoscopes, and a smaller tube. No clean elective arc; it is an emergency.",
+    ],
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 207–212. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "salivary-gland-surgery",
@@ -2952,7 +2987,13 @@ const PROCEDURES = [
       "**Warthin's tumor** is the second most common benign salivary tumor — almost always parotid, can be bilateral, rarely malignant."
     ]
   },
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 224–234 (parotidectomy; submandibular gland excision)."
+    caseFlow: [
+      "**Intubate, then let paralysis wear off — the facial-nerve constraint:** for parotidectomy the surgeon maps and protects CN VII, so beyond intubation **avoid neuromuscular blockade** and keep the field still with anesthetic depth/remifentanil instead. Confirm the surgeon's monitoring preference.",
+      "**Dissection along the facial nerve — the crux:** the long careful part is separating gland from nerve, and holding a still patient WITHOUT paralysis is the anesthetic task (a cough or move risks the nerve).",
+      "**Length/bleed in extensive cases:** total parotidectomy ± neck dissection can lose ~500–700 mL and run long — plan access and monitoring accordingly.",
+      "**Smooth emergence — protect the nerve/repair:** wake without bucking; coughing strains the dissection and any facial-nerve repair.",
+    ],
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 224–234 (parotidectomy; submandibular gland excision). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "sinus-nasal-surgery",
@@ -3005,7 +3046,13 @@ const PROCEDURES = [
         "Monitor for epistaxis, orbital signs, CSF rhinorrhea."
       ]
     },
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 235–243."
+    caseFlow: [
+      "**Vasoconstrictor application — the surge beat:** topical/injected epinephrine, cocaine, or oxymetazoline can spike **BP/HR and provoke dysrhythmias** — know when it goes in, communicate, treat the surge, and refuse it where it is dangerous.",
+      "**Bloodless field is the core task:** head-up positioning, TIVA (often drier than volatile), and controlled/relative hypotension where safe — a bloody field stalls endoscopic work.",
+      "**Working at the orbit and skull base — the dreaded complications:** instruments are millimeters from the orbit and anterior skull base; **orbital injury, CSF leak, or intracranial entry** are the catastrophes — a sudden proptosis, bradycardia, or brisk bleed should trigger suspicion.",
+      "**Throat pack out, smooth emergence — runway:** the surgeon removes the pack and you suction the pharynx before extubation; occult swallowed blood can present late as hematemesis or airway trouble.",
+    ],
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 235–243. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "otology-neurotology",
@@ -3058,7 +3105,13 @@ const PROCEDURES = [
         "Watch for facial-nerve deficit, dizziness, and (neurotology) brainstem/CSF issues."
       ]
     },
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 244–257 (otology and neurotology)."
+    caseFlow: [
+      "**No paralysis (facial NIM), N2O off:** beyond intubation avoid NMB so CN VII can be stimulated, and **avoid N2O** — it expands the air-filled middle ear and can displace a tympanic graft (off well before grafting).",
+      "**Microscope work — a still, bloodless field:** slight head-up with a dry field for the microscope; tiny movements matter under magnification.",
+      "**Neurotology (acoustic neuroma) is the bigger arc:** prolonged posterior-fossa work near the brainstem with **VAE risk in the head-up position** and facial/auditory nerve monitoring — precordial-Doppler vigilance, and brainstem manipulation can swing hemodynamics.",
+      "**Emergence — PONV and a smooth wake-up:** vestibular manipulation makes PONV high (multimodal antiemetics), and bucking can disrupt grafts — aim for a calm, non-coughing emergence.",
+    ],
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 244–257 (otology and neurotology). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "osa-airway-reconstruction",
@@ -3110,7 +3163,13 @@ const PROCEDURES = [
         "Watch for bleeding, edema, and OSA-related respiratory events."
       ]
     },
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 258–267."
+    caseFlow: [
+      "**Difficult airway by definition:** OSA means anticipating hard mask ventilation AND hard intubation — ramp, video laryngoscopy, awake FOI if severe, with a documented backup plan before induction.",
+      "**Opioid-sparing maintenance sets up the wake-up:** these patients are exquisitely opioid-sensitive and the surgery swells the pharynx — multimodal/regional analgesia and minimal intraop opioid protect the airway later.",
+      "**Emergence is the crux — extubate awake with full reflexes:** the freshly operated, swollen palate/pharynx bleeds and obstructs; wake fully before extubation.",
+      "**Runway:** monitored bed, head-up, CPAP-ready — opioid-induced upper-airway obstruction is the late danger on the ward.",
+    ],
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 258–267. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
 {
     id: "tmj-surgery",
@@ -3238,11 +3297,10 @@ const PROCEDURES = [
       mortality: "Minimal"
     },
     flags: [
-      "**Autonomic hyperreflexia in spinal-cord-injured patients (lesion above T6–T10):** noxious stimulus below the level → **severe HTN + bradycardia**, dysrhythmias, even cardiac arrest. Prevent with GA or neuraxial; if it occurs, deepen anesthesia and give IV antihypertensive (SNP 0.5–5 mcg/kg/min, labetalol 5–10 mg, phentolamine 2–5 mg).",
+      "**Autonomic hyperreflexia in spinal-cord-injured patients (lesion above T6–T10):** noxious stimulus below the level → **severe HTN + bradycardia**, dysrhythmias, even cardiac arrest. Prevent with GA or neuraxial; if it occurs, deepen anesthesia and give IV antihypertensive (SNP 0.5–5 mcg/kg/min, labetalol 5–10 mg, phentolamine 2–5 mg). Remove the stimulus first (drain the bladder) — HTN is often >200 systolic, and AD can first appear **postoperatively** as the anesthetic wears off. (2025 OA.)",
       "**Avoid succinylcholine in paraplegic/quadriplegic patients** — denervation hyperkalemia → **VF/asystole**.",
       "**Bladder perforation** may be silent under GA — suspect with unexplained HTN/tachycardia (or shoulder pain in an awake patient); regional lets the awake patient report it.",
       "**Lithotomy hazards:** peroneal nerve compression at the fibular head → **foot drop**; anticipate **↓BP when legs come down** — lower them slowly and together.",
-      "**Autonomic hyperreflexia** in patients with cord injury **above ~T5–T10**: bladder/urethral stimulation below the lesion triggers severe hypertension, bradycardia, headache. Prevent with GA/spinal/epidural; if it occurs, **deepen anesthesia + IV antihypertensive** (SNP 0.5–5 mcg/kg/min, labetalol 5–10 mg, or phentolamine 2–5 mg).",
       "**Obturator reflex:** cautery at the lateral bladder wall (TURBT) stimulates the obturator nerve → sudden adductor/thigh jerk → **risk of bladder perforation.** Muscle relaxation (or an obturator nerve block) abolishes it — regional alone does not."
     ],
     technique: {
@@ -3269,14 +3327,15 @@ const PROCEDURES = [
       ],
       intra: [
         "Lithotomy padding; regional or GA; avoid succinylcholine in SCI; prevent/treat autonomic hyperreflexia.",
-        "Monitor for bladder perforation; minimal fluids."
+        "Monitor for bladder perforation; minimal fluids.",
+        "Prolonged ureteroscopy or bladder-tumor resection with hypotonic irrigant can absorb fluid → the same dilutional hyponatremia as TURP; track irrigation and limit resection time. (2024 OA.)"
       ],
       post: [
         "Anticipate ↓BP when legs lowered; watch for peroneal injury (foot drop), fever/bacteremia, perforation.",
         "Mild pain (morphine 2–4 mg, fentanyl 25–50 mcg, ketorolac 15–30 mg)."
       ]
     },
-    source: "Jaffe 5e (2014), Urology §9.0, p. 878–882 (diagnostic and therapeutic transurethral procedures except TURP)."
+    source: "Jaffe 5e (2014), Urology §9.0, p. 878–882 (diagnostic and therapeutic transurethral procedures except TURP). Autonomic dysreflexia per OpenAnesthesia 'Autonomic Dysreflexia' (2025); transurethral-irrigation hyponatremia per 'Hyponatremia and TURP Syndrome' (2024)."
   },
   {
     id: "turp",
@@ -3295,7 +3354,7 @@ const PROCEDURES = [
     flags: [
       "**TURP syndrome — the signature hazard:** absorption of hypotonic irrigant → **dilutional hyponatremia, hypervolemia, hypotonicity** → visual disturbance, confusion, N/V, seizures, coma, HTN/angina, cardiovascular collapse. Limit resection to **≤1 h optimally (never >2 h)**; Na **<120** = severe. Treat with furosemide 5–20 mg + **hypertonic 3% saline 100 mL over 1–2 h**, goal Na >120; observation/water restriction if mild.",
       "**Regional (spinal, ~T9 level) is preferred over GA** specifically because the **awake patient's mental status is the earliest monitor for TURP syndrome** — confusion/agitation flags it before collapse.",
-      "**Monopolar vs bipolar matters:** monopolar uses nonelectrolyte irrigant (sorbitol-mannitol/glycine) → the hyponatremia risk; **bipolar uses saline → no dilutional hyponatremia** and no pacemaker interference. Glycine itself causes visual/CNS symptoms.",
+      "**Monopolar vs bipolar matters:** monopolar uses nonelectrolyte irrigant (sorbitol-mannitol/glycine) → the hyponatremia risk; **bipolar uses saline → no dilutional hyponatremia** and no pacemaker interference. Glycine itself causes visual/CNS symptoms. Laser vaporization (HoLEP, photoselective) likewise uses saline and largely avoids the dilutional syndrome. (2025 OA.)",
       "**Bladder/prostatic-capsule perforation and venous-sinus bleeding** — blood loss is hard to quantify in the irrigant; large glands (>80 g) need T&C; watch for hypothermia from irrigant."
     ],
     technique: {
@@ -3322,7 +3381,8 @@ const PROCEDURES = [
       ],
       intra: [
         "Monitor for TURP syndrome (mental status, Na, vitals); track resection time and irrigant type.",
-        "Manage hypothermia (warm irrigant), blood loss, and perforation; lithotomy care."
+        "Manage hypothermia (warm irrigant), blood loss, and perforation; lithotomy care.",
+        "Track irrigant deficit (instilled minus returned); pause and assess once ~1000 mL is absorbed in men (~750 mL in women) and keep intravesical pressure low (limit bag height). When correcting hyponatremia, raise Na no faster than ~10 mEq/L per 24 h to avoid central pontine myelinolysis. (2024 OA.)"
       ],
       post: [
         "Recheck Na; treat hyponatremia (furosemide ± 3% saline, goal >120); anticipate ↓BP when legs lowered.",
@@ -3335,7 +3395,12 @@ const PROCEDURES = [
       "**Glycine irrigant** can add hyperammonemia and transient visual disturbance ('TURP blindness'); modern bipolar/saline systems largely avoid the classic syndrome."
     ]
   },
-    source: "Jaffe 5e (2014), Urology §9.0, p. 883–887 (TURP and minimally invasive variants)."
+    caseFlow: [
+      "**Awake under spinal — the case IS the vigilance:** with a regional anesthetic the patient's mental status is your earliest TURP-syndrome monitor. As resection runs, **track resection time and irrigant deficit** (pause near ~1000 mL absorbed in men); risk builds with longer resection and higher bag height.",
+      "**The TURP-syndrome pivot:** restlessness, confusion, visual change, nausea, or HTN→sudden hypotension is the syndrome arriving (as early as 15 min) — tell the surgeon to **stop and achieve hemostasis**, check Na, and treat (furosemide ± 3% saline). Venous-sinus bleeding/capsular perforation shows here as hard-to-quantify blood loss.",
+      "**Runway:** resection done and irrigant clear; recheck Na, watch for clot retention and bleeding, and anticipate the **BP drop when the legs come down** from lithotomy.",
+    ],
+    source: "Jaffe 5e (2014), Urology §9.0, p. 883–887 (TURP and minimally invasive variants). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). TURP-syndrome thresholds/management per OpenAnesthesia 'Hyponatremia and TURP Syndrome' (2024); laser-prostate note per 'Anesthesia for Laser Surgery' (2025)."
   },
   {
     id: "open-robotic-prostatectomy",
@@ -3394,7 +3459,12 @@ const PROCEDURES = [
       "**Steep Trendelenburg + CO2 pneumoperitoneum** for robotic RP → ↑IOP/ICP, facial/airway edema, ↓pulmonary compliance — confirm tube position after positioning and watch for postop airway swelling."
     ]
   },
-    source: "Jaffe 5e (2014), Urology §9.0, p. 887–890 (open and robotic prostate operations)."
+    caseFlow: [
+      "**Docked in steep Trendelenburg — the locked-in stretch:** once the robot is docked the table cannot move; the case runs head-down under pneumoperitoneum with rising ICP/IOP and facial/airway edema. **Recheck the ETT after positioning** (cephalad carina shift → endobronchial migration) and protect the eyes.",
+      "**The dissection crux:** the apex/dorsal venous complex is the bleeder (open retropubic can lose up to ~1500 mL); the neurovascular-bundle spare and bladder-neck anastomosis are the meticulous beats — a calm steady field vs. calling for blood/converting is the tell.",
+      "**Emergence is the trap:** before extubating a long head-down case, confirm a **cuff leak / direct look for airway edema** — obstruction on emergence is the classic robotic-prostatectomy catastrophe. Watch vision postop.",
+    ],
+    source: "Jaffe 5e (2014), Urology §9.0, p. 887–890 (open and robotic prostate operations). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "nephrectomy-upper-tract",
@@ -3455,7 +3525,12 @@ const PROCEDURES = [
       "**Renal cell carcinoma** is the most common solid renal tumor (~90%); the **classic triad — flank pain, hematuria, palpable mass — occurs in only 10–15%** (most found incidentally). Associated with **von Hippel–Lindau**; can throw a **tumor thrombus up the IVC** (possible CPB)."
     ]
   },
-    source: "Jaffe 5e (2014), Urology §9.0, p. 891–898 (nephrectomy; operations on the renal pelvis and upper ureter)."
+    caseFlow: [
+      "**Flank position, kidney rest up — first hazard is positioning:** table flexion + kidney rest compress the IVC → expect a **BP drop as you go lateral**; pad the dependent arm/axillary roll and watch for pleural entry (pneumothorax: ↑PIP, hypoxemia).",
+      "**The resection crux depends on the thrombus:** a routine nephrectomy is steady, but **renal-cell carcinoma with IVC/atrial tumor thrombus** is the case that explodes — know the thrombus level preop, because caval control (± bypass) means sudden massive hemorrhage/embolism. Asking for the level or for bypass standby is the tell.",
+      "**Runway:** specimen out, hemostasis secured; high flank-incision pain (epidural/multimodal), watch urine output (especially solitary/partial), pneumothorax, and retractor neuralgia.",
+    ],
+    source: "Jaffe 5e (2014), Urology §9.0, p. 891–898 (nephrectomy; operations on the renal pelvis and upper ureter). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "cystectomy-diversion",
@@ -3508,7 +3583,12 @@ const PROCEDURES = [
         "Watch for bleeding, metabolic acidosis (continent diversion), and infection."
       ]
     },
-    source: "Jaffe 5e (2014), Urology §9.0, p. 899–905 (cystectomy; open bladder operations)."
+    caseFlow: [
+      "**The long cystectomy half — settle in for blood loss:** elderly comorbid cancer patient, hours of pelvic dissection with steady bleeding and large third-space loss; full monitoring, arterial line, active warming, stay ahead of losses.",
+      "**Diversion construction — the bowel beat:** harvesting the ileal segment (conduit/neobladder) brings fluid shifts, the start of prolonged ileus, and acid-base drift (hyperchloremic acidosis with continent diversions) — keep fluids judicious to limit bowel edema and track the gas. In cord-injured patients guard against autonomic hyperreflexia throughout.",
+      "**Runway:** anastomoses done = past the bleeding; epidural/multimodal, watch for ongoing bleeding, metabolic acidosis, and ileus into the postop days.",
+    ],
+    source: "Jaffe 5e (2014), Urology §9.0, p. 899–905 (cystectomy; open bladder operations). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "genital-perineal-surgery",
@@ -3569,7 +3649,7 @@ const PROCEDURES = [
   },
 {
     id: "cesarean-obstetric",
-    name: "Cesarean Section & Obstetric Emergencies (incl. Uterine Rupture, Obstetric Hysterectomy)",
+    name: "Cesarean Section & Obstetric Emergencies (incl. Uterine Rupture, Placenta Accreta, Obstetric Hysterectomy)",
     section: "Obstetric/Gynecologic Surgery",
     page: "835",
     tags: ["Neuraxial preferred","Full stomach","Left uterine tilt","Obstetric hemorrhage","Preeclampsia/HELLP","RSI if GA"],
@@ -3584,8 +3664,9 @@ const PROCEDURES = [
     flags: [
       "**Every parturient is a full stomach with a potentially difficult airway.** Give nonparticulate antacid (Na citrate 30 mL) + metoclopramide 10 mg + ranitidine/famotidine before all C-sections; airway mucosal edema → use a **smaller ETT (6.0 mm)**, no nasal airways, suction gently. ↑MV + ↓FRC (↓20%) → **rapid desaturation** on any apnea.",
       "**Maintain 15° left uterine tilt at all times** — supine aortocaval compression by the gravid uterus causes maternal hypotension and fetal compromise. Spinal hypotension is common: preload/coload (1–1.5 L crystalloid), and **phenylephrine 25–50 mcg/min is the vasopressor of choice** (ephedrine → more fetal acidosis).",
-      "**Massive obstetric hemorrhage (previa, abruption, rupture, atony) — activate MTP early.** Two 14–16 ga IVs, O-neg/uncrossmatched if needed, **RBC:FFP:PLT 6:4:1 (or RBC:FFP 1:1)**; induce the unstable patient with **ketamine or etomidate**. Uterine atony cascade: oxytocin 20–40 U/L → methylergonovine 0.2 mg IM (HTN) → carboprost 0.25 mg (bronchospasm/pulm HTN) → misoprostol; escalate to artery ligation/embolization/hysterectomy. DIC follows abruption/AFE/massive loss.",
-      "**Preeclampsia/eclampsia & HELLP:** neuraxial is preferred and safe **if platelets are normal** (coagulopathy contraindicates it). If GA is needed, **blunt the laryngoscopy pressor response** (lidocaine, esmolol, remifentanil; labetalol/hydralazine). **MgSO4 potentiates nondepolarizers** (reduce doses, monitor, avoid defasciculation) and worsens hypotension. Eclamptic seizure: O2 + small midazolam/propofol, MgSO4 4–6 g load then 1–2 g/h. **MAC is ↓30% in pregnancy** — easy to overdose."
+      "**Massive obstetric hemorrhage (previa, abruption, rupture, atony) — activate MTP early.** Two 14–16 ga IVs, O-neg/uncrossmatched if needed, **RBC:FFP:PLT 6:4:1 (or RBC:FFP 1:1)**; induce the unstable patient with **ketamine or etomidate**. Uterine atony cascade: oxytocin 20–40 U/L → methylergonovine 0.2 mg IM (HTN) → carboprost 0.25 mg (bronchospasm/pulm HTN) → misoprostol; escalate to artery ligation/embolization/hysterectomy. DIC follows abruption/AFE/massive loss. Give **early TXA 1 g IV** (repeat 1 g if bleeding continues at 30 min — WOMAN trial).",
+      "**Preeclampsia/eclampsia & HELLP:** neuraxial is preferred and safe **if platelets are normal** (coagulopathy contraindicates it). If GA is needed, **blunt the laryngoscopy pressor response** (lidocaine, esmolol, remifentanil; labetalol/hydralazine). **MgSO4 potentiates nondepolarizers** (reduce doses, monitor, avoid defasciculation) and worsens hypotension. Eclamptic seizure: O2 + small midazolam/propofol, MgSO4 4–6 g load then 1–2 g/h. **MAC is ↓30% in pregnancy** — easy to overdose.",
+      "**Placenta accreta spectrum (PAS) — the planned massive-hemorrhage case:** suspect it with placenta previa + prior cesarean (risk climbs with each prior). Default is a **planned cesarean hysterectomy at 34 0/7–35 6/7 wk at a Level III/IV center** with a multidisciplinary team — **leave the placenta in situ; do NOT attempt removal** (pulling it bleeds catastrophically). Setup: **arterial line before incision**, 2–3 large-bore IVs ± central, MTP-capable blood bank, rapid transfuser/fluid warmer, **cell salvage with a leukodepletion filter**, **early TXA**, viscoelastic-guided resuscitation (FIGO grade 1 creta / 2 increta / 3 percreta a–b–c). Often CSE with **planned conversion to GA after delivery**; IR balloon occlusion is mixed-evidence/not routine; ureteral stents/cystoscopy if bladder invasion. (2025 OA.)"
     ],
     technique: {
       summary: "Delivery via lower-segment (transverse) or classic (vertical) uterine incision for failure to progress, prior cesarean, malpresentation, or fetal/maternal emergency. The shared anesthetic block also covers repair of uterine rupture (a true obstetric emergency with catastrophic hemorrhage) and emergent obstetric hysterectomy for uncontrolled bleeding.",
@@ -3612,14 +3693,24 @@ const PROCEDURES = [
       ],
       intra: [
         "15° left tilt; spinal preferred (phenylephrine for ↓BP, atropine for ↓HR); GA with RSI + pressor-blunting if needed (small ETT).",
-        "Reduced doses (MAC ↓30%, MgSO4 interaction); MTP and atony cascade ready; constant communication with obstetrician."
+        "Reduced doses (MAC ↓30%, MgSO4 interaction); MTP and atony cascade ready; constant communication with obstetrician.",
+        "Neuraxial/GA recipe: spinal hyperbaric bupivacaine 0.75% 11–12 mg (ED95 ~11.2 mg) + fentanyl 10–25 mcg + preservative-free morphine 75–200 mcg (epidural morphine 1–3 mg) for a T4 block; epidural top-up 2% lidocaine 15–25 mL or 3% chloroprocaine. For GA: volatile until delivery, then TIVA/opioid to preserve uterine tone — and beware the real awareness risk in obstetric GA. (2023 OA.)",
+        "MgSO4: therapeutic 5–9 mg/dL; toxicity ladder — loss of patellar reflex ~12, respiratory depression 15–20, cardiac arrest ≥24 mg/dL; rescue calcium gluconate 1 g IV. Mg potentiates nondepolarizers (titrate to twitches), not succinylcholine; a bolus (30 mg/kg if on Mg, 45 mg/kg if naïve) blunts the intubation pressor response. (2023 OA.)",
+        "Cord prolapse: Trendelenburg or knee-chest + manual elevation of the presenting part (± bladder fill 500–750 mL) maintained until uterine incision; GA/RSI for the crash section. (2025 OA.)"
       ],
       post: [
         "Watch for hemorrhage/atony, ↓BP, and (after rupture/massive resuscitation) pulmonary edema, DIC, and acute renal failure — ICU if severe.",
-        "Multimodal analgesia; continue MgSO4 for preeclampsia; reduce insulin in diabetics."
+        "Multimodal analgesia; continue MgSO4 for preeclampsia; reduce insulin in diabetics.",
+        "Postpartum tubal ligation (ACOG: urgent, ideally <24 h): full-stomach aspiration prophylaxis; an in-situ epidural reactivates best within ~4 h of delivery and declines over 24 h; aim for a T4 block (postpartum LA sensitivity rises — doses ~30% lower 8–24 h out); avoid volatile (uterine atony). Defer if on Mg for preeclampsia, hemorrhaging, septic, or coagulopathic. (2025 OA.)"
       ]
     },
-    source: "Jaffe 5e (2014), Obstetric/Gynecologic Surgery §8.3, p. 835–844 (cesarean section lower-segment and classic; repair of uterine rupture; emergent obstetric hysterectomy; shared obstetric anesthetic considerations)."
+    caseFlow: [
+      "**Setup and the pre-delivery window:** aspiration prophylaxis, 15° left tilt, neuraxial (spinal/CSE) the default — the danger here is **spinal hypotension** (preload/coload, phenylephrine 25–50 mcg/min) and a failed/high block; for the crash section it is RSI with a smaller ETT on a full-stomach, edematous airway.",
+      "**Delivery and the uterotonic cascade:** at delivery give oxytocin (slow — a bolus drops SVR) and read uterine tone; **atony is the commonest hemorrhage** — escalate oxytocin → methylergonovine 0.2 mg (avoid in HTN) → carboprost 0.25 mg (avoid in asthma/pulmonary HTN) → misoprostol while the surgeon works.",
+      "**The hemorrhage pivot — read the field:** brisk, non-clotting bleeding (previa/accreta/rupture/abruption) means **activate MTP early (6:4:1)**, give early TXA, and convert neuraxial to GA if unstable. Watch for the placenta that will not separate (accreta) and the sudden hypotensive/bradycardic high-block or AFE picture.",
+      "**Runway:** uterus firm and dry, blood loss tallied; for the resuscitated/ruptured patient watch pulmonary edema, DIC, and renal injury (ICU). Neuraxial morphine + multimodal for the routine recovery.",
+    ],
+    source: "Jaffe 5e (2014), Obstetric/Gynecologic Surgery §8.3, p. 835–844 (cesarean section lower-segment and classic; repair of uterine rupture; emergent obstetric hysterectomy; shared obstetric anesthetic considerations). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Placenta accreta spectrum per OpenAnesthesia 'Placenta Accreta Spectrum' (2025); postpartum tubal ligation per 'Postpartum Tubal Ligation' (2025). Neuraxial dosing per OpenAnesthesia 'Anesthetic Management of Cesarean Delivery' (2023); MgSO4 toxicity/dosing per 'Magnesium in Pregnancy' (2023); TXA/hemorrhage per 'Postpartum Hemorrhage' (2025); cord prolapse per 'Obstetrical Emergencies' (2025)."
   },
   {
     id: "gyn-oncology-laparotomy",
@@ -3672,11 +3763,16 @@ const PROCEDURES = [
         "Watch for bleeding, fluid/electrolyte derangement, ileus, and infection."
       ]
     },
-    source: "Jaffe 5e (2014), Obstetric/Gynecologic Surgery §8.1, p. 760–795 (staging/cytoreductive/second-look laparotomy; radical vulvectomy; pelvic exenteration; radical hysterectomy; gynecologic oncology)."
+    caseFlow: [
+      "**The long debulking arc:** staging/cytoreduction can run 5–12 h — settle in for steady blood loss and large third-space/insensible losses; arterial line, large-bore access, blood checked in, and active warming from the start.",
+      "**Exenteration is the deep end:** removing pelvic viscera with urinary/bowel diversion can lose **1200–4000 mL** — the danger windows are the pelvic sidewall dissection (sudden venous hemorrhage) and the steady ooze of raw surfaces; stay ahead of losses and watch lithotomy time (peroneal/compartment).",
+      "**Runway:** ICU for the major resections; epidural/multimodal analgesia, continued VTE prophylaxis (cancer + pelvis + long case = high risk), and a watch for ongoing bleeding, fluid/electrolyte shifts, and ileus.",
+    ],
+    source: "Jaffe 5e (2014), Obstetric/Gynecologic Surgery §8.1, p. 760–795 (staging/cytoreductive/second-look laparotomy; radical vulvectomy; pelvic exenteration; radical hysterectomy; gynecologic oncology). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "minor-uterine-procedures",
-    name: "Minor Uterine Procedures (D&C · D&E · GTD Suction · Hysteroscopy · Conization)",
+    name: "Minor Uterine Procedures (D&C · D&E · GTD Suction · Hysteroscopy · Conization · Cervical Cerclage)",
     section: "Obstetric/Gynecologic Surgery",
     page: "801",
     tags: ["MAC/regional/GA","Lithotomy","Brief","Hysteroscopic fluid absorption","Cervical/vagal","Hemorrhage (GTD/D&E)"],
@@ -3692,7 +3788,8 @@ const PROCEDURES = [
       "**Operative hysteroscopy uses distension media that can be absorbed → fluid overload and a TURP-like syndrome** (dilutional hyponatremia with hypotonic glycine/sorbitol; fluid overload even with saline in bipolar). Monitor fluid deficit closely; the surgeon should cap absorption — stop if the deficit is excessive.",
       "**Gestational trophoblastic disease suction and 2nd-trimester D&E can hemorrhage briskly** (atony, vascular tissue) — have oxytocics ready, large-bore access, and blood available; GTD may have associated hyperthyroidism and (rarely) trophoblastic pulmonary embolization.",
       "**Cervical dilation/manipulation triggers vagal responses** (bradycardia) and uterine perforation is possible — watch the rhythm, suspect perforation with unexpected bleeding/hypotension.",
-      "Pregnant or recently pregnant patients (D&E, GTD) carry **parturient aspiration physiology** — apply full-stomach precautions; uterine tilt if a gravid uterus is present."
+      "Pregnant or recently pregnant patients (D&E, GTD) carry **parturient aspiration physiology** — apply full-stomach precautions; uterine tilt if a gravid uterus is present.",
+      "**Cervical cerclage (McDonald/Shirodkar transvaginal; TAC abdominal) — keep intra-abdominal pressure down and the membranes in:** neuraxial to a **T10–S4** block is typical (0.75% bupivacaine 7.5–9 mg + fentanyl, or chloroprocaine for fast turnover). For a rescue cerclage with **bulging membranes**, Trendelenburg + **nitroglycerin** help the obstetrician reduce them — but steep Trendelenburg with a hyperbaric spinal risks a **high block** (time the dose carefully). Aspiration prophylaxis if >13 wk; left-uterine displacement if >20 wk; avoid coughing/straining on emergence. (2025 OA.)"
     ],
     technique: {
       summary: "Short transcervical procedures: dilation & curettage (D&C) for diagnosis/bleeding/retained tissue, dilation & evacuation (D&E) for pregnancy termination/loss, suction curettage for gestational trophoblastic disease, hysteroscopy (diagnostic or operative resection of polyps/fibroids/septa), and cervical conization (LEEP/cold-knife) for dysplasia.",
@@ -3725,7 +3822,7 @@ const PROCEDURES = [
         "Mild pain; mostly outpatient."
       ]
     },
-    source: "Jaffe 5e (2014), Obstetric/Gynecologic Surgery §8.2, p. 777–810 (D&C; therapeutic abortion/D&E; suction curettage for GTD; hysteroscopy; conization of the cervix)."
+    source: "Jaffe 5e (2014), Obstetric/Gynecologic Surgery §8.2, p. 777–810 (D&C; therapeutic abortion/D&E; suction curettage for GTD; hysteroscopy; conization of the cervix). Cervical cerclage per OpenAnesthesia 'Anesthesia for Cervical Cerclage' (Warrick & Daly, 2025)."
   },
   {
     id: "hysterectomy-benign",
@@ -3987,7 +4084,8 @@ const PROCEDURES = [
       ],
       intra: [
         "RSI; DLT/OLV for thoracic; pneumoperitoneum management for lap; arterial line for thoracic compression.",
-        "Coordinate bougie/dilator passage; epidural for open pain."
+        "Coordinate bougie/dilator passage; epidural for open pain.",
+        "Esophageal perforation (Boerhaave, instrumental, traumatic) is a septic emergency — mediastinitis/sepsis, full stomach, often unstable: RSI, resuscitate, broad-spectrum antibiotics. Avoid N2O in obstruction/perforation (distends the obstructed esophagus and bowel and can worsen a mediastinal/pleural air leak)."
       ],
       post: [
         "Extubate by approach/reserve; watch for aspiration, dysrhythmia, and anastomotic/leak issues.",
@@ -4003,7 +4101,14 @@ const PROCEDURES = [
       "**The 'four birds of the chest'** (thoracic-surgeon classic): azygos, hemiazygos, 'esopha-goose,' thoracic duck (thoracic duct), and 'vagoose' (vagus) — duct injury causes chylothorax."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.1, p. 482–491, 585–588 (esophagostomy; diverticulectomy; perforation; esophagomyotomy/Heller; fundoplication; laparoscopic fundoplication and Heller myotomy; shared esophageal anesthetic considerations p. 494)."
+    caseFlow: [
+      "**Induction in a shared airway:** obstructing/refluxing lesions mean full-stomach **RSI**, head-up; the surgical field sits at or just below the airway, so a Zenker pouch can regurgitate on induction.",
+      "**The myotomy / wrap without breaching mucosa — the crux:** Heller myotomy and diverticulectomy live or die on not **perforating the esophageal mucosa**; expect a **leak test** (insufflation or methylene-blue/saline) before closing. Pass any bougie or scope only on request, slowly, stopping at resistance.",
+      "**RLN and the bougie:** the left cervical (Zenker) approach risks the **recurrent laryngeal nerve**; for fundoplication the wrap is sized over a **bougie** — insert exactly when asked, never against resistance.",
+      "**Inspect-for-perforation gate:** a positive leak test means repair and a longer case, not closure — don't commit to a fast wake-up until they confirm a dry suture line.",
+      "**Closing / runway:** short cervical or laparoscopic cases wake up; a **transthoracic** approach or a **perforation/sepsis** presentation runs longer, may stay intubated, and can declare a **pneumothorax** after hiatal/chest work.",
+    ],
+    source: "Jaffe 5e (2014), General Surgery §7.1, p. 482–491, 585–588 (esophagostomy; diverticulectomy; perforation; esophagomyotomy/Heller; fundoplication; laparoscopic fundoplication and Heller myotomy; shared esophageal anesthetic considerations p. 494). Esophageal perforation (mediastinitis/sepsis) per Jaffe 5e §7.1 Management of Esophageal Perforation; N2O avoidance standard. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "esophagectomy",
@@ -4062,7 +4167,14 @@ const PROCEDURES = [
       "**The most common cause of esophageal perforation is iatrogenic** (instrumentation, classically the cervical esophagus) — relevant whenever you pass an OG/TEE/bougie in these patients."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.1, p. 492–504; minimally invasive esophagectomy shares these considerations. OLV/DLT technique cross-references Thoracic Surgery p. 285."
+    caseFlow: [
+      "**Abdominal phase — building the conduit:** the stomach is tubularized on the **right gastroepiploic arcade** and a pyloroplasty/pyloromyotomy plus feeding J-tube are added. Conduit perfusion rides on that single arcade — restrictive fluids, avoid pressors that threaten it.",
+      "**Reposition to lateral, thoracic phase on one lung:** for Ivor Lewis the patient is turned and a **DLT/bronchial blocker** gives **one-lung ventilation** for the right thoracotomy — the hypoxia/hypotension stretch. Re-confirm tube position after every turn.",
+      "**The anastomosis — the crux:** gastroesophageal anastomosis in the chest (Ivor Lewis) or **neck** (transhiatal / 3-hole, where the **RLN** is at risk). **Anastomotic leak** is the dreaded late event; once it is sewn you are past the OLV/bleeding peak.",
+      "**Re-expand the lung, hemostasis, chest tubes, close:** back to two-lung ventilation; keep fluids restrictive to protect both the lung and the conduit.",
+      "**Runway:** a big case — thoracic epidural/multimodal planned, **ICU intubated** is common; watch pulmonary morbidity and the conduit/anastomosis.",
+    ],
+    source: "Jaffe 5e (2014), General Surgery §7.1, p. 492–504; minimally invasive esophagectomy shares these considerations. OLV/DLT technique cross-references Thoracic Surgery p. 285. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "gastroduodenal-surgery",
@@ -4121,7 +4233,14 @@ const PROCEDURES = [
       "**Gastric-cancer metastasis eponyms:** **Virchow's node** (left supraclavicular), **Blumer's shelf** (pouch-of-Douglas deposit palpable on rectal exam), and Sister Mary Joseph nodule (periumbilical) — signs of advanced disease."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.2, p. 505–520, 584 (gastric/duodenal perforation; peptic ulcer operations; gastric resection; gastrostomy; duodenotomy; laparoscopic perforated-ulcer repair; shared considerations p. 509)."
+    caseFlow: [
+      "**Exploration & resectability (cancer):** a staging look first; bulky GE-junction tumors can change the approach or the plan before resection commits.",
+      "**Resection — the long meticulous pole:** the stomach is devascularized and divided; in **total gastrectomy** the splenic hilum and tail of pancreas are in the field. Relaxation needed; handle the OG/NG tube only as the surgeon directs.",
+      "**Reconstruction — the anastomosis:** Billroth I/II or **Roux-en-Y** gastrojejunostomy; **anastomotic leak / sepsis** is the feared complication. Starting the anastomosis means you are on the back half.",
+      "**Hemostasis, NG placement, closing** — controlled emergence for the elective resection.",
+      "**Perforation (Graham omental patch) is a different beast:** an **emergency with peritonitis/septic shock** — RSI, resuscitate, source-control washout-and-patch, often ICU. No clean elective arc; the priority is the lethal-triad fight, not a tidy wake-up.",
+    ],
+    source: "Jaffe 5e (2014), General Surgery §7.2, p. 505–520, 584 (gastric/duodenal perforation; peptic ulcer operations; gastric resection; gastrostomy; duodenotomy; laparoscopic perforated-ulcer repair; shared considerations p. 509). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "bariatric-surgery",
@@ -4141,7 +4260,8 @@ const PROCEDURES = [
       "**Anticipate a difficult airway AND high aspiration risk** — ramp the patient (ear-to-sternal-notch), preoxygenate well (they desaturate fast), and intubate awake or via RSI. Prior restrictive bariatric surgery further raises aspiration risk.",
       "**OSA is near-universal — avoid sedative premedication, expect difficult mask ventilation, and plan opioid-sparing multimodal analgesia and monitored postop care.** OSA may carry pulmonary HTN; obesity is a CAD/sudden-death risk factor.",
       "**Weight-based dosing is drug-specific:** lipophilic drugs distribute into a larger volume (often dosed nearer total body weight), while others use lean/ideal body weight — dose deliberately, not by a single scalar. Anticipate difficult vascular access.",
-      "**Laparoscopic approach adds steep positioning + CO2 pneumoperitoneum** on an already-compromised respiratory system → high airway pressures, ↓FRC, ↑ETCO2; recheck tube position and ventilation. Reduced vitamin K (post-bypass) can potentiate warfarin."
+      "**Laparoscopic approach adds steep positioning + CO2 pneumoperitoneum** on an already-compromised respiratory system → high airway pressures, ↓FRC, ↑ETCO2; recheck tube position and ventilation. Reduced vitamin K (post-bypass) can potentiate warfarin.",
+      "**Ask about GLP-1 agonists (semaglutide, tirzepatide) — they delay gastric emptying and raise aspiration risk** on top of the baseline obesity/GERD risk; follow current hold guidance and consider gastric ultrasound to gauge residual contents. **Dose by the right weight:** succinylcholine and sugammadex by **total** body weight, rocuronium by **ideal** body weight, sedatives/opioids/infusions by **ideal or adjusted** body weight (AIBW = IBW + 0.4×[TBW−IBW]); titrate to effect."
     ],
     technique: {
       summary: "Weight-loss surgery (Roux-en-Y gastric bypass, sleeve gastrectomy, banding) for morbid obesity (BMI ≥40, or ≥35 with comorbidity), performed open or — usually — laparoscopically. The anesthetic is dominated by airway, aspiration, OSA, and obesity pharmacology.",
@@ -4152,6 +4272,12 @@ const PROCEDURES = [
         "Opioid-sparing analgesia; extubate fully awake; monitored postop bed for OSA."
       ]
     },
+    caseFlow: [
+      "**Induction is the pinch point** — ramped, well-preoxygenated RSI on a fast-desaturating airway with high aspiration risk (worse on a GLP-1). Once the tube is in and confirmed, the most dangerous moment is behind you.",
+      "**Insufflation + reverse Trendelenburg:** expect higher airway pressures and lower compliance — recruit, add PEEP, accept higher peaks. Deep neuromuscular block improves the surgeon\u2019s view.",
+      "**The sizing/stapling step is the cue to mind your tubes:** a bougie or orogastric tube is passed to size the stomach — **withdraw it at the surgeon\u2019s request before the stapler fires** so it is not caught in the staple line. A methylene-blue or air leak test may follow.",
+      "**Head-up emergence:** fully reverse the block, extubate awake and sitting up, have HFNC/CPAP ready and a monitored OSA bed. Do not blindly pass an NG/OG tube postop — clear it with the surgeon first."
+    ],
     physiology: [
       "Obesity reduces FRC and compliance and accelerates desaturation; OSA adds collapsibility and opioid sensitivity.",
       "Altered volumes of distribution change drug dosing; pneumoperitoneum/steep positioning compound the respiratory load."
@@ -4171,7 +4297,8 @@ const PROCEDURES = [
       ],
       post: [
         "Extubate fully awake; monitored bed for OSA obstruction/desaturation; opioid-sparing analgesia.",
-        "Watch for VTE, bleeding, anastomotic/leak issues, and rhabdomyolysis in the very obese."
+        "Watch for VTE, bleeding, anastomotic/leak issues, and rhabdomyolysis in the very obese.",
+        "Avoid postop NSAIDs (marginal-ulcer risk after bypass); do not manipulate or place an NG/OG tube without the surgeon\u2019s OK (staple line/anastomosis); position head-up and use HFNC/CPAP/BiPAP as the surgeon permits."
       ]
     },
   recall: {
@@ -4179,7 +4306,7 @@ const PROCEDURES = [
       "**Dumping syndrome** is common after gastric bypass — rapid emptying of hyperosmolar food into the jejunum causes early (osmotic/autonomic: cramping, diarrhea, tachycardia, diaphoresis) and late (reactive hypoglycemia) symptoms; dietary modification is first-line."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.2, p. 511–516, 611–613 (open and laparoscopic operations for morbid obesity)."
+    source: "Jaffe 5e (2014), General Surgery §7.2, p. 511–516, 611–613 (open and laparoscopic operations for morbid obesity). Enriched (GLP-1/delayed-gastric-emptying aspiration risk, weight-based dosing rules, deep NMB, bougie/staple-line tube handling, head-up emergence + HFNC/CPAP) from OpenAnesthesia: 'Anesthesia for Bariatric Surgery' (May & Sakharpe, updated 2026-03-04)."
   },
 {
     id: "small-bowel-appendix",
@@ -4199,6 +4326,7 @@ const PROCEDURES = [
       "**The acute abdomen is a full stomach — RSI with cricoid pressure**, and **metoclopramide is contraindicated in obstruction/perforation.** Bowel distension splints the diaphragm (↓FRC) → rapid desaturation; preoxygenate well. An NG tube can stay for induction (suction first) or be pulled — it doesn't preclude cricoid.",
       "**Restore volume BEFORE induction:** emergent patients are hypovolemic/septic (third-spacing, vomiting, peritonitis); even elective patients are dry from bowel prep. Anticipate **large fluid shifts (10–15 mL/kg/h)**, warm fluids, and pressors for the relative hypovolemia unmasked by induction agents.",
       "**Avoid N2O** — it diffuses into and distends bowel, worsening exposure and distension.",
+      "**Carcinoid tumors are common in the small bowel and appendix** — a functional or metastatic carcinoid releases serotonin/histamine/kinins, and tumor manipulation can trigger a **carcinoid crisis** (bronchospasm, flushing, and profound hypotension OR hypertension). **Octreotide** 25–100 mcg IV bolus (infusion if refractory) is the treatment and is given prophylactically when carcinoid is known; avoid histamine-releasing drugs (morphine, atracurium) and sympathomimetics/catecholamines, which can provoke mediator release.",
       "**Sepsis/septic shock** may need aggressive hemodynamic support (arterial line ± CVP/TEE in the unstable patient); watch for hemorrhage. Retroperitoneal-tumor resection can involve great vessels → major bleeding."
     ],
     technique: {
@@ -4210,6 +4338,13 @@ const PROCEDURES = [
         "Arterial line ± CVP for the sick/septic patient or major resection; warm aggressively; T&S/T&C."
       ]
     },
+    caseFlow: [
+      "**This entry spans quick to open-ended — first read which case you're in.** Appendectomy is short and predictable; exploratory laparotomy and lysis of adhesions can run for hours.",
+      "**Appendectomy:** find the appendix, divide the mesoappendix and base, and it's out — fast unless **retrocecal, perforated, or abscessed**, which means more dissection, irrigation, and a longer, dirtier case (and a sicker patient).",
+      "**Small-bowel resection / lysis of adhesions (the time sink):** the surgeon runs the bowel to find the lesion or the obstructing band. **Dense adhesions from prior surgery are the classic bog-down** and the enterotomy-injury risk — this is where an easy case becomes a long one.",
+      "**Resect → anastomosis → close the mesenteric defect:** once they're anastomosing, you're near the end (leak check, washout, fascia). Your cue to start planning emergence.",
+      "**Exploratory/staging laparotomy is the wild card:** the finding drives everything — a quick negative look vs. unresectable tumor vs. ischemic bowel needing resection. Don't commit to an emergence timeline until they've declared what they found.",
+    ],
     physiology: [
       "Intraabdominal pathology (distension, ascites, blood, pain) reduces FRC and raises the A-a gradient; obstruction/perforation drives sepsis and fluid sequestration.",
       "Open laparotomy → large third-space and heat loss; abdominal packing further reduces FRC."
@@ -4245,7 +4380,7 @@ const PROCEDURES = [
       "**Polyposis syndromes:** **Peutz-Jeghers** = hamartomatous GI polyps + buccal/perioral **pigmentation** ('Peutz = Pigmentation'); **Gardner's** = colonic adenomas (FAP variant) + osteomas, sebaceous cysts, and desmoids ('SOD')."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.3, p. 521–533, 640–649, and §7.2 ostomy p. 526–528 (appendectomy; Meckel's; small-bowel resection; enterolysis; enteric fistulae; ostomy procedures; exploratory/staging laparotomy; intraabdominal/retroperitoneal tumor; subphrenic abscess; shared intestinal/peritoneal considerations p. 534)."
+    source: "Jaffe 5e (2014), General Surgery §7.3, p. 521–533, 640–649, and §7.2 ostomy p. 526–528 (appendectomy; Meckel's; small-bowel resection; enterolysis; enteric fistulae; ostomy procedures; exploratory/staging laparotomy; intraabdominal/retroperitoneal tumor; subphrenic abscess; shared intestinal/peritoneal considerations p. 534). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Carcinoid tumors of the small bowel/appendix noted per Jaffe technique; carcinoid-crisis management (octreotide; avoid histamine-releasers/sympathomimetics) per standard practice."
   },
   {
     id: "colorectal-surgery",
@@ -4276,6 +4411,13 @@ const PROCEDURES = [
         "Modified-lithotomy care for pelvic dissection; warm; pressors for sepsis; remove gastric tube in OR if placed."
       ]
     },
+    caseFlow: [
+      "**Access & exploration:** ports or laparotomy, then a survey for resectability and peritoneal/liver disease. A long look-around, frozen sections, or an unplanned call to another service means the plan — and the case length — may grow.",
+      "**Mobilizing the colon (the long, quiet pole):** taking down attachments along the white line of Toldt and the flexures — usually the most time-consuming stretch, and where a struggling case announces itself: **dense adhesions from a reop abdomen, a bulky tumor, or obesity** slow this to a crawl, and the lap→**open conversion** decision is made here. Cruising through it predicts an on-time finish.",
+      "**Ligating the vascular pedicle & dividing the mesentery:** the brisk-bleeding moment and the mesenteric defect. In pelvic/recurrent cases **the ureters are the crux here** (they may pre-place ureteric stents) — a long pause over the pelvic sidewall or sudden bleeding is the worry.",
+      "**Anastomosis or stoma maturation — your runway marker:** once they're past the mesentery to the anastomosis, what's left is the leak test, closing the mesenteric defect, washout, and fascia. This is the 'what's next?' beat — your cue to start planning relaxant reversal and emergence.",
+      "**Leak test, washout, fascial closure ± stoma:** home stretch. The exception is low rectal / abdominoperineal work, where the **pelvic/perineal dissection** is the bloodiest, slowest part (most of the EBL) with the lithotomy-position risks. Fascia closing = wake-up; a stoma adds a short tail."
+    ],
     physiology: [
       "Acute obstruction/perforation → diaphragmatic splinting, sepsis, and fluid sequestration; chronic IBD/cancer → anemia, hypoalbuminemia, malabsorptive coagulopathy.",
       "Pelvic dissection bleeds and the lithotomy position shifts venous return."
@@ -4310,7 +4452,7 @@ const PROCEDURES = [
       "**Ligament of Treitz** (duodenojejunal flexure) is the great divide: bleeding **proximal** = upper GI bleed, **distal** = lower GI bleed (the vast majority of lower GI bleeds are colonic)."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.4, p. 539–548, 602 (total proctocolectomy; partial colectomy; colostomy; stoma closure/peristomal hernia; laparoscopic bowel resection; shared large-bowel considerations p. 546)."
+    source: "Jaffe 5e (2014), General Surgery §7.4, p. 539–548, 602 (total proctocolectomy; partial colectomy; colostomy; stoma closure/peristomal hernia; laparoscopic bowel resection; shared large-bowel considerations p. 546). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "anorectal-surgery",
@@ -4402,6 +4544,13 @@ const PROCEDURES = [
         "ICU recovery for major resection; consider postop ventilation; PCA (not epidural if coagulopathic)."
       ]
     },
+    caseFlow: [
+      "**Mobilization & intraop ultrasound:** the liver is freed and the resection line mapped against the intrahepatic portal/hepatic veins. A long look or a changed plan here can mean a bigger resection than booked.",
+      "**Inflow control — hilar dissection, Pringle ready:** the artery, portal vein, and bile duct to the resected segment are isolated. The **Pringle maneuver** (clamping the porta hepatis) is the bleeding-control tool — note the clamp/unclamp times; reperfusion on unclamping can swing hemodynamics.",
+      "**Parenchymal transection — the crux and the bleeding:** dividing liver substance is where **massive hemorrhage from hepatic/portal vein branches** happens. This is when your **low-CVP** technique earns its keep (or, for total vascular exclusion, the loaded-CVP/pressor-ready plan) — be dead ready to transfuse. A surgeon working slowly and repeatedly asking for suction and packing = trouble, not tempo.",
+      "**Hemostasis of the raw surface, specimen out — over the hump:** transection done, bleeding risk drops sharply; they argon/suture the cut surface and check for bile leak. Reasonable point to restore CVP and reassess.",
+      "**Closure:** home stretch — major resections go to ICU, often still intubated, so plan that rather than a fast wake-up.",
+    ],
     physiology: [
       "The hepatic vascular bed bleeds freely; low venous pressure decompresses it but at renal cost. Vascular exclusion produces ischemia-reperfusion and abrupt hemodynamic swings.",
       "Loss of liver mass + ischemic injury → postop coagulopathy, hypoglycemia, and impaired drug metabolism."
@@ -4430,7 +4579,7 @@ const PROCEDURES = [
       "**Budd-Chiari syndrome:** hepatic-vein outflow thrombosis → painful hepatomegaly, ascites, and portal hypertension (a cause of the sick liver patient you may meet)."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.5, p. 563–567 (hepatic resection; hepatorrhaphy; shared hepatic considerations p. 567). Cirrhosis/portal HTN evaluation cross-references p. 448."
+    source: "Jaffe 5e (2014), General Surgery §7.5, p. 563–567 (hepatic resection; hepatorrhaphy; shared hepatic considerations p. 567). Cirrhosis/portal HTN evaluation cross-references p. 448. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "biliary-cholecystectomy",
@@ -4461,6 +4610,12 @@ const PROCEDURES = [
         "Vitamin K for prolonged PT; muscle relaxation for exposure; awake extubation if aspiration risk."
       ]
     },
+    caseFlow: [
+      "**Insufflation & port placement:** the CO2 pneumoperitoneum + steep reverse-Trendelenburg hit is front-loaded here (↓venous return, ↑PaCO2). Veress/trocar entry is the rare-but-catastrophic vascular/bowel-injury moment — a sudden unexplained ↓BP early is that until proven otherwise.",
+      "**Dissecting Calot's triangle for the critical view of safety — the crux:** the surgeon must positively identify the cystic duct and cystic artery (Calot's = cystic duct · common hepatic duct · cystic artery) before clipping. The dread is **misclipping the common bile duct** or injuring the **right hepatic duct/artery**. If the anatomy is unclear they'll slow down, shoot an **intraoperative cholangiogram**, or **convert to open** — expect a longer, quieter case, not a problem with your anesthetic. (Watch opioid-induced sphincter of Oddi spasm if a cholangiogram is shot.)",
+      "**Gallbladder off the liver bed, specimen out:** the high-stakes part is done; oozing from the liver bed is the usual nuisance. Reasonable point to ease back if you'd tightened things during the dissection.",
+      "**Desufflation & closure:** preload falls as the abdomen deflates; residual subdiaphragmatic CO2 → postop shoulder-tip pain to forewarn PACU about."
+    ],
     physiology: [
       "Pneumoperitoneum + reverse Trendelenburg reduce venous return and FRC and raise PaCO2; subdiaphragmatic gas refers pain to the shoulder.",
       "Obstructive jaundice impairs renal protection; cirrhosis worsens bleeding and hepatic reserve."
@@ -4496,7 +4651,7 @@ const PROCEDURES = [
       "**Klatskin tumor:** a cholangiocarcinoma at the **confluence of the right and left hepatic ducts** — a hilar bile-duct cancer presenting with painless obstructive jaundice."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.5, p. 572–591 (open and laparoscopic cholecystectomy; CBD exploration; biliary drainage; sphincteroplasty; bile-duct tumor; choledochal cyst; shared biliary considerations p. 580)."
+    source: "Jaffe 5e (2014), General Surgery §7.5, p. 572–591 (open and laparoscopic cholecystectomy; CBD exploration; biliary drainage; sphincteroplasty; bile-duct tumor; choledochal cyst; shared biliary considerations p. 580). Critical-view-of-safety / Calot's-triangle case flow per Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "pancreatic-surgery",
@@ -4528,6 +4683,13 @@ const PROCEDURES = [
         "Anticipate major fluid shifts and possible hemorrhage; ICU for sick patients/major resection."
       ]
     },
+    caseFlow: [
+      "**Exploration & resectability — the make-or-break gate (Whipple):** the surgeon checks for mets and whether the tumor is off the **SMA/portal vein**. If unresectable, the Whipple is aborted for a bypass — a completely different, shorter case. Don't plan until they've committed to resect.",
+      "**Resection phase (the long, meticulous pole):** dissecting the pancreatic head off the portal vein/SMV and dividing stomach, duodenum, bile duct, and pancreas. **Bleeding off the portal vein/SMV** is the dread; slow careful going here is normal — but a venous injury announces itself as sudden brisk loss.",
+      "**Reconstruction — three anastomoses:** pancreaticojejunostomy → hepaticojejunostomy → gastrojejunostomy. Once they start the **pancreatic anastomosis** (the one whose **leak/fistula** is the feared complication), you're past the bleeding risk and on the back half — start thinking wake-up plan and glucose.",
+      "**Drains, hemostasis check, closure:** home stretch after three anastomoses. Long case → keep warming, watch glucose, plan a controlled emergence (ICU for the sick/major ones).",
+      "**Distal/total pancreatectomy or Puestow run shorter** — fewer anastomoses, no portal-vein dissection. Total pancreatectomy makes the patient brittle-diabetic immediately, so glucose is the post-resection crux.",
+    ],
     physiology: [
       "Extensive retroperitoneal dissection → large third-space loss; pancreatic disease deranges glucose homeostasis.",
       "Necrotizing pancreatitis drives SIRS/sepsis, capillary leak, ARDS, and renal injury."
@@ -4561,7 +4723,7 @@ const PROCEDURES = [
       "**Hemorrhagic pancreatitis signs: Cullen's** (periumbilical bruising) and **Grey-Turner's** (flank bruising) — retroperitoneal blood tracking to the skin."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.6, p. 624–632 (operative drainage for pancreatitis; pseudocyst drainage; longitudinal pancreaticojejunostomy; pancreatectomy; Whipple resection; shares biliary considerations p. 580)."
+    source: "Jaffe 5e (2014), General Surgery §7.6, p. 624–632 (operative drainage for pancreatitis; pseudocyst drainage; longitudinal pancreaticojejunostomy; pancreatectomy; Whipple resection; shares biliary considerations p. 580). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "splenectomy",
@@ -4619,14 +4781,21 @@ const PROCEDURES = [
       "**Kehr's sign:** left **shoulder** pain from diaphragmatic irritation by a ruptured/bleeding spleen (referred via the phrenic nerve) — a classic sign of splenic injury/hemoperitoneum."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.3 p. 645 and §7.5 laparoscopic splenectomy p. 595 (open and laparoscopic splenectomy)."
+    caseFlow: [
+      "**Mobilization toward the hilum:** ligaments taken down (harmonic) and the spleen freed to its pedicle. **Massive splenomegaly (>20–30 cm)** carries a high **lap→open conversion** rate — watch for that call.",
+      "**Hilar control — the crux and the bleed:** the **splenic hilum** is stapled (endo-GIA) and short gastrics divided. **Hilar/short-gastric hemorrhage** and injury to the **pancreatic tail, stomach, or splenic flexure** are the dreads — brisk loss or a call for conversion/cell-saver is trouble. (ITP: give platelets only AFTER the splenic artery is ligated.)",
+      "**Spleen out, then hunt for an accessory spleen — the can't-skip step:** a missed accessory spleen fails an ITP/hereditary-spherocytosis case; the bed and pancreatic tail are checked for bleeding/leak.",
+      "**Closing:** rapid, does not need relaxation; laparoscopic cases wake up, while a **trauma/open** splenectomy runs hotter.",
+      "**Runway/post:** confirm pneumococcal/meningococcal/Hib vaccination (**OPSI** risk); watch post-splenectomy thrombocytosis/VTE.",
+    ],
+    source: "Jaffe 5e (2014), General Surgery §7.3 p. 645 and §7.5 laparoscopic splenectomy p. 595 (open and laparoscopic splenectomy). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
 {
     id: "thyroid-parathyroid-surgery",
     name: "Thyroidectomy & Parathyroidectomy",
     section: "General Surgery",
-    page: "672",
-    tags: ["GETA","Goiter/airway","RLN injury","Euthyroid first","Postop hypocalcemia","Neck hematoma"],
+    page: "670–682",
+    tags: ["GETA","Goiter/airway","RLN injury","NIM tube","Euthyroid first","Hypercalcemia","IOPTH","Postop hypocalcemia","Neck hematoma"],
     snapshot: {
       position: "Supine, neck extended",
       time: "1–2 h",
@@ -4636,59 +4805,76 @@ const PROCEDURES = [
       mortality: "<0.1%"
     },
     flags: [
-      "**A large goiter can compress/deviate the trachea → stridor and a difficult airway** — review CT for tracheal involvement; have reinforced/smaller tubes ready and anticipate tracheomalacia after removal. Retrosternal extension can complicate the airway further.",
-      "**Make the patient euthyroid before elective surgery** — uncontrolled hyperthyroidism risks thyroid storm. Continue antithyroid drugs/beta-blockers; hyperthyroid patients have ↑BMR (rapid desaturation), AF/CHF, and ↑ sensitivity to muscle relaxants (associated myasthenia gravis).",
-      "**Recurrent laryngeal nerve injury** (uni → hoarseness; bilateral → airway obstruction) — many surgeons use intraoperative nerve monitoring (coordinate relaxant use); check cord function on emergence (have the patient phonate 'e').",
-      "**Postop neck hematoma is an airway emergency** and **hypocalcemia** follows parathyroid injury/removal (parathyroidectomy especially) — monitor Ca, watch for Trousseau/Chvostek, and have a plan to open the neck at the bedside; CPAP helps airway obstruction while preparing."
+      "**A large goiter can compress/deviate the trachea → stridor and a difficult airway** — review CT for tracheal involvement; have reinforced/smaller tubes ready and anticipate tracheomalacia after removal. Retrosternal extension can complicate the airway further. With a large substernal goiter, keep spontaneous ventilation and avoid paralysis until the airway is secured past the obstruction (controlled ventilation can collapse the trachea distal to the ETT); identify a rescue position preop, and intubate head-up if SVC compression causes pharyngeal venous congestion.",
+      "**Make the patient euthyroid before elective surgery** — uncontrolled hyperthyroidism risks thyroid storm. Continue antithyroid drugs/beta-blockers; hyperthyroid patients have ↑BMR (rapid desaturation), AF/CHF, and ↑ sensitivity to muscle relaxants (associated myasthenia gravis). Hyperthyroidism raises propofol clearance (run higher infusion rates and monitor depth); a clinically hypothyroid patient warrants a stress-dose of hydrocortisone (associated adrenal insufficiency) and shows delayed emergence.",
+      "**Recurrent laryngeal nerve injury** (uni → hoarseness; bilateral → airway obstruction/stridor) — with **intraoperative nerve monitoring (NIM/EMG tube), avoid long-acting neuromuscular blockers** (they abolish the EMG signal): a short-acting nondepolarizing dose facilitates intubation then recovers, and the tube electrodes must sit directly on the cords. Check cord function on emergence (phonate \'e\').",
+      "**Postop neck hematoma is an airway emergency** and **hypocalcemia** follows parathyroid removal/devascularization (parathyroidectomy, or total thyroidectomy that strips the parathyroids) — check Ca in PACU, watch for Trousseau/Chvostek and laryngospasm, and have a plan to open the neck at the bedside; CPAP helps airway obstruction while preparing."
     ],
     technique: {
-      summary: "Removal of thyroid tissue (lobectomy/total thyroidectomy for goiter, nodules, hyperthyroidism, or cancer), thyroglossal duct cyst excision, or parathyroidectomy for hyperparathyroidism. Shared themes: the airway (goiter), the recurrent laryngeal nerve, and calcium/thyroid status.",
+      summary: "Removal of thyroid tissue (lobectomy/total thyroidectomy for goiter, nodules, hyperthyroidism, or cancer), thyroglossal duct cyst excision, or parathyroidectomy for hyperparathyroidism. Parathyroid is increasingly a focused/minimally invasive excision guided by preop localization (ultrasound, sestamibi) and confirmed by intraoperative PTH. Shared themes: the airway (goiter), the recurrent laryngeal nerve, and calcium/thyroid status.",
       steps: [
         "Confirm euthyroid status; review airway/CT for tracheal compression; reinforced/smaller ETT ready.",
-        "Coordinate relaxant use with RLN nerve monitoring if used; neck extended, eyes protected.",
+        "Coordinate relaxant use with RLN nerve monitoring if used (short-acting / avoid long-acting NMB); neck extended, eyes protected.",
+        "Parathyroid: focused excision guided by preop localization; converts to four-gland exploration if localization fails or hyperplasia is found (MEN-1/2A, secondary/tertiary).",
+        "Parathyroid: confirm cure with intraoperative PTH — surgeon draws pre- and post-excision samples; coordinate the timed draws from a clean line.",
         "Check cord function and assess for tracheomalacia on emergence; smooth extubation.",
-        "Monitor Ca (parathyroid) and watch for expanding neck hematoma (airway emergency)."
+        "Monitor Ca (parathyroidectomy or total thyroidectomy) and watch for expanding neck hematoma (airway emergency)."
       ]
     },
+    caseFlow: [
+      "**Setup decides the airway plan:** for a large substernal/compressive goiter, keep the patient **spontaneously ventilating** and avoid paralysis until the airway is secured past the obstruction — controlled ventilation can collapse the trachea distal to the tube. Have the preop **rescue position** (upright/lateral/sometimes prone) ready, and a head-up position if there is SVC compression. With a NIM tube the blue electrode band must sit between the cords — recheck it after the neck is extended.",
+      "**Dissection is the recurrent-laryngeal-nerve and parathyroid danger zone:** keep paralysis off so the nerve monitor reads, and (parathyroid) coordinate the timed IOPTH draws. Gland manipulation in a hyperthyroid patient can trigger **thyroid storm** (hypertension, tachycardia, ↑EtCO2, hyperthermia — it mimics MH); have beta-blockers, cooling, and steroids ready and avoid ketamine/ephedrine/atropine/hypercapnia.",
+      "**Closing — hemostasis is everything:** the surgeon often asks for a **Valsalva** to reveal bleeders before closing. Plan a **smooth emergence** — coughing/bucking raises venous pressure and risks a hematoma — with deep extubation or low-dose remifentanil (0.025–0.05 mcg/kg/min); confirm cord movement.",
+      "**Recovery — watch the neck and the calcium:** an expanding **neck hematoma** is an airway emergency (about 75% within 6 h — release the clips at the bedside); after total thyroidectomy or parathyroidectomy, **hypocalcemia** appears at 24–72 h (a PACU PTH, half-life 2–4 min, predicts it). PONV is high — favor TIVA and minimize opioids."
+    ],
     physiology: [
       "Goiter mechanically narrows/deviates the trachea; long-standing compression can leave tracheomalacia.",
-      "Thyroid hormone excess raises metabolic rate and cardiac irritability; parathyroid disruption drops calcium."
+      "Thyroid hormone excess raises metabolic rate and cardiac irritability; parathyroid disruption (or devascularization during total thyroidectomy) drops calcium.",
+      "Hyperparathyroidism → hypercalcemia: symptoms track the rate of rise, not the absolute level (Ca <12 mg/dL usually asymptomatic; 12–14 mild; >16 life-threatening). Acidosis raises ionized Ca, alkalosis lowers it.",
+      "Hypercalcemia → hypovolemia (polyuria), short QT, ↑ digitalis sensitivity with catecholamine resistance; raised Ca also enhances the response to neuromuscular blockers."
     ],
     comorbid: [
       "Hyperthyroid (Graves, toxic goiter) with AF/CHF, or hypothyroid; hyperparathyroid (often with renal disease, MEN).",
-      "Coexisting thyroid nodules and hyperparathyroidism common; possible MEN syndromes (screen for pheo)."
+      "Parathyroid: primary hyperparathyroidism (single adenoma ~85%) — frequently hypovolemic from anorexia/N-V/polyuria, so correct volume and electrolytes preop. Secondary/tertiary hyperparathyroidism = renal-failure (often dialysis) patients, who get 3.5-gland or total parathyroidectomy ± forearm reimplant and carry the highest postop hypocalcemia risk.",
+      "Coexisting thyroid nodules and hyperparathyroidism are common; possible MEN syndromes — **exclude pheochromocytoma before any MEN-2A neck surgery** (anesthetizing an unrecognized pheo can be fatal)."
     ],
     phases: {
       pre: [
         "Ensure euthyroid; assess airway/goiter (CT); check Ca, thyroid function; continue antithyroid/beta-blocker.",
+        "Parathyroid: control hypercalcemia first — volume expansion (NS) then furosemide diuresis while keeping euvolemic to drive renal Ca excretion; CCBs, correct hypophosphatemia; dialysis if dangerously high. Continue Ca-lowering meds unless levels have normalized.",
         "For MEN, exclude coexisting pheochromocytoma before surgery."
       ],
       intra: [
         "Airway management for goiter; RLN-monitoring-compatible relaxant strategy; neck extension/eye protection.",
-        "Smooth maintenance; assess for tracheomalacia."
+        "Thyroidectomy analgesia/emergence: a **superficial cervical plexus block (C2–C4)** gives good opioid-sparing analgesia (deep block not recommended — phrenic/RLN/intravascular risks). PONV is high — favor TIVA, minimize opioids (retching raises venous pressure and bleeding). Plan a smooth emergence (Valsalva for hemostasis on the surgeon\u2019s request; deep extubation or low-dose remifentanil) and protect exophthalmic eyes (Graves).",
+        "Parathyroid IOPTH: a ≥50% fall in PTH from the highest pre-excision baseline by ~10 min after gland removal confirms cure — the Miami criterion (Jaffe 5e: 50% decrease or normalization 5–10 min after removal). An inadequate drop sends the case to bilateral neck exploration, so it can run long; draw the timed samples from a clean/dedicated line.",
+        "Parathyroid: avoid Ca-containing IV fluids (LR) — use NS or Normosol; keep normocarbia (acidosis ↑ ionized Ca, alkalosis ↓ it). Hypercalcemia enhances NMB response — titrate relaxant to effect; with a NIM tube use short-acting / avoid long-acting (post-2014 option: rocuronium fully reversed with sugammadex — FDA-approved 2015 — before nerve mapping).",
+        "Parathyroid: methylene blue localization dye (7.5 mg/kg) causes a **spurious ↓ SpO2** reading; sestamibi (20 mCi) is given 60–90 min preop. Slight head-up reduces blood loss with little added VAE risk."
       ],
       post: [
-        "Check cord function ('e'); monitor for neck hematoma (open at bedside if airway threatened) and hypocalcemia (Trousseau/Chvostek).",
-        "Monitor Ca after parathyroidectomy; CPAP for airway obstruction."
+        "Check cord function (\'e\'); monitor for neck hematoma (open at bedside if airway threatened) and hypocalcemia (Trousseau/Chvostek).",
+        "Parathyroid: check serum/ionized Ca in PACU (nl total 8.5–10.5 mg/dL; ionized 1–1.3 mM) and admit ~24 h for serial Ca plus hematoma/airway watch. Symptomatic hypocalcemia (perioral paresthesia, tetany, laryngospasm, bronchospasm, apnea): 10–20 mL of 10% Ca gluconate over 10 min, follow levels and repeat; CPAP for airway obstruction. Worst in secondary/tertiary (renal) disease — \'hungry bone.\'"
       ]
     },
-  recall: {
-    mnemonics: [
-      "**Hypercalcemia causes — 'CHIMPANZEES':** Calcium (iatrogenic), Hyperparathyroidism, Immobility/Iatrogenic (thiazides), Mets/Milk-alkali, Paget's, Addison's/Acromegaly, Neoplasm, Zollinger-Ellison (MEN-I), Excess vitamin D, Excess vitamin A, Sarcoid.",
-      "**Hypercalcemia symptoms:** 'stones, bones, abdominal groans, and psychiatric overtones'; ECG shows a **short QT** (and prolonged PR)."
-    ],
-    pimps: [
-      "**Chvostek's = CHeek:** facial-muscle twitch on tapping the facial nerve in hypocalcemia (the post-thyroid/parathyroid complication to watch).",
-      "**Most common thyroid cancer is papillary** ('Papillary = Popular,' ~80%), identified by **psammoma bodies** and Orphan-Annie nuclei; it spreads lymphatically and has the best prognosis. (Medullary arises from parafollicular C cells → calcitonin, MEN-II.)"
-    ],
-    pearls: [
-      "**MEN syndromes** (screen before adrenal/thyroid/parathyroid surgery): **MEN-I = '3 Ps'** (Pituitary, Pancreatic, Parathyroid); **MEN-IIa** = medullary thyroid cancer + pheochromocytoma + hyperparathyroidism; **MEN-IIb** = medullary thyroid cancer + pheo + mucosal neuromas + marfanoid habitus."
-    ],
-    anatomy: [
-      "**Recurrent laryngeal nerve** lives in the tracheoesophageal groove — the structure you protect; **unilateral injury → hoarseness, bilateral → airway obstruction** (watch for post-extubation stridor). The **superior laryngeal (external) branch** supplies the cricothyroid ('the high-note nerve')."
-    ]
-  },
-    source: "Jaffe 5e (2014), General Surgery §7.11 Endocrine, p. 670–682 (thyroglossal duct cyst; thyroidectomy; parathyroidectomy)."
+    recall: {
+      mnemonics: [
+        "**Hypercalcemia causes — \'CHIMPANZEES\':** Calcium (iatrogenic), Hyperparathyroidism, Immobility/Iatrogenic (thiazides), Mets/Milk-alkali, Paget\'s, Addison\'s/Acromegaly, Neoplasm, Zollinger-Ellison (MEN-I), Excess vitamin D, Excess vitamin A, Sarcoid.",
+        "**Hypercalcemia symptoms:** \'stones, bones, abdominal groans, and psychiatric overtones\'; ECG shows a **short QT** (and prolonged PR)."
+      ],
+      pimps: [
+        "**Chvostek\'s = CHeek:** facial-muscle twitch on tapping the facial nerve in hypocalcemia (the post-thyroid/parathyroid complication to watch).",
+        "**Most common thyroid cancer is papillary** (\'Papillary = Popular,\' ~80%), identified by **psammoma bodies** and Orphan-Annie nuclei; it spreads lymphatically and has the best prognosis. (Medullary arises from parafollicular C cells → calcitonin, MEN-II.)"
+      ],
+      pearls: [
+        "**MEN syndromes** (screen before adrenal/thyroid/parathyroid surgery): **MEN-I = \'3 Ps\'** (Pituitary, Pancreatic, Parathyroid); **MEN-IIa** = medullary thyroid cancer + pheochromocytoma + hyperparathyroidism; **MEN-IIb** = medullary thyroid cancer + pheo + mucosal neuromas + marfanoid habitus.",
+        "**Four-gland hyperplasia** (MEN-1/2A, secondary/tertiary hyperparathyroidism) → **total parathyroidectomy with autotransplant** of some parathyroid tissue to the forearm."
+      ],
+      anatomy: [
+        "**Recurrent laryngeal nerve** lives in the tracheoesophageal groove — the structure you protect; **unilateral injury → hoarseness, bilateral → airway obstruction** (watch for post-extubation stridor). The **superior laryngeal (external) branch** supplies the cricothyroid (\'the high-note nerve\').",
+        "**Ligament of Berry** tethers the thyroid to the trachea and the **RLN runs just behind it** — the classic spot for intraoperative nerve injury. The inferior parathyroids sit near the junction of the inferior thyroid artery and the RLN."
+      ]
+    },
+    source: "Jaffe 5e (2014), General Surgery §7.11 Endocrine, p. 670–682 (thyroglossal duct cyst; thyroidectomy; parathyroidectomy p. 678–682). Parathyroid IOPTH/Miami criterion, IONM relaxant strategy, methylene-blue SpO2 artifact, and Ca cadence per Jaffe 5e p. 680–682. Post-2014 update: rocuronium–sugammadex reversal before nerve mapping (sugammadex FDA-approved 2015). Recall pearls (Ligament of Berry; forearm autotransplant) from Surgical Recall 8e (Blackbourne 2018). Thyroidectomy detail (substernal-goiter spontaneous-ventilation strategy, SVC head-up, hyperthyroid propofol clearance, hypothyroid stress-dose steroid, thyroid storm vs MH, superficial cervical plexus block, smooth-emergence/Valsalva, neck-hematoma and 24–72 h hypocalcemia timing) from OpenAnesthesia: 'Anesthesia for Thyroidectomy' (Segredo, updated 2025-03-04)."
   },
   {
     id: "adrenalectomy-pheochromocytoma",
@@ -4719,6 +4905,13 @@ const PROCEDURES = [
         "Fluid-load before vein ligation; manage post-removal hypotension with vasopressin/epinephrine; ICU if unstable."
       ]
     },
+    caseFlow: [
+      "**Induction & lines, then positioning:** for a pheo this is already high-stakes — a light plane or laryngoscopy can trigger a catecholamine surge. Deep, smooth, art-line in before induction.",
+      "**Tumor mobilization — the HTN-surge phase:** any handling of a pheo can dump catecholamines → sudden severe **hypertension/tachyarrhythmia**. The surgeon minimizes manipulation and will pause when you ask; have **SNP/nitroglycerin/esmolol/Mg** drawn up and titrating. This is the volatile stretch.",
+      "**Clipping the adrenal vein — THE pivot point:** most surgeons take the **adrenal vein early**; the instant catecholamine inflow is cut, expect the swing to **profound hypotension**. **Volume-load before they clip, ease off your vasodilators, and have vasopressin/norepinephrine ready** — the crash is the classic pheo-resection event. (Right adrenal vein drains straight into the IVC → harder, stapled; watch for IVC bleeding.)",
+      "**Gland out, hemostasis — over the hump:** the hemodynamic fireworks are done; keep pressure up while autonomic tone resets, weaning pressors as tolerated.",
+      "**Closure:** glucose can rebound-drop after removal (watch it); pheo and bilateral/Cushing's cases often go to ICU for ongoing pressure and steroid management.",
+    ],
     physiology: [
       "Pheo releases massive catecholamines (NE>E) → chronic vasoconstriction/hypovolemia, cardiomyopathy, and extreme BP lability that collapses when the tumor is removed.",
       "Conn's → Na/water retention + K loss; Cushing's → glucocorticoid excess; pneumoperitoneum (lap) adds its own load."
@@ -4730,14 +4923,19 @@ const PROCEDURES = [
     phases: {
       pre: [
         "Pheo: confirm α-blockade adequacy (symptom resolution, orthostatic targets) and volume repletion; ECHO for cardiomyopathy.",
-        "Conn's: correct K/alkalosis; Cushing's/bilateral: plan steroid replacement; screen for MEN."
+        "Conn's: correct K/alkalosis; Cushing's/bilateral: plan steroid replacement; screen for MEN.",
+        "Pheo readiness (Roizen criteria): no in-hospital BP >160/90 for 24 h pre-op, no orthostatic BP <80/45, no ST/T changes for 1 wk, ≤5 PVCs/min. α-blockade ≥7–14 d (phenoxybenzamine, t½ ~24 h, or shorter-acting α1 doxazosin/terazosin/prazosin) plus high-Na diet/fluids; add β ONLY after α (for epi-secreting tachyarrhythmia). 'Rule of 10s': ~10% bilateral / extra-adrenal / malignant / familial / pediatric. (2025 OA.)"
       ],
       intra: [
         "Invasive lines (femoral/axillary) before induction; gentle deep induction; treat surge HTN/arrhythmia, surgeon pauses.",
-        "Fluid-load before vein ligation; manage post-removal hypotension (vasopressin/epinephrine)."
+        "Fluid-load before vein ligation; manage post-removal hypotension (vasopressin/epinephrine).",
+        "Pheo antihypertensives drawn up (verbatim doses): nicardipine 100–200 mcg bolus / 3–15 mg/h; clevidipine 1–16 mg/h (lipid emulsion — don't confuse with propofol); sodium nitroprusside 0.3–3 mcg/kg/min (cyanide at high dose); nitroglycerin 0.1–3 mcg/kg/min; esmolol 50–300 mcg/kg/min; phentolamine 5 mg bolus (1 mg peds). MgSO4 (blunts catecholamine release + vasodilates; useful in resistant HTN) and dexmedetomidine as adjuncts. (2025 OA.)",
+        "Pheo post-clamp pressors: phenylephrine 50–200 mcg / 0.15–3 mcg/kg/min; norepinephrine 8–12 mcg / 0.02–1 mcg/kg/min; epinephrine 8–20 mcg / 0.02–1; vasopressin 0.01–0.04 U/min. Reach deep plane BEFORE laryngoscopy and BEFORE insufflation (both trigger surges); IV/intratracheal lidocaine blunts the airway response. (2025 OA.)",
+        "Pheo drugs to AVOID: ketamine/ephedrine (sympathomimetic), morphine/meperidine/atracurium/cisatracurium (histamine), succinylcholine (catecholamine release + tumor compression), pancuronium/atropine (vagolytic), desflurane (sympathetic stim), halothane (sensitizes myocardium), and dopaminergic antiemetics (metoclopramide, droperidol, haloperidol, prochlorperazine) + glucagon. Safe PONV: ondansetron, fosaprepitant. Induction propofol or etomidate (steadier if hypovolemic); maintain sevoflurane/iso or TIVA; relax with rocuronium/vecuronium; opioids fentanyl/remifentanil/alfentanil (no histamine). (2025 OA.)"
       ],
       post: [
         "ICU if unstable; watch for hypoglycemia (post-pheo), adrenal insufficiency (bilateral/Cushing's), residual HTN, pneumothorax.",
+        "Pheo post-resection: a slow wake-up may be HYPOGLYCEMIA (catecholamine insulin-suppression lifts) — and β-blockade masks the signs; ~50% remain hypertensive early from residual catecholamine stores. ICU for labile/cardiomyopathy cases. (2025 OA.)",
         "Continue/taper steroids; epidural (open) or PCA analgesia."
       ]
     },
@@ -4749,7 +4947,7 @@ const PROCEDURES = [
       "**MEN association:** pheochromocytoma occurs in **MEN-IIa** (with medullary thyroid cancer + hyperparathyroidism) and **MEN-IIb** (with medullary thyroid cancer + mucosal neuromas + marfanoid habitus) — exclude a coexisting pheo before any MEN-related thyroid/parathyroid surgery."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.11 Endocrine, p. 683–693, and laparoscopic adrenalectomy p. 599–601 (open and laparoscopic adrenalectomy; pheochromocytoma considerations p. 689). Adrenal/pheo also relevant to Urology adrenal/retroperitoneal surgery."
+    source: "Jaffe 5e (2014), General Surgery §7.11 Endocrine, p. 683–693, and laparoscopic adrenalectomy p. 599–601 (open and laparoscopic adrenalectomy; pheochromocytoma considerations p. 689). Adrenal/pheo also relevant to Urology adrenal/retroperitoneal surgery. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Pheochromocytoma vasoactive-drug doses, drugs-to-avoid list, Roizen readiness criteria, and Rule-of-10s per OpenAnesthesia 'Pheochromocytoma' (Thompson & Cui, updated 2025-02-19)."
   },
   {
     id: "hernia-abdominal-wall",
@@ -4811,7 +5009,14 @@ const PROCEDURES = [
       "**Incarcerated** = irreducible/imprisoned in the sac; **strangulated** = incarcerated + compromised blood supply (the surgical emergency)."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.10, p. 651–655, 609 (inguinal/femoral/incisional herniorrhaphy; abdominal dehiscence repair; laparoscopic inguinal hernia repair)."
+    caseFlow: [
+      "**Inguinal/femoral repairs are short, low-arc** — local/spinal/LMA, minimal EBL; the only live concern is **compromised bowel** seen on reducing an incarcerated/strangulated sac.",
+      "**Incisional/ventral — dissection & reduction:** the sac is freed and adhesions taken down (**bowel-injury risk** in re-do abdomens); large defects mean **loss of domain**.",
+      "**Fascial closure — the crux of the big ones:** primary closure ± mesh ± component separation. For loss-of-domain, **forcing the abdomen closed spikes intra-abdominal and peak airway pressure** and drops venous return → watch for it; a planned bridged mesh / open abdomen avoids **abdominal compartment syndrome**.",
+      "**Dehiscence repair is urgent:** the fascia has burst (± **evisceration**), often a sick/septic full-stomach patient → retention sutures, RSI, resuscitate.",
+      "**Runway:** simple repairs wake up; big ventral/loss-of-domain cases warrant watching postop respiratory mechanics and may need continued ventilation.",
+    ],
+    source: "Jaffe 5e (2014), General Surgery §7.10, p. 651–655, 609 (inguinal/femoral/incisional herniorrhaphy; abdominal dehiscence repair; laparoscopic inguinal hernia repair). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "breast-surgery",
@@ -4924,7 +5129,14 @@ const PROCEDURES = [
       "**Four types of rejection by timing:** **hyperacute** (immediate, in the OR — preformed antibodies; treatment is to remove the graft), **accelerated acute** (7–10 days), **acute** (weeks–months, T-cell mediated), and **chronic** (months–years)."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.13 Transplantation, p. 694–704 (cadaveric and living-donor kidney transplantation; kidney/pancreas transplantation; transplant nephrectomy). Live-donor nephrectomy and the urology renal-transplant context overlap Urology §9.0."
+    caseFlow: [
+      "**Pre-incision optimization:** the goal is **euvolemia (CVP ~10–12)**; the recipient is often dialysis-dependent, so K+/acid-base are corrected before the vascular work.",
+      "**Vascular anastomoses to the iliac vessels:** renal vein→external iliac vein, then renal artery→external iliac artery. The **pancreas** adds a donor-iliac **Y-graft** arterial inflow + portal-vein-to-iliac-vein, with the duodenum drained to bowel/bladder — **mesenteric bleeding** if the graft vessels are not controlled.",
+      "**Immunosuppression + mannitol/furosemide BEFORE reperfusion — the timed crux:** give induction immunosuppression and **mannitol (12.5–25 g, or 0.25–0.5 g/kg)** before the clamps come off; unclamping (vein first) is reperfusion → watch the **hyperkalemia/hemodynamic swing**, and for the pancreas the dreaded **graft venous thrombosis**.",
+      "**Ureter-to-bladder / exocrine drainage, then watch for urine — early graft function:** brisk urine is the reassuring sign; keep filling pressures up to perfuse the graft.",
+      "**Runway:** kidney-alone often wakes up; **SPK** and brittle diabetics get tighter glucose control and ICU selectively. Prolonged cold ischemia → delayed graft function.",
+    ],
+    source: "Jaffe 5e (2014), General Surgery §7.13 Transplantation, p. 694–704 (cadaveric and living-donor kidney transplantation; kidney/pancreas transplantation; transplant nephrectomy). Live-donor nephrectomy and the urology renal-transplant context overlap Urology §9.0. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "liver-transplant",
@@ -4982,7 +5194,14 @@ const PROCEDURES = [
       "**Rejection timing:** **hyperacute** (immediate intraoperative, preformed antibody → explant), **accelerated acute** (7–10 d), **acute** (weeks–months, T-cell mediated, usually steroid-responsive), and **chronic** (months–years)."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.13 Transplantation, p. 705–719 (orthotopic and living-donor liver transplantation). Note: this is the standalone hepatic transplant entry; the CV heart/lung-transplant entry is separate."
+    caseFlow: [
+      "**Preanhepatic / dissection — bleeding through portal hypertension:** the diseased liver is freed off the cava amid varices and adhesions; expect **massive, ongoing hemorrhage** and caval manipulation dropping venous return. Rapid transfuser running, **TEG-guided** products, ionized Ca repleted against citrate.",
+      "**Anhepatic — clamps on, liver out:** caval/portal clamping cuts venous return (**CO ↓30–50%** off bypass) while acidosis, lactate, and coagulopathy climb with no liver to clear them. **Normalize pH, ionized Ca, and K (<4.5) NOW** — before reperfusion, not during.",
+      "**Reperfusion — the dreaded event:** unclamping floods the right heart with cold, acidotic, hyperkalemic, vasoactive blood → **post-reperfusion syndrome** (↓SVR, ↓BP, arrhythmia, RV strain, K-driven arrest; ~30% of cases). Have **epinephrine / CaCl2 / NaHCO3** ready — the whole case turns here.",
+      "**Neohepatic / biliary reconstruction — signs of a working graft:** **bile production**, clearing lactate/acidosis, recovering coagulation, even a metabolic alkalosis as the new liver metabolizes citrate — you are on the back half. Avoid **overtransfusion** (graft congestion).",
+      "**Runway:** straight to **ICU, usually still intubated**; early extubation where feasible improves graft flow. Watch primary nonfunction, vascular thrombosis, ongoing coagulopathy.",
+    ],
+    source: "Jaffe 5e (2014), General Surgery §7.13 Transplantation, p. 705–719 (orthotopic and living-donor liver transplantation). Note: this is the standalone hepatic transplant entry; the CV heart/lung-transplant entry is separate. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018); staged hemodynamics per OpenAnesthesia, Adult Liver Transplantation: Anesthetic & Surgical Considerations (2023)."
   },
   {
     id: "organ-donor-operations",
@@ -5027,14 +5246,21 @@ const PROCEDURES = [
       ],
       intra: [
         "Living donor: gentle pneumoperitoneum, mannitol/hydration for graft.",
-        "Procurement: hemodynamic/DI/temperature support; heparin then cross-clamp; relaxant for access."
+        "Procurement: hemodynamic/DI/temperature support; heparin then cross-clamp; relaxant for access.",
+        "Procurement verbatim: maintain oxygenation/BP as if a live patient (often multiple pressors ± transfusion); give heparin 30,000 U (300 U/kg) + phentolamine immediately before supraceliac aortic cross-clamp; turn the ventilator OFF after cross-clamp (keep lungs inflated if lungs are procured). DBD: anesthesia ends at cross-clamp. DCD (non-heart-beating): role ends at declared cardiac death."
       ],
       post: [
         "Living donor: aggressive multimodal analgesia/antiemesis; monitor remaining renal function.",
         "Procurement: care concludes at organ recovery."
       ]
     },
-    source: "Jaffe 5e (2014), General Surgery §7.13 Transplantation, p. 700–720 (live-donor nephrectomy — laparoscopic and open; multiorgan procurement). Living-donor nephrectomy also relevant to Urology."
+    caseFlow: [
+      "**Living-donor nephrectomy is a healthy-patient case — a perfect graft AND a safe donor:** generous hydration and **mannitol** to drive diuresis while the kidney is mobilized laparoscopically on its pedicle.",
+      "**Heparinize before the vessels are clamped — the timed step:** systemic **heparin** goes in just before the renal artery/vein are clamped; **warm-ischemia time starts at clamp**, so the team moves fast to get the graft out and flushed. Protamine after.",
+      "**Kidney out, hemostasis, close:** donor is otherwise well — opioid-sparing/PONV-light, early-recovery focus; wakes up.",
+      "**Multiorgan procurement (DBD) has no emergence arc** — the job is **donor physiology maintenance** (lung-protective ventilation, pressors, treat diabetes insipidus/temperature) until **aortic cross-clamp**, after which ventilation is withdrawn. (DCD: withdrawal of support, death declaration, then rapid retrieval.) No wake-up to follow.",
+    ],
+    source: "Jaffe 5e (2014), General Surgery §7.13 Transplantation, p. 700–720 (live-donor nephrectomy — laparoscopic and open; multiorgan procurement). Living-donor nephrectomy also relevant to Urology. Procurement heparin 300 U/kg + phentolamine, ventilator-off-post-cross-clamp, and DBD/DCD anesthesia endpoints per Jaffe 5e §7.12 Multiorgan Procurement p. 720. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018); living-donor nephrectomy arc only — procurement has no emergence arc."
   },
   {
     id: "trauma-surgery",
@@ -5053,7 +5279,7 @@ const PROCEDURES = [
     flags: [
       "**Treat as a full stomach with a possible C-spine injury and a difficult airway** — RSI with manual in-line stabilization; if a difficult airway is anticipated, plan a surgical airway under local. Cricoid pressure can be problematic with C-spine injury — weigh against cord risk.",
       "**Cardiac tamponade (Beck's triad: ↓BP, distended neck veins, muffled heart sounds) needs immediate decompression** — induction can cause cardiovascular collapse (loss of compensatory tachycardia/preload); keep the patient full, fast, and tight, prep-and-drape awake if possible, and have the surgeon ready to release tamponade at induction.",
-      "**Damage-control resuscitation — fight the lethal triad (coagulopathy + hypothermia + acidosis):** balanced massive transfusion (**~4 plasma : 6 PRBC : 1 platelet**, or 1:1:1), warm everything, limit crystalloid, and accept abbreviated surgery (pack and return) over definitive repair in the unstable patient. TXA early.",
+      "**Damage-control resuscitation — fight the lethal triad (coagulopathy + hypothermia + acidosis):** balanced massive transfusion (**~4 plasma : 6 PRBC : 1 platelet**, or 1:1:1), warm everything, limit crystalloid, and accept abbreviated surgery (pack and return) over definitive repair in the unstable patient. Monitor/replace **ionized Ca** — many now call it the lethal diamond. **TXA** early: 1 g IV over 10 min then 1 g over 8 h, ideally **<3 h** from injury (benefit greatest <1 h); 2 g IV/IO if significant TBI/altered mental status. (2026 OA update; CRASH-2/CRASH-3/PATCH.)",
       "**Chest trauma needing thoracotomy/sternotomy may need a DLT/BB** (single-lumen-then-exchange if difficult airway); great-vessel/aortic injury and abdominal compartment syndrome are specific catastrophes. Anticipate sudden exsanguination on opening a contained hematoma."
     ],
     technique: {
@@ -5076,11 +5302,14 @@ const PROCEDURES = [
     phases: {
       pre: [
         "Rapid primary survey; assume full stomach/C-spine/difficult airway; activate MTP and warming.",
-        "Identify tamponade/tension pneumothorax/exsanguinating hemorrhage needing immediate intervention."
+        "Identify tamponade/tension pneumothorax/exsanguinating hemorrhage needing immediate intervention.",
+        "FAST/E-FAST to triage free fluid/pericardial effusion/pneumothorax; intraop TEE can guide resuscitation but is contraindicated with unstable C-spine or esophageal injury. (2026 OA update.)"
       ],
       intra: [
         "Crash RSI with in-line stabilization; balanced massive transfusion; TXA; aggressive warming.",
-        "Decompress tamponade; DLT/BB for thoracotomy; damage-control (abbreviated) surgery if unstable."
+        "For the hypotensive patient: etomidate 0.1–0.2 mg/kg or ketamine 0.25–1 mg/kg; sux 1–1.5 mg/kg (avoid >48 h after burn/SCI — hyperkalemia) or roc 1–1.2 mg/kg; avoid neuraxial in hypovolemia and avoid N2O (bowel/air). (2023 OA update.)",
+        "Decompress tamponade; DLT/BB for thoracotomy; damage-control (abbreviated) surgery if unstable.",
+        "Permissive (hypotensive) resuscitation: target SBP ~80–90 mmHg until major bleeding is controlled — EXCEPT in TBI, where hypotension worsens outcome (keep normotensive). REBOA can temporize exsanguinating sub-diaphragmatic hemorrhage as a bridge to control. (2023 OA.)"
       ],
       post: [
         "ICU; continued resuscitation/rewarming/coagulation correction; planned re-exploration.",
@@ -5095,7 +5324,7 @@ const PROCEDURES = [
       "**Basilar skull fracture signs: 'raccoon eyes'** (periorbital bruising) and **Battle's sign** (mastoid bruising) — a relative contraindication to nasal tubes/NG (cribriform-plate risk)."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.14 Trauma, p. 730–751 (tube thoracostomy; ED thoracotomy; neck-trauma exploration; chest trauma — tamponade/great-vessel/tracheobronchial; abdominal trauma — damage control/hepatic-splenic/vascular). Chest-trauma airway/OLV overlaps Thoracic and Cardiovascular sections."
+    source: "Jaffe 5e (2014), General Surgery §7.14 Trauma, p. 730–751 (tube thoracostomy; ED thoracotomy; neck-trauma exploration; chest trauma — tamponade/great-vessel/tracheobronchial; abdominal trauma — damage control/hepatic-splenic/vascular). Chest-trauma airway/OLV overlaps Thoracic and Cardiovascular sections. Enriched with dated OpenAnesthesia updates: TXA dosing/window (Tranexamic Acid in Trauma, 2026; Trauma-Induced Coagulopathy, 2023), FAST/E-FAST/TEE (Ultrasound in Trauma, 2026), shock induction agents (Anesthesia for Abdominal Trauma, 2023). Permissive-hypotension target (SBP 80–90; normotensive in TBI) and REBOA per OpenAnesthesia (Trauma-Induced Coagulopathy 2023; Anesthesia for Abdominal Trauma 2023)."
   },
 {
     id: "office-facial-laser-rf",
@@ -5561,6 +5790,12 @@ const PROCEDURES = [
         "Manage post-ictal autonomic surge; rapid emergence with airway-reflex recovery; outpatient discharge."
       ]
     },
+    caseFlow: [
+      "**Induction \u2014 agent choice is the crux** (it sets seizure quality): **methohexital** is the default (low anticonvulsant effect); **propofol** shortens seizures (good for a low threshold or postictal agitation); **etomidate** for the hemodynamically unstable; **ketamine/ketofol** when seizures are hard to induce or an antidepressant boost is wanted; **remifentanil** lets you cut the hypnotic dose (pair with a low-dose hypnotic to avoid awareness). Hyperventilate to lower the seizure threshold.",
+      "**Isolate a limb, then paralyze:** an assistant inflates a cuff above systolic on one ankle/forearm **before** the succinylcholine, so that limb escapes the paralytic and the motor seizure can be timed there. Bite block in \u2014 masseters contract directly despite paralysis.",
+      "**Stimulus and seizure \u2014 the autonomic rollercoaster:** an initial **parasympathetic surge \u2192 bradycardia/asystole**, then a **sympathetic surge \u2192 hypertension/tachycardia**. Treat per patient (glycopyrrolate/atropine for the brady; esmolol/labetalol/NTG for the surge). If the seizure runs **>120 sec**, break it with a benzodiazepine or more anesthetic.",
+      "**Recovery \u2014 short and steep:** support the airway until the sux wears off; watch for **postictal agitation (~10%)** \u2014 midazolam 1\u20132 mg, droperidol 1 mg, or propofol 30 mg \u2014 then PACU. (CIED: keep the ECT stimulus and nerve stimulator \u226515 cm from the device, consider a higher sux dose to cut fasciculation EMI, and reactivate any deactivated ICD.)"
+    ],
     physiology: [
       "The induced seizure triggers a parasympathetic-then-sympathetic autonomic sequence with bradydysrhythmia then hypertension/tachycardia, plus transient rises in ICP, IOP, and intragastric pressure.",
       "Brief, self-limited; the anesthetic must be ultra-short-acting and frequently repeated over a treatment course."
@@ -5572,7 +5807,8 @@ const PROCEDURES = [
     phases: {
       pre: [
         "Screen for MI <3 mo (absolute contraindication), ↑ICP/CVA <3 mo (relative); review psychotropic meds.",
-        "Plan HR/BP pretreatment; have a pacemaker magnet available if applicable; remote-location readiness."
+        "Plan HR/BP pretreatment; have a pacemaker magnet available if applicable; remote-location readiness.",
+        "Premed options: glycopyrrolate 0.2 mg (bradycardia; give \u226520 min before if drying secretions), ondansetron 4 mg (nausea ~25%), ketorolac 30 mg / acetaminophen (headache ~50%). Psychotropic plan: **MAOIs** \u2014 avoid meperidine and indirect sympathomimetics; **bupropion** \u2014 prolonged seizures, hold the morning dose; **benzodiazepines/anticonvulsants** reduce seizure efficacy (hold/taper)."
       ],
       intra: [
         "Methohexital + succinylcholine 50–80 mg; bite block; manage the autonomic swings; ensure adequate seizure (>25 sec).",
@@ -5583,7 +5819,7 @@ const PROCEDURES = [
         "Outpatient recovery; plan for the repeated course."
       ]
     },
-    source: "Jaffe 5e (2014), Out-of-Operating Room Procedures §13.0, p. 1484–1488 (electroconvulsive therapy)."
+    source: "Jaffe 5e (2014), Out-of-Operating Room Procedures §13.0, p. 1484–1488 (electroconvulsive therapy). Enriched (agent menu, isolated-limb cuff technique, premedication, 120-sec rule, CIED management, postictal agitation doses) from OpenAnesthesia: 'Electroconvulsive Therapy Procedure' and 'ECT Anesthetic Considerations' (Bryson, updated 2023-01-04)."
   },
   {
     id: "cardiac-electrophysiology-procedures",
@@ -6247,7 +6483,8 @@ const PROCEDURES = [
       "**Avoid succinylcholine in burn patients beyond ~24–48 h post-injury — upregulated extrajunctional ACh receptors cause life-threatening hyperkalemia** (risk persists for months to >1 year after a major burn). Use nondepolarizers (and expect resistance to them).",
       "**Tangential burn excision can bleed massively and fast** — large-bore access, T&C/blood in the room, tranexamic acid considered, and aggressive warming; whole-body heat loss is severe with open burn wounds and prone/exposed positioning.",
       "**Burn physiology is whole-body:** smoke-inhalation lung injury, possible carbon-monoxide/cyanide exposure, hypermetabolism, fluid shifts, and a frequently difficult airway (facial/airway burns, contractures). Pressure-sore patients are often chronically ill, malnourished, paraplegic (autonomic dysreflexia risk), and possibly septic.",
-      "**Position is a hazard itself** — prone/lateral for sacral/ischial sores (airway/access plan, return-to-supine ready); contractures and grafted areas complicate positioning and access."
+      "**Position is a hazard itself** — prone/lateral for sacral/ischial sores (airway/access plan, return-to-supine ready); contractures and grafted areas complicate positioning and access.",
+      "**Inhalation-injury airway: intubate early, do not wait.** Warning signs — facial burns, singed nasal hair/soot, stridor, hoarseness, dysphagia; fluid resuscitation worsens laryngeal edema, so use an ETT **0.5–1 mm smaller** and secure it well. **CO** is invisible on pulse oximetry (use co-oximetry) — 100% O2 cuts its half-life from ~4–5 h to ~1 h (HBO if carboxyhemoglobin >20%). **Cyanide:** suspect with an anion-gap acidosis and a high mixed-venous O2 despite adequate delivery → hydroxocobalamin."
     ],
     technique: {
       summary: "Coverage of chronic pressure sores (debridement + flap, often in paraplegic/chronically-ill patients) and excision/grafting of burn wounds (tangential excision + split-thickness skin graft). United by blood loss, heat loss, and burn-specific physiology.",
@@ -6273,7 +6510,8 @@ const PROCEDURES = [
       ],
       intra: [
         "Nondepolarizer (burns); aggressive warming and blood management for brisk excision loss; safe positioning.",
-        "Large-bore access; T&C/blood available; TXA consideration."
+        "Large-bore access; T&C/blood available; TXA consideration.",
+      "Resuscitate by Parkland (4 mL × %TBSA × kg lactated Ringer\u2019s, half over the first 8 h; +30–50% with inhalation injury) titrated to urine output 0.5–1 mL/kg/h; escharotomy if a circumferential chest eschar limits ventilation. Electrical burns → rhabdomyolysis/myoglobinuria (target UO ~2 mL/kg/h, consider bicarbonate/mannitol) with deep injury the skin underestimates."
       ],
       post: [
         "ICU for large burns/major loss; ongoing warming and transfusion; analgesia (high opioid tolerance in chronic burns).",
@@ -6285,7 +6523,7 @@ const PROCEDURES = [
       "**Curling's ulcer:** a stress gastric/duodenal ulcer after major **burn** injury ('Curling's = curling-iron burn'). (Contrast **Cushing's ulcer:** stress ulcer after CNS injury/raised ICP.)"
     ]
   },
-    source: "Jaffe 5e (2014), Plastic and Reconstructive Surgery §11.0, p. 1162–1174 (pressure sore reconstruction; free skin graft for burn wound with tangential excision)."
+    source: "Jaffe 5e (2014), Plastic and Reconstructive Surgery §11.0, p. 1162–1174 (pressure sore reconstruction; free skin graft for burn wound with tangential excision). Burn detail (inhalation-injury airway warning signs + smaller ETT, CO/cyanide recognition and treatment, Parkland resuscitation + UO targets, escharotomy, electrical-burn rhabdomyolysis) from OpenAnesthesia: 'Burn Injuries: Initial Evaluation and Management' (Ding & Perlman, updated 2023-01-12)."
   },
 {
     id: "hand-wrist-surgery",
@@ -6391,7 +6629,13 @@ const PROCEDURES = [
         "Monitor for the sequelae of the sitting position."
       ]
     },
-    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 956–983 (arthroscopic shoulder surgery; shoulder arthritis/arthroplasty; instability surgery; glenohumeral arthroplasty; shoulder girdle; brachial plexus surgery; arm/humerus surgery)."
+    caseFlow: [
+      "**Up into the beach chair — the cerebral-perfusion crux:** as the head rises, **transduce/measure BP at the level of the brain, not the arm (~0.75 mmHg lost per cm of height).** Chasing an arm-cuff number while the brain is hypotensive is how watershed strokes happen; the head-up position also carries a VAE risk.",
+      "**Block, then the procedure:** the interscalene block carries the analgesia (expect ~50% ipsilateral phrenic palsy — not for the respiratory-limited patient); the surgeon works a tight, head-up field where your airway access is limited.",
+      "**Steady-state vigilance:** the ongoing job is holding MAP-at-brain through position changes, insufflation, and traction — arthroplasty brings more stimulation and blood loss than a scope.",
+      "**Chair down / runway:** lower the back, reassess perfusion; regional carries postop analgesia — watch for phrenic-palsy dyspnea, pneumothorax, and any new neuro deficit on emergence.",
+    ],
+    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 956–983 (arthroscopic shoulder surgery; shoulder arthritis/arthroplasty; instability surgery; glenohumeral arthroplasty; shoulder girdle; brachial plexus surgery; arm/humerus surgery). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "spine-surgery-orthopedic",
@@ -6444,7 +6688,14 @@ const PROCEDURES = [
         "Watch for postoperative visual loss, blood loss/coagulopathy, and airway/positioning injury."
       ]
     },
-    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 984–999 (minimally invasive/posterior lumbar discectomy; thoracolumbar spine surgery; lumbosacral spine surgery). Cervical-spine and intradural work cross-references Neurosurgery."
+    caseFlow: [
+      "**Pre-prone setup — the safety crux:** tape/secure the airway, run the lines, baseline the neuromonitor, THEN log-roll prone onto a Jackson/Wilson frame with the **eyes free and the abdomen hanging free** (abdominal compression engorges epidural veins → more bleeding and worse ventilation). A tube dislodged prone is an emergency.",
+      "**Exposure & blood loss that scales with levels:** subperiosteal dissection — each added level adds loss; arterial line, TXA, and cell saver running, MAP held where the cord and surgeon tolerate.",
+      "**Instrumentation & correction — the neuromonitoring crux:** placing pedicle screws and correcting the deformity is where **a SSEP/MEP signal drop warns of impending cord/nerve injury.** Keep TIVA steady (no paralysis during MEP), avoid hypotension/anemia right here, and be ready for a wake-up test if asked.",
+      "**Rods on, decortication & graft, hemostasis:** correction locked in; the cord-injury window narrows once instrumentation is set and signals are stable.",
+      "**Closure, supine, neuro check — runway:** turn back supine carefully, then a **vision and motor check on emergence** (POVL/ischemic optic neuropathy is the feared long-prone-fusion complication). Among the most painful cases — multimodal plan; big fusions may stay intubated.",
+    ],
+    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 984–999 (minimally invasive/posterior lumbar discectomy; thoracolumbar spine surgery; lumbosacral spine surgery). Cervical-spine and intradural work cross-references Neurosurgery. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "hip-surgery-arthroplasty-fracture",
@@ -6461,10 +6712,10 @@ const PROCEDURES = [
       mortality: "Low (elective); notably higher (elderly hip fracture)"
     },
     flags: [
-      "**Bone-cement implantation syndrome (BCIS): cementing the femoral component can cause sudden hypotension, hypoxemia, arrhythmia, and even cardiac arrest** — from embolized marrow/cement and mediator release. Warn the team, ensure euvolemia, raise FiO2, and be ready to support BP at the moment of cementing/prosthesis insertion.",
+      "**Bone-cement implantation syndrome (BCIS): cementing the femoral component can cause sudden hypotension, hypoxemia, arrhythmia, and even cardiac arrest** — from embolized marrow/cement and mediator release. Warn the team, ensure euvolemia, raise FiO2, and be ready to support BP at the moment of cementing/prosthesis insertion. (BCIS severity: Grade 1 = SpO2 <94% or SBP ↓>20%; Grade 2 = SpO2 <88% or SBP ↓>40% or loss of consciousness; Grade 3 = cardiovascular collapse/arrest — 2023 OA.)",
       "**The hip-fracture population is elderly and frail with high perioperative mortality** — optimize but don't excessively delay (early repair improves outcomes); they often have CAD, CHF, pulmonary disease, dementia, and are anticoagulated. Treat as full-stomach if recent trauma.",
       "**VTE/PE risk is high — mechanical + pharmacologic prophylaxis is standard**, and the timing of neuraxial anesthesia must respect anticoagulant dosing (ASRA intervals) to avoid spinal hematoma.",
-      "**Neuraxial anesthesia is common and may reduce VTE/blood loss/delirium**, but coordinate with anticoagulation; significant blood loss warrants T&C, large-bore access, and a transfusion plan, especially in fracture/revision cases."
+      "**Neuraxial anesthesia is common and may reduce VTE/blood loss/delirium**, but coordinate with anticoagulation; significant blood loss warrants T&C, large-bore access, and a transfusion plan, especially in fracture/revision cases. (For hip fracture, a 2021 RCT found neuraxial NOT superior to GA for 60-day survival or ambulation — choose by patient and anticoagulation status; 2024 OA.)"
     ],
     technique: {
       summary: "Total hip arthroplasty (elective, for arthritis) and hip-fracture fixation (ORIF, hemiarthroplasty, or arthroplasty in the elderly). Cementing risk, the frail fracture population, blood loss, and VTE prevention dominate.",
@@ -6497,7 +6748,14 @@ const PROCEDURES = [
         "Watch for BCIS sequelae, bleeding, PE, and cardiac events."
       ]
     },
-    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1000–1033 (total hip arthroplasty; hip fracture fixation — ORIF, hemiarthroplasty)."
+    caseFlow: [
+      "**Positioning:** THA is usually **lateral decubitus** (axillary roll, beanbag, pad the peroneal nerve and the down-side eye/ear); hip-fracture fixation is often supine on a fracture table with traction — a perineal-post and traction-related nerve stretch are the positioning hazards.",
+      "**Dislocation & femoral canal prep — the first embolic beat:** the head is dislocated and excised, the acetabulum reamed; **reaming/broaching the femoral canal showers marrow/fat** and can dip BP/ETCO2 even before any cement.",
+      "**Cementation & stem impaction — THE dreaded beat (BCIS):** pressurized cement + driving the femoral stem embolizes marrow/fat/cement → **sudden hypotension, hypoxemia, arrhythmia, even arrest.** Have FiO2 up, euvolemia ensured, the surgeon warned, and a pressor in hand at this moment. Press-fit (uncemented) stems lower but don't abolish the risk.",
+      "**Reduction & trial, hemostasis:** once the prosthesis is reduced and cement set, the acute hemodynamic window is largely past — reassess volume and blood loss (substantial in revision/fracture).",
+      "**Closure / runway:** watch for delayed BCIS and ongoing ooze; multimodal/neuraxial analgesia, anticoagulant-aware VTE prophylaxis timing, and a delirium-aware emergence in the frail elderly.",
+    ],
+    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1000–1033 (total hip arthroplasty; hip fracture fixation — ORIF, hemiarthroplasty). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). BCIS grading and hip-fracture GA-vs-neuraxial evidence per OpenAnesthesia (Methyl Methacrylate / Bone Cement Implantation Syndrome 2023; Anesthesia for Orthopedic Surgeries 2024)."
   },
   {
     id: "knee-surgery-orthopedic",
@@ -6550,7 +6808,14 @@ const PROCEDURES = [
         "Watch for PE, bleeding, and tourniquet/nerve injury."
       ]
     },
-    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1034–1052 (total knee arthroplasty; arthrodesis; knee/lower-extremity ORIF; ligament reconstruction; patellar realignment; knee arthroscopy/arthrotomy; tendon repair)."
+    caseFlow: [
+      "**Tourniquet up (150 mmHg over SBP):** a near-bloodless field begins and the **≤120-min clock** starts; expect a slow BP/HR creep and, under regional, tourniquet pain emerging over time.",
+      "**Bony cuts & trialing:** femur and tibia are resected and trial components placed — the hemodynamically quiet working middle.",
+      "**Cementation — the milder BCIS beat:** cement to the tibial/femoral components can embolize marrow (lower risk than the hip, but distal-femur cement still warrants vigilance) — raise FiO2.",
+      "**Tourniquet DEFLATION — the washout beat:** releasing the cuff dumps accumulated CO2/K+/lactate and any venous thrombus into the circulation → **↑ETCO2, transient ↓BP, and a PE/embolism window.** Anticipate it; support BP and watch the capnograph and rhythm.",
+      "**Closure / runway:** motor-sparing analgesia (adductor canal ± iPACK) for early mobilization, VTE prophylaxis, and 24-h watch for postop blood loss.",
+    ],
+    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1034–1052 (total knee arthroplasty; arthrodesis; knee/lower-extremity ORIF; ligament reconstruction; patellar realignment; knee arthroscopy/arthrotomy; tendon repair). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "tibia-lower-leg-surgery",
@@ -6608,7 +6873,13 @@ const PROCEDURES = [
       "**Fat embolism syndrome pentad to recognize:** long-bone (femur/tibia) fracture + **respiratory failure (hypoxemia) + petechiae + mental-status change** (classically 12–72 h post-injury or after reaming) — supportive care and oxygenation are the mainstay."
     ]
   },
-    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1053–1060 (tibial plateau fracture; intramedullary nailing; external fixation; distal tibia/ankle/foot fractures; nonunion/malunion repair)."
+    caseFlow: [
+      "**Setup & tourniquet (trauma = RSI first):** for acute trauma treat as a full stomach — RSI, resuscitate, survey for other injuries; a tourniquet (150 over SBP, ≤120 min) is used for many leg cases.",
+      "**Reaming/nailing — the fat-embolism beat:** **intramedullary reaming pressurizes the canal and can shower fat/marrow emboli** → watch for an intraop ETCO2 drop, hypoxemia, and tachycardia (fat-embolism syndrome can declare 12–72 h out but starts here). Maintain oxygenation.",
+      "**Fixation set, tourniquet down — washout:** deflation dumps CO2/K+/lactate → transient ↑ETCO2/↓BP; support BP and watch the rhythm.",
+      "**Closure / runway — compartment watch is the crux:** the limb-threatening risk is **acute compartment syndrome** (pain out of proportion, especially after tibial fracture/reperfusion); a dense block can mask it, so coordinate block choice with the surgeon and keep suspicion high — and do not extubate a patient with evolving pulmonary injury.",
+    ],
+    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1053–1060 (tibial plateau fracture; intramedullary nailing; external fixation; distal tibia/ankle/foot fractures; nonunion/malunion repair). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "ankle-foot-surgery",
@@ -6877,7 +7148,7 @@ const PROCEDURES = [
   },
   {
     id: "pediatric-neonatal-general-thoracic",
-    name: "Neonatal General & Thoracic Surgery (Omphalocele/Gastroschisis · CDH · TEF · Bronchoscopy)",
+    name: "Neonatal General & Thoracic Surgery (Omphalocele/Gastroschisis · CDH · TEF · NEC · Pyloric Stenosis · Bronchoscopy)",
     section: "Pediatric Surgery",
     page: "1326",
     tags: ["Neonate/emergent","Heat/fluid loss","Abdominal-wall pressure","Aspiration","Shared airway"],
@@ -6894,7 +7165,9 @@ const PROCEDURES = [
       "**These are neonates: aggressive temperature management, glucose monitoring, weight-based dosing, and full-stomach precautions (RSI or awake intubation) — bowel obstruction/distension is common, and gastroschisis has no covering sac.** Omphalocele associates with other anomalies (cardiac, Beckwith-Wiedemann → hypoglycemia).",
       "**Congenital diaphragmatic hernia (CDH) is a sick neonate with pulmonary hypoplasia and persistent pulmonary hypertension — avoid high airway pressures (pneumothorax of the good lung), avoid mask ventilation that distends gut into the chest, and manage PPHN (oxygenation, avoid acidosis, ± iNO/ECMO).** Repair may even occur on ECMO.",
       "**Pediatric bronchoscopy/esophagoscopy is a shared airway** — coordinate ventilation with the endoscopist, manage the small airway's narrow margin, and watch for laryngospasm/desaturation.",
-      "**Anterior mediastinal mass in a child is a classic catastrophe** — airway or cardiovascular collapse can occur on induction/with muscle relaxation. If suspected, keep the child **spontaneously ventilating**, ask whether they can lie flat, and have rigid bronchoscopy/CPB backup. (See the **Mediastinal Mass** entry — same physiology applies to peds.)"
+      "**Anterior mediastinal mass in a child is a classic catastrophe** — airway or cardiovascular collapse can occur on induction/with muscle relaxation. If suspected, keep the child **spontaneously ventilating**, ask whether they can lie flat, and have rigid bronchoscopy/CPB backup. (See the **Mediastinal Mass** entry — same physiology applies to peds.)",
+      "**Necrotizing enterocolitis (NEC) is the commonest neonatal surgical emergency** — a critically ill, often premature neonate with thrombocytopenia (up to 90%), DIC, and metabolic acidosis; pneumatosis intestinalis/portal venous gas on film. **Perforation (free air, or bile/stool/positive Gram stain on paracentesis) is an absolute indication for surgery.** GETA with RSI/full-stomach precautions, high-dose fentanyl + relaxant (volatile often not tolerated), **avoid N2O**; expect aggressive resuscitation (isotonic crystalloid up to 100 mL/kg + 5% albumin), pressors, and PRBC/FFP/platelets in the room. NICU ventilated postop. (2026 OA.)",
+      "**Pyloric stenosis is a MEDICAL, not surgical, emergency — correct the hypochloremic hypokalemic metabolic alkalosis BEFORE the OR** (targets: serum Cl >100 mEq/L, HCO3 <30 mEq/L, infant voiding). Full stomach: decompress with an OG/NG tube (suction supine and both lateral) then RSI/modified-RSI; **avoid N2O**. Watch for **postoperative apnea** (CSF alkalosis) — monitor 12–24 h and avoid/limit opioids. (2024 OA.)"
     ],
     technique: {
       summary: "Neonatal and pediatric general/thoracic emergencies and procedures: omphalocele and gastroschisis closure (± staged silo), congenital diaphragmatic hernia repair, tracheoesophageal fistula, and diagnostic/therapeutic bronchoscopy/esophagoscopy. Heat/fluid loss, intraabdominal pressure, and neonatal pulmonary physiology dominate.",
@@ -6916,15 +7189,19 @@ const PROCEDURES = [
     phases: {
       pre: [
         "Cover/warm defect; resuscitate with warm fluids; glucose; full-stomach precautions; screen for associated anomalies.",
-        "Assess pulmonary status (CDH/PPHN); plan ECMO availability if needed."
+        "Assess pulmonary status (CDH/PPHN); plan ECMO availability if needed.",
+        "CDH is NOT a surgical emergency — repair after optimization (the 12–36 h \u0027honeymoon\u0027); proceed when MAP is normal-for-gestation, lactate <3 mmol/L, urine output >1 cc/kg/h, preductal SpO2 85–95% on FiO2 <0.5, and echo PAP <80% systemic. (2026 OA.)"
       ],
       intra: [
         "RSI/awake intubation; aggressive warming; manage closure intraabdominal-pressure effects (staged silo if needed).",
-        "CDH: low airway pressures, avoid gut distension, manage PPHN; bronchoscopy: shared-airway coordination."
+        "CDH: low airway pressures, avoid gut distension, manage PPHN; bronchoscopy: shared-airway coordination.",
+        "Peds one-lung ventilation (CDH/TEF/thoracoscopy): the left mainstem is smaller (use a half-size-smaller ETT for left isolation) and the right-upper-lobe takeoff is <1 cm from the carina (right endobronchial intubation occludes it). Options: endobronchial intubation, a bronchial blocker (Fogarty 1.5–3 mL balloon, or Arndt 5/7/9 Fr), or a DLT only in children >8–10 y (smallest 26 Fr). Infants desaturate fast on OLV. (2023 OA.)",
+        "CDH gentle-ventilation/hemodynamic targets: permissive hypercapnia PaCO2 50–70 mmHg/pH ≥7.25, preductal SpO2 80–95% / postductal >70%, PIP <25 / PEEP 3–5 / RR 40–60 (HFOV rescue); MAP 45–55. Right-radial (preductal) arterial line + pre/postductal SpO2; high-dose opioid + relaxant, avoid N2O; milrinone for LV diastolic dysfunction, vasopressin for catecholamine-resistant shock, stress-dose hydrocortisone. Avoid NMB at delivery-room intubation; aggressive PPV → contralateral pneumothorax. (2026 OA.)"
       ],
       post: [
         "NICU; temperature/glucose/ventilation management; watch abdominal compartment syndrome after closure.",
-        "CDH: ongoing PPHN/ECMO management; watch for pulmonary hypertensive crises."
+        "CDH: ongoing PPHN/ECMO management; watch for pulmonary hypertensive crises.",
+        "Postop analgesia: a caudal block (Armitage ~0.5 mL/kg lumbosacral, 1 mL/kg thoracolumbar) or truncal (TAP/rectus-sheath) block plus IV acetaminophen cuts opioid need in these neonates (opioid excess → apnea, feeding delay). (OA.)"
       ]
     },
   recall: {
@@ -6935,7 +7212,14 @@ const PROCEDURES = [
       "**Pyloric stenosis:** projectile non-bilious vomiting in a ~3–6-week-old with a palpable 'olive' and a **'string sign'** on imaging; the metabolic signature is **hypochloremic, hypokalemic metabolic alkalosis** — a **medical** emergency, not surgical: rehydrate and correct the alkalosis BEFORE the OR (alkalosis predisposes to postoperative apnea)."
     ]
   },
-    source: "Jaffe 5e (2014), Pediatric Surgery §12.0, p. 1326–1354 (omphalocele/gastroschisis; congenital diaphragmatic hernia; tracheoesophageal fistula; pediatric bronchoscopy/esophagoscopy). Adult thoracic/foregut technique cross-references Thoracic and General Surgery."
+    caseFlow: [
+      "**Sick neonate to the table — stabilize first:** warm aggressively, decompress the stomach (OG/NG), RSI or awake intubation (full stomach), and place arterial/central access for the unstable NEC or large defect. Correct what you can before incision — alkalosis in pyloric stenosis, acidosis/coagulopathy in NEC.",
+      "**Reduction / resection — the working middle:** gastroschisis/omphalocele viscera are reduced; NEC necrotic bowel is resected (or a peritoneal drain placed in the tiny/unstable neonate). Ongoing third-space and blood loss — keep warming, transfusing, and supporting pressure.",
+      "**Closure — the intraabdominal-pressure crux:** forcing the viscera back can spike **intraabdominal and airway pressure → impaired ventilation, dropped venous return, and gut/renal/limb ischemia (abdominal compartment syndrome).** Watch peak pressures and perfusion; a **staged silo** is the escape if it will not close.",
+      "**CDH and TEF run different arcs:** CDH = gentle low-pressure ventilation, no bag-mask gut distension, manage PPHN (the case can pivot to iNO/ECMO); TEF = position the tube tip to isolate the fistula. Pyloromyotomy is short by contrast — the real work was the preop resuscitation.",
+      "**Runway:** NICU intubated for the sick neonates, with ongoing temperature/glucose/ventilation and compartment-pressure watch — pyloric stenosis is the exception (extubate awake, monitor 12–24 h for apnea).",
+    ],
+    source: "Jaffe 5e (2014), Pediatric Surgery §12.0, p. 1326–1354 (omphalocele/gastroschisis; congenital diaphragmatic hernia; tracheoesophageal fistula; pediatric bronchoscopy/esophagoscopy). Adult thoracic/foregut technique cross-references Thoracic and General Surgery. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). NEC per OpenAnesthesia 'Necrotizing Enterocolitis' (2026); pyloric stenosis per 'Pyloric Stenosis' (Chatterjee, 2024); pediatric one-lung-ventilation technique per 'One-Lung Ventilation in Children' (2023); peds caudal/truncal analgesia per OA. CDH targets/management per OpenAnesthesia 'Congenital Diaphragmatic Hernia' (Mattia & Soto, 2026)."
   },
   {
     id: "pediatric-airway-ent",
@@ -6955,7 +7239,8 @@ const PROCEDURES = [
       "**Obstructive sleep apnea is common and changes everything: these children are exquisitely opioid-sensitive (apnea/obstruction), need reduced opioid dosing and monitored recovery, and may obstruct on emergence.** Severe OSA/young age → plan inpatient monitoring after tonsillectomy.",
       "**The post-tonsillectomy bleed is a feared emergency — a hypovolemic child with a full stomach of swallowed blood and a bloody airway.** Resuscitate first, RSI with two suctions ready and a smaller ETT, and anticipate a difficult, soiled view; the bleeding is often worse than visible (swallowed).",
       "**Shared airway with the surgeon plus the narrow pediatric airway: laryngospasm and desaturation are constant threats** — secure the tube well, watch the surgeon's manipulation, and have a laryngospasm plan (CPAP, deepen, succinylcholine/atropine).",
-      "**Airway foreign body is a shared-airway emergency requiring rigid bronchoscopy** — coordinate ventilation, avoid converting a partial to complete obstruction, and weigh spontaneous vs controlled ventilation with the team. Emergence delirium is common after pediatric ENT."
+      "**Airway foreign body is a shared-airway emergency requiring rigid bronchoscopy** — coordinate ventilation, avoid converting a partial to complete obstruction, and weigh spontaneous vs controlled ventilation with the team. Emergence delirium is common after pediatric ENT.",
+      "**Suspected epiglottitis is a do-not-disturb airway emergency:** keep the child calm and SITTING, give NO premed and NO preoperative IV, go straight to the OR, and do an inhalational induction (100% O2) keeping SPONTANEOUS ventilation — ENT scrubbed for rigid bronchoscopy/tracheostomy. Intubate only at a deep plane (cherry-red swollen epiglottis), then ICU 24–48 h; extubate once a cuff leak appears. (H. influenzae b; now rare post-Hib vaccine.)"
     ],
     technique: {
       summary: "Pediatric ENT/airway procedures: tonsillectomy and adenoidectomy (the commonest), airway foreign-body removal by rigid bronchoscopy, and laryngeal/tracheal procedures. The shared narrow airway, OSA, post-tonsillectomy hemorrhage, and laryngospasm define the anesthetic.",
@@ -6977,7 +7262,8 @@ const PROCEDURES = [
     phases: {
       pre: [
         "Assess OSA severity and airway; reduce opioid plan; URI assessment; plan recovery setting.",
-        "For bleed: resuscitate and treat as full stomach."
+        "For bleed: resuscitate and treat as full stomach.",
+        "Croup (viral, subglottic) vs epiglottitis: croup is usually medical — dexamethasone + nebulized epinephrine, humidified O2; intubation is rare (~0.2%) and uses an ETT a half-size smaller. (2023 OA.)"
       ],
       intra: [
         "Shared-airway vigilance; secure ETT; laryngospasm plan; reduced opioids for OSA.",
@@ -6993,7 +7279,13 @@ const PROCEDURES = [
       "**Epiglottitis** is a pediatric airway emergency — the classic child sits forward, drooling, in a tripod position; **keep the child calm and upright, avoid instrumenting the airway until in the OR**, and plan an inhalational induction with the surgeon scrubbed for rigid bronchoscopy/tracheostomy backup."
     ]
   },
-    source: "Jaffe 5e (2014), Pediatric Surgery §12.0, p. 1355–1435 (tonsillectomy/adenoidectomy; airway foreign body/rigid bronchoscopy; laryngeal/tracheal procedures). Adult airway/ENT technique cross-references Otolaryngology."
+    caseFlow: [
+      "**Suspected epiglottitis — the no-touch induction:** the child stays sitting and calm (no premed, no preop IV); inhalational induction with 100% O2 keeping **spontaneous ventilation**, ENT scrubbed for rigid bronchoscopy/tracheostomy. Secure the airway only at a deep plane — the swollen **cherry-red epiglottis** is the dreaded view — then ICU intubated 24–48 h.",
+      "**Airway foreign body — the shared-airway crux:** rigid bronchoscopy with the airway shared; the dangerous beat is **converting a partial to a complete obstruction** during retrieval (a ball-valve object can fully occlude). Coordinate ventilation, weigh spontaneous vs controlled, and let the scope push an object distal if needed.",
+      "**Tonsillectomy — under the gag, then emergence:** reinforced/RAE tube, reconfirm after the gag opens; the danger window is **emergence laryngospasm** on a bloody reactive airway — and OSA children obstruct and are opioid-sensitive.",
+      "**Runway:** monitored recovery for OSA (inpatient if severe/young), emergence-delirium watch, and the late **post-tonsillectomy bleed (5–10 days)** as a separate emergency.",
+    ],
+    source: "Jaffe 5e (2014), Pediatric Surgery §12.0, p. 1355–1435 (tonsillectomy/adenoidectomy; airway foreign body/rigid bronchoscopy; laryngeal/tracheal procedures). Adult airway/ENT technique cross-references Otolaryngology. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Epiglottitis/croup management per OpenAnesthesia 'Epiglottitis and Croup' (McLean & Olomu, 2023)."
   },
   {
     id: "pediatric-craniofacial-cleft",
@@ -7046,7 +7338,13 @@ const PROCEDURES = [
         "Temperature/glucose vigilance; analgesia."
       ]
     },
-    source: "Jaffe 5e (2014), Pediatric Surgery §12.0, p. 1436–1480 (craniosynostosis/cranial vault remodeling; cleft lip repair; palatoplasty; pharyngoplasty; alveolar/secondary cleft repair; otoplasty). Craniofacial/cleft airway also relates to Plastics and Otolaryngology."
+    caseFlow: [
+      "**Difficult airway first (syndromic):** Apert/Crouzon/Pierre Robin/Treacher Collins mean planning for hard mask AND intubation (fiberoptic/LMA-conduit, awake if needed) before anything else — secure and tape meticulously.",
+      "**Craniosynostosis vault remodeling — the blood-loss crux:** scalp and bone bleed steadily and the **sagittal sinus is right there**, so expect to lose a large fraction of the infant's blood volume fast. Blood in the room from the start, arterial line, antifibrinolytics, and **VAE vigilance** with any head-up — this is the high-stakes stretch.",
+      "**Cleft lip/palate — the shared oral airway:** an oral RAE secured midline under the surgeon's gag (recheck after the gag opens — it kinks, dislodges, or extubates), throat pack counted; palatoplasty narrows the airway for later.",
+      "**Runway:** craniosynostosis → ICU with blood/coagulation/VAE watch; palate/pharyngoplasty → watch for **new postoperative airway obstruction/OSA** as the repair narrows the pharynx; neonatal warming/glucose throughout.",
+    ],
+    source: "Jaffe 5e (2014), Pediatric Surgery §12.0, p. 1436–1480 (craniosynostosis/cranial vault remodeling; cleft lip repair; palatoplasty; pharyngoplasty; alveolar/secondary cleft repair; otoplasty). Craniofacial/cleft airway also relates to Plastics and Otolaryngology. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
 {
     id: "or-essentials-sutures",
@@ -7261,6 +7559,156 @@ const PROCEDURES = [
       ]
     },
     source: "Surgical Recall, 8e (Blackbourne, 2018) — drains, tubes, wound closure. Reference content (not a Jaffe procedure)."
+  },
+  {
+    id: "gender-affirming-top-surgery",
+    name: "Gender-Affirming Top Surgery (Chest Masculinization / Feminization)",
+    section: "Plastic and Reconstructive Surgery",
+    page: "OA 2023",
+    tags: ["GETA","Chest-wall blocks","Hormone therapy","Opioid-sparing","Affirming care","Chest binding"],
+    snapshot: {
+      position: "Supine, arms abducted (often sat upright to check symmetry)",
+      time: "1.5\u20134 h",
+      ebl: "Modest",
+      painScore: "4\u20136",
+      anesthesia: "GETA \u00b1 chest-wall regional",
+      mortality: "Low (elective, usually healthy)"
+    },
+    flags: [
+      "**Affirmation is clinical care, not etiquette \u2014 use the patient's chosen name and pronouns through the entire perioperative encounter** (standard of care, tied to better outcomes). Pre-brief the whole team and fix the chart/whiteboard so a deadname doesn't surface at a vulnerable moment.",
+      "**Don't reflexively stop gender-affirming hormones.** Evidence does not support routinely stopping **testosterone** (transmasculine) before surgery; for **estrogen** (transfeminine) the data are less clear \u2014 weigh VTE risk (smoking, prior VTE) against the dysphoria and physiologic effect of abrupt cessation, and decide with the patient rather than by default.",
+      "**Sugammadex binds progesterone** \u2014 counsel AFAB/transmasculine patients on hormonal contraception to use a **nonhormonal backup for 7 days** (a bolus \u2248 one missed dose). For AMAB/transfeminine patients, pregnancy isn't a concern and the gender-affirming hormone effect isn't meaningfully changed.",
+      "**Chest binding has perioperative consequences** (transmasculine): chronic binding affects the chest wall and respiration, patients may be reluctant to remove a binder, and being unable to bind postop can worsen dysphoria \u2014 discuss timing of stopping/resuming. Prior **vocal feminization surgery** (glottoplasty/web) may mean a **smaller ETT**."
+    ],
+    technique: {
+      summary: "Chest reconstruction to align the chest with gender identity: **masculinization** = bilateral subcutaneous mastectomy (double-incision with free nipple grafts for larger chests, or periareolar/keyhole for smaller) in transmasculine patients; **feminization** = breast augmentation (implant \u00b1 fat grafting) in transfeminine patients. Usually elective surgery in otherwise healthy, often young patients \u2014 the anesthetic priorities are affirming care, opioid-sparing analgesia, and PONV control.",
+      steps: [
+        "Confirm chosen name/pronouns and the affirming plan with the whole team before the patient enters the room.",
+        "Position supine, arms abducted; the surgeon may sit the patient upright intraoperatively to assess symmetry \u2014 secure the airway/lines for the position change.",
+        "Opioid-sparing multimodal: chest-wall regional (PECS I/II or serratus plane) where used, plus acetaminophen/NSAID and PONV prophylaxis.",
+        "Masculinization: free nipple grafts and drains after mastectomy. Feminization: implant pocket created, sized, and closed."
+      ]
+    },
+    physiology: [
+      "Gender-affirming hormones shift baseline labs: **testosterone \u2192 \u2191Hgb/Hct, \u2191creatinine**; **estrogen \u2192 \u2193Hgb/Hct, \u2193creatinine**; **spironolactone \u2192 \u2191K**. After ~6 months of therapy, interpret labs against the affirmed-gender reference ranges.",
+      "Chronic chest binding can reduce lung volumes (clinical significance unclear) and cause chest-wall pain; estrogen carries a baseline VTE consideration."
+    ],
+    comorbid: [
+      "Often young and healthy, but screen for VTE risk factors (smoking, personal/family history) and the effects of hormone therapy.",
+      "Pregnancy can occur in transmasculine (AFAB) patients \u2014 testosterone causes amenorrhea but is **not** reliable contraception and does not stop ovulation; offer pregnancy testing where it would change management, ideally pre-discussed, letting the patient choose the less-distressing test (urine vs serum)."
+    ],
+    phases: {
+      pre: [
+        "Team-wide affirming brief (name/pronouns; chart/whiteboard corrected). Make the hormone-continuation decision **with** the patient. Interpret labs by affirmed gender if \u22656 months of therapy.",
+        "Ask about chest binding (and timing), prior vocal/airway surgery (possible smaller ETT), and VTE risk factors; offer pregnancy testing to AFAB patients where it would change management."
+      ],
+      intra: [
+        "GETA; supine arms-abducted, anticipate an upright symmetry check. Opioid-sparing multimodal \u00b1 chest-wall blocks (PECS/serratus); PONV prophylaxis.",
+        "If sugammadex is used, remember the progesterone-binding/contraception counseling for AFAB patients on hormonal contraception."
+      ],
+      post: [
+        "Multimodal analgesia and PONV control; counsel on resuming binding/garments per the surgeon.",
+        "Reaffirm chosen name/pronouns in the PACU handoff."
+      ]
+    },
+    source: "OpenAnesthesia: 'Transgender and Gender-Diverse Patients: Anesthetic Considerations' (Roque & Reece-Nguyen, updated 2023-02-16) \u2014 affirmation, hormone/VTE continuation, sugammadex\u2013contraception, lab interpretation, chest binding, vocal-surgery airway. Operative technique/positioning and chest-wall block specifics are general plastics/regional practice (not in the OA source) \u2014 flag to confirm against a dedicated top-surgery source. Not in Jaffe 5e."
+  },
+  {
+    id: "special-needs-dental",
+    name: "Special-Needs Dental Rehabilitation under GA (Autism \u00b7 Intellectual Disability)",
+    section: "Dental Surgery",
+    page: "OA 2024",
+    tags: ["GETA","Nasal ETT","Shared airway","Neurodiverse/ASD","IM ketamine option","Coping plan","Emergence agitation"],
+    snapshot: {
+      position: "Supine",
+      time: "1\u20132 h (full-mouth rehab)",
+      ebl: "Minimal",
+      painScore: "2\u20134",
+      anesthesia: "GETA (often nasal ETT); induction may be the hard part",
+      mortality: "Low"
+    },
+    flags: [
+      "**The hardest part is usually induction, not the dentistry \u2014 the plan is behavioral first.** Neurodiverse patients thrive on routine; build an **individualized coping plan with the family** (the real experts), use **'one voice'** at induction (one designated communicator, everyone else silent until asleep), allow comfort items, dim lights, minimize waiting/transfers. A good coping plan avoids premedication in up to ~60%.",
+      "**Have an IM-ketamine plan for the patient who won't cooperate or won't leave the car** \u2014 last resort: consult family for site (deltoid/thigh), long-enough needle, approach slowly, use distraction; be ready in the parking lot with portable monitoring/airway. Standard premed routes: **PO ketamine 2\u20133 mg/kg + midazolam 0.3\u20130.5 mg/kg** in a preferred drink, or **IM ketamine 3\u20135 mg/kg**.",
+      "**Don't force the nonessential routine steps:** vitals and height/weight can be deferred to the OR or estimated; allow street clothes; ID band off-arm; **physical restraint is a last resort** (guardian consent \u00b1 institutional policy).",
+      "**It's still a shared airway.** Plan a (usually **nasal**) ETT with a **throat pack**, secure it well, suction blood/irrigation, and account for the comorbidities that travel with the population: **epilepsy (~30% of ASD \u2014 continue anticonvulsants)**, GERD/aspiration, OSA, and the home sedatives/antipsychotics."
+    ],
+    technique: {
+      summary: "General anesthesia (commonly **nasal ETT**) for full-mouth dental rehabilitation \u2014 restorations, extractions, cleanings \u2014 bundled into a single anesthetic for patients who cannot tolerate awake dental care: children, and teens/adults with autism spectrum disorder and intellectual disability. The anesthetic challenge is overwhelmingly the **behavioral approach to a safe induction**, not the dentistry itself.",
+      steps: [
+        "Preop (often by phone): build an individualized coping plan with the family \u2014 cognitive level, communication, triggers, sensory sensitivities, prior encounters; consider a first-case start and waiting in the car.",
+        "Premedicate by the route the patient tolerates (PO ketamine+midazolam in a drink; IM ketamine as last resort); 'one voice' at induction; parent-present or mask-vs-IV per the plan.",
+        "Secure the airway (nasal ETT typical for dental access) with a throat pack; **bundle** other needed care (imaging, labs, procedures) under the one anesthetic.",
+        "Smooth emergence; anticipate emergence agitation; reunite with family/comfort items early."
+      ]
+    },
+    physiology: [
+      "Little physiologic stress from the dentistry itself \u2014 the dominant issues are perioperative anxiety/behavior and the shared airway.",
+      "Population comorbidities shape risk: epilepsy (~30% of ASD), sleep problems (40\u201380%), GERD/aspiration, and chronic sedative/antipsychotic use that alters anesthetic requirements."
+    ],
+    comorbid: [
+      "Autism spectrum disorder (\u224855% have intellectual disability, ~16% moderate\u2013severe), ADHD, sensory processing disorder (95% of ASD), anxiety, self-injury/aggression; epilepsy and OSA common. Know the home meds (clonidine, melatonin, benzodiazepines, antipsychotics) \u2014 consider continuing or boosting per the plan.",
+      "**Cerebral palsy** is part of this population at many centers but is **not** covered by the neurodiverse OA source \u2014 its specific considerations (GERD/aspiration, contractures/positioning, seizure meds, baclofen, secretions, temperature regulation) should be built from a dedicated CP source rather than assumed here."
+    ],
+    phases: {
+      pre: [
+        "Family-built coping plan (the highest-yield intervention); decide premed route (PO drink vs IM-ketamine last resort) and induction method (parent-present, mask vs IV); first-case/short-wait scheduling; allow comfort items, street clothes, deferred vitals.",
+        "Review epilepsy/anticonvulsants, GERD/aspiration, OSA, and the home psychotropic list."
+      ],
+      intra: [
+        "'One voice' induction; **IM ketamine 3\u20135 mg/kg** or **PO ketamine 2\u20133 mg/kg + midazolam 0.3\u20130.5 mg/kg** per plan; nasal ETT + throat pack; bundle all needed care under one anesthetic; dim lights, weighted blanket, induce on the transport bed/chair to minimize transfers.",
+        "Mind the shared airway (blood/irrigation) and continue seizure precautions."
+      ],
+      post: [
+        "Anticipate emergence agitation; reunite with family/comfort items early; PONV and pain control.",
+        "Recover in a calm, low-stimulus space."
+      ]
+    },
+    source: "OpenAnesthesia: 'Preparation and Preoperative Considerations for Neurodiverse Patients' (Antosh & Atteri, updated 2024-04-03) \u2014 coping plan, premedication routes/doses (Table 1), 'one voice' induction, environmental adaptations, ASD comorbidities. Dental shared-airway/nasal-ETT specifics per the project's Dental entries (general practice). Cerebral-palsy-specific considerations are NOT covered by this source \u2014 flagged to build from a dedicated CP source. Not in Jaffe 5e."
+  },
+  {
+    id: "or-essentials-laparoscopic-robotic",
+    name: "Laparoscopic & Robotic Surgery: Physiology & Anesthetic Management",
+    section: "OR Essentials",
+    page: "OA 2024",
+    tags: ["Pneumoperitoneum","Hypercarbia","Steep Trendelenburg","Robotic","Lung-protective ventilation","Cross-cutting"],
+    snapshot: {
+      position: "Varies (steep Trendelenburg / reverse T / lithotomy)",
+      time: "\u2014",
+      ebl: "\u2014",
+      painScore: "\u2014",
+      anesthesia: "Reference (applies across MIS cases)",
+      mortality: "\u2014"
+    },
+    flags: [
+      "**Insufflation is a predictable hemodynamic hit:** CO2 pneumoperitoneum raises SVR, MAP, CVP and filling pressures while cardiac index transiently dips (normalizes ~15 min); peritoneal stretch can trigger a **vagal bradyarrhythmia (even arrest) at insufflation**, and hypercarbia drives tachyarrhythmias. Keep insufflation **<15 mmHg** to protect renal perfusion and urine output.",
+      "**It loads the lungs:** cephalad diaphragm displacement drops FRC and compliance \u2192 atelectasis, higher peak pressures, V/Q mismatch (worse in Trendelenburg). **Raise minute ventilation** for absorbed CO2 (plateaus ~1 h), target EtCO2 ~40 with **permissive hypercapnia** to avoid barotrauma; lung-protective **6\u20138 mL/kg IBW + PEEP 5\u201310**. An **ETT (not an SGA)** is preferred for the pressures and PEEP needed.",
+      "**Steep Trendelenburg has its own toll:** facial/conjunctival/airway edema, raised ICP/IOP, **postoperative vision loss (ischemic optic neuropathy)**, nerve injury, and **endobronchial tube migration** as the carina moves cephalad (recheck the tube after insufflation/positioning). Limit fluids (head-down worsens airway edema); keep strict normocapnia in cerebrovascular or intracranial-mass patients.",
+      "**Robotic adds mechanical hazards:** once the robot is **docked the table must not move** (injury risk) \u2014 position perfectly first; protect the face from the arms; arms are tucked (consider an arterial line if access will be lost); the surgeon has **no tactile feedback** (higher iatrogenic-injury risk). Watch for **gas embolism, subcutaneous emphysema, and capnothorax** (rising airway pressure, hypoxemia, crepitus over neck/chest \u2014 usually resolves on desufflation)."
+    ],
+    technique: {
+      summary: "A cross-cutting reference for the shared physiology and anesthetic management of minimally invasive (laparoscopic and robotic-assisted) surgery \u2014 the consequences of CO2 pneumoperitoneum and extreme positioning that apply across the colorectal, biliary, bariatric, gynecologic, and urologic cases in this app. Reference content; see each procedure for its specifics.",
+      steps: [
+        "GETA with an ETT; deep neuromuscular block improves visualization and prevents movement while the robot is docked.",
+        "Lung-protective ventilation (6\u20138 mL/kg IBW, PEEP 5\u201310); accept higher peak/driving pressures and permissive hypercapnia (EtCO2 ~40); desufflate if acidosis/hypercarbia becomes extreme.",
+        "Goal-directed balanced crystalloid (HR/BP/CVP/UO are poor guides under pneumoperitoneum \u2014 consider SVV/PPV); avoid N2O (bowel distension/PONV).",
+        "Multimodal opioid-sparing analgesia (acetaminophen/NSAID, port-site local, TAP block where suitable); PONV prophylaxis (laparoscopy is an independent risk)."
+      ]
+    },
+    physiology: [
+      "Hypercarbia drives a neuroendocrine stress response (catecholamines, vasopressin, cortisol, RAAS/ADH) \u2192 higher SVR/MAP; direct aortic compression adds to SVR while IVC compression can cut preload. Cardiac index dips, then normalizes ~15 min.",
+      "Splanchnic, renal, and hepatic blood flow fall with raised intra-abdominal pressure (largely offset by hypercarbic vasodilation); urine output drops \u2014 keep insufflation <15 mmHg. CO2 absorption plateaus ~1 h."
+    ],
+    comorbid: [
+      "Cardiac disease tolerates the SVR/CO swings poorly; cerebrovascular or intracranial-mass patients need strict normocapnia; obese patients show a wider A\u2013a gradient in Trendelenburg.",
+      "Bullous lung disease or prior pneumothorax raises capnothorax risk; severe reflux/hiatal hernia raises aspiration risk with positioning."
+    ],
+    phases: {
+      pre: ["Reference \u2014 applies across MIS cases. Assess cardiac/pulmonary reserve for the SVR/CO swings and for steep positioning; confirm aspiration risk and a vascular-access plan (arms often tucked)."],
+      intra: ["ETT + deep NMB; lung-protective ventilation with permissive hypercapnia; insufflation <15 mmHg; recheck the ETT after insufflation/positioning (endobronchial migration); protect eyes/face/nerves; for robotic cases, no table movement once docked."],
+      post: ["Watch for residual hypercarbia, shoulder-tip/visceral pain, PONV, and (after steep/long cases) facial and airway edema \u2014 confirm a cuff leak / awake protective extubation; subcutaneous emphysema or capnothorax usually resolves but should be monitored."]
+    },
+    source: "OpenAnesthesia: 'Anesthesia for Laparoscopic and Robotic Surgery' (Rodi & Villasenor, updated 2024-07-16) \u2014 pneumoperitoneum hemodynamics and pulmonary effects, positioning risks, lung-protective ventilation, robotic hazards, and complications (gas embolism, capnothorax, subcutaneous emphysema). Cross-cutting reference (not a Jaffe procedure); applies to the laparoscopic/robotic cases throughout this app."
   }
 ];
 
@@ -7289,6 +7737,19 @@ function drapesBlock(recall){
     <div class="drapes">
       <div class="drapes-head"><h3>Across the Drapes</h3><span class="pill-tag">Surgeon's-eye view</span></div>
       <div class="drapes-body">${groups}</div>
+    </div>`;
+}
+
+/* Following the Case — renders the optional case-tempo / anesthesiologist's-seat view.
+   Returns '' when p.caseFlow is absent, so existing entries are unaffected.
+   caseFlow = [ "beat with the **attention cue** bolded", ... ] (ordered = chronological) */
+function caseFlowBlock(caseFlow){
+  if(!Array.isArray(caseFlow) || !caseFlow.length) return '';
+  const items = caseFlow.map(i => `<li>${mdBold(i)}</li>`).join("");
+  return `
+    <div class="caseflow">
+      <div class="caseflow-head"><h3>Following the Case</h3><span class="pill-tag">From your seat</span></div>
+      <div class="caseflow-body"><ol>${items}</ol></div>
     </div>`;
 }
 
@@ -7748,6 +8209,8 @@ function renderProcedure(p){
         <p>${mdBold(p.technique.summary)}</p>
         <ul>${techSteps}</ul>
       </section>
+
+      ${caseFlowBlock(p.caseFlow)}
 
       <section class="section">
         <div class="section-head"><span class="bar" style="background:${PILLARS.physiology.color}"></span><h3>${PILLARS.physiology.label}</h3><span class="pill-tag">${PILLARS.physiology.tag}</span></div>
