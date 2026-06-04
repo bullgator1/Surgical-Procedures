@@ -18,6 +18,7 @@
 <meta name="apple-mobile-web-app-title" content="Anesthesia Ref">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#2d7a69">
+<link rel="manifest" href="manifest.json">
 <style>
   /* ============================================================
      ANESTHESIA PROCEDURE REFERENCE
@@ -2776,7 +2777,7 @@ const PROCEDURES = [
     ],
     recall: {
       pimps: [
-        "**Edrophonium (Tensilon) test:** a short-acting anticholinesterase that *transiently improves* myasthenic weakness — historically used to diagnose MG and to distinguish a **myasthenic crisis** (under-treated → improves with edrophonium) from a **cholinergic crisis** (over-treated → worsens). Largely supplanted by antibody testing, but classic on rounds."
+        "**Edrophonium (Tensilon) test:** a short-acting anticholinesterase that transiently improves myasthenic weakness — historically used to diagnose MG and to distinguish a **myasthenic crisis** (under-treated → improves with edrophonium) from a **cholinergic crisis** (over-treated → worsens). Largely supplanted by antibody testing, but classic on rounds."
       ]
     },
     source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 329–333. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Myasthenia-specific relaxant/reversal and postop-ventilation detail per OpenAnesthesia 'Myasthenia Gravis' (2024)."
@@ -3102,7 +3103,7 @@ const PROCEDURES = [
       mortality: "Rare"
     },
     flags: [
-      "**Post-tonsillectomy hemorrhage is the classic emergency: treat as a full stomach with a hypovolemic, swallowed-blood patient.** RSI with suction ready, two laryngoscopes, smaller ETT; resuscitate volume first. Blood loss is often underestimated (much is swallowed).",
+      "**Post-tonsillectomy hemorrhage is the classic emergency: treat as a full stomach with a hypovolemic, swallowed-blood patient.** Loss is largely swallowed and **hidden — children compensate until ~40% volume loss**, so HR/Hct/BP can look deceptively normal: resuscitate (warm isotonic 10–20 mL/kg, repeat) BEFORE the OR. Primary bleed <24 h vs secondary ~POD 5–10. Preoxygenate left-lateral head-down if tolerated; **modified RSI** (reduced-dose propofol/ketamine/etomidate + sux or roc — sugammadex ready; gentle ventilation <12 cmH2O ± apneic-oxygenation NC); **two working suctions + Magill forceps** for clots, two laryngoscopes, smaller cuffed ETT; ENT in the room at induction. Empty the stomach (OG) before waking; extubate fully awake. (2023 OA.)",
       "**OSA children desaturate fast and are sensitive to opioids** — avoid sedative premed in OSA, titrate opioids carefully, expect difficult mask ventilation; severe chronic obstruction can cause pulmonary HTN/cor pulmonale.",
       "**Shared airway with the mouth gag** — a reinforced ETT (resists kinking under the gag) is preferred; **confirm throat-pack removal** before extubation; emerge smoothly to avoid laryngospasm.",
       "This is often a child's **first anesthetic** — screen family history (e.g., MH, pseudocholinesterase) and plan a calm induction."
@@ -3144,7 +3145,7 @@ const PROCEDURES = [
       "**Emergence — laryngospasm watch:** blood and secretions on a reactive airway make this the dangerous moment — suction, extubate per practice (deep vs awake), and position to recover. OSA children obstruct and are opioid-sensitive: go light.",
       "**The post-tonsillectomy bleed is a different case:** a hypovolemic, swallowed-blood, full-stomach child with a bloody view — resuscitate volume FIRST, then RSI with two suctions, two laryngoscopes, and a smaller tube. No clean elective arc; it is an emergency.",
     ],
-    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 207–212. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
+    source: "Jaffe 5e (2014), Otolaryngology-Head and Neck Surgery §3.0, p. 207–212. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Post-tonsillectomy-hemorrhage specifics (hidden ~40% loss, modified RSI, left-lateral preox, Magill/two-suction setup, primary vs secondary timing) per OpenAnesthesia 'Posttonsillectomy Hemorrhage' (Patrao & Hunyady, 2023)."
   },
   {
     id: "salivary-gland-surgery",
@@ -3681,7 +3682,8 @@ const PROCEDURES = [
       "**Robotic prostatectomy = prolonged steep Trendelenburg + CO2 pneumoperitoneum → ↑ICP, ↑intraocular pressure, and airway/facial/laryngeal edema.** Postoperative **vision loss/blindness has been reported**; get a neurosurgical consult for intracranial lesions or VP shunts. Limit time, protect eyes, assess for airway edema before extubation.",
       "**Recheck the ETT position after going into steep Trendelenburg** — the carina shifts cephalad and the tube can endobronchially migrate; steep head-down also compromises ventilation (↑ airway pressures, ↓ FRC).",
       "**Open retropubic prostatectomy can bleed substantially** (up to 1500 mL) from the prostatic venous plexus — large-bore access, T&C, blood available.",
-      "**Airway edema → obstruction** is the classic robotic-emergence trap — verify a cuff leak / direct look before extubating after long head-down cases."
+      "**Airway edema → obstruction** is the classic robotic-emergence trap — verify a cuff leak / direct look before extubating after long head-down cases.",
+      "**Neuraxial is contraindicated for robotic prostatectomy** — port placement, CO2 insufflation, steep head-down position, and case length make an epidural impractical and unsafe (risk of a **high block in steep Trendelenburg**), with little postop benefit shown; plan **GETA + multimodal opioid-sparing analgesia** (acetaminophen + NSAID ± TAP block, mixed evidence). **Both arms are tucked** — secure additional IV access **before** positioning, since arm access is lost once docked."
     ],
     technique: {
       summary: "Removal of the prostate for cancer (radical) or large BPH (open simple). Robotic/laparoscopic radical prostatectomy uses steep Trendelenburg and CO2 pneumoperitoneum with the surgeon at a console; open retropubic approaches risk venous-plexus bleeding.",
@@ -3693,11 +3695,11 @@ const PROCEDURES = [
       ]
     },
     physiology: [
-      "Steep Trendelenburg + pneumoperitoneum raise ICP, IOP, and CVP, reduce FRC, and shift the diaphragm/carina cephalad.",
+      "Steep Trendelenburg + CO2 pneumoperitoneum (typically insufflated to ~15 mmHg) raise ICP, IOP, and CVP, reduce FRC, and shift the diaphragm/carina cephalad.",
       "Prolonged dependent head-down position causes facial/laryngeal/conjunctival edema; the prostatic venous plexus bleeds freely in open repair."
     ],
     comorbid: [
-      "40–80 yr; prostate cancer or large BPH; cardiopulmonary disease relevant to tolerating Trendelenburg/pneumoperitoneum.",
+      "40–80 yr; prostate cancer or large BPH; cardiopulmonary disease relevant to tolerating Trendelenburg/pneumoperitoneum. Poor robotic candidates (consider open): severe obesity, severe cardiopulmonary dysfunction, glaucoma/↑IOP, ↑ICP, severe obstructive lung disease.",
       "Glaucoma/intracranial pathology raise the stakes of ↑IOP/↑ICP."
     ],
     phases: {
@@ -3707,11 +3709,13 @@ const PROCEDURES = [
       ],
       intra: [
         "Secure positioning, eye protection; recheck ETT after Trendelenburg; manage ventilation under pneumoperitoneum.",
-        "Open: manage venous-plexus blood loss."
+        "Open: manage venous-plexus blood loss.",
+        "Robotic: intraoperative urine output is an unreliable volume gauge — the Foley is not accessible to anesthesia and the urinary tract is divided to remove the prostate."
       ],
       post: [
-        "Assess airway edema before extubation (long head-down); watch vision.",
-        "High pain (open) — epidural/PCA; monitor for bleeding."
+        "Suspect airway edema (often with periorbital edema) in any dyspneic patient after a prolonged robotic case — assess a cuff leak / direct look before extubation; watch vision.",
+        "Robotic life-threatening postop concerns: airway edema, hypercapnic respiratory failure, and pulmonary embolism (VTE ~0.5% — lower than open but still present; tobacco, large prostate, and longer OR time raise the risk).",
+        "Analgesia: multimodal/opioid-sparing; open retropubic is high-pain (epidural/PCA reasonable for OPEN, not robotic); monitor for bleeding."
       ]
     },
   recall: {
@@ -3725,7 +3729,7 @@ const PROCEDURES = [
       "**The dissection crux:** the apex/dorsal venous complex is the bleeder (open retropubic can lose up to ~1500 mL); the neurovascular-bundle spare and bladder-neck anastomosis are the meticulous beats — a calm steady field vs. calling for blood/converting is the tell.",
       "**Emergence is the trap:** before extubating a long head-down case, confirm a **cuff leak / direct look for airway edema** — obstruction on emergence is the classic robotic-prostatectomy catastrophe. Watch vision postop.",
     ],
-    source: "Jaffe 5e (2014), Urology §9.0, p. 887–890 (open and robotic prostate operations). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
+    source: "Jaffe 5e (2014), Urology §9.0, p. 887–890 (open and robotic prostate operations). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Robotic-specific anesthetic detail (≈15 mmHg pneumoperitoneum, neuraxial contraindicated, periorbital/airway edema, VTE ~0.5%, hypercapnic respiratory failure/PE, unreliable intraop UOP, poor-candidate selection) per OpenAnesthesia 'Anesthesia for Robotic Prostatectomy' (Brotman & Kotamarti, updated 2026-01-27)."
   },
   {
     id: "nephrectomy-upper-tract",
@@ -4589,7 +4593,7 @@ const PROCEDURES = [
       "**The acute abdomen is a full stomach — RSI with cricoid pressure**, and **metoclopramide is contraindicated in obstruction/perforation.** Bowel distension splints the diaphragm (↓FRC) → rapid desaturation; preoxygenate well. An NG tube can stay for induction (suction first) or be pulled — it doesn't preclude cricoid.",
       "**Restore volume BEFORE induction:** emergent patients are hypovolemic/septic (third-spacing, vomiting, peritonitis); even elective patients are dry from bowel prep. Anticipate **large fluid shifts (10–15 mL/kg/h)**, warm fluids, and pressors for the relative hypovolemia unmasked by induction agents.",
       "**Avoid N2O** — it diffuses into and distends bowel, worsening exposure and distension.",
-      "**Carcinoid tumors are common in the small bowel and appendix** — a functional or metastatic carcinoid releases serotonin/histamine/kinins, and tumor manipulation can trigger a **carcinoid crisis** (bronchospasm, flushing, and profound hypotension OR hypertension). **Octreotide** 25–100 mcg IV bolus (infusion if refractory) is the treatment and is given prophylactically when carcinoid is known; avoid histamine-releasing drugs (morphine, atracurium) and sympathomimetics/catecholamines, which can provoke mediator release.",
+      "**Carcinoid tumors are common in the small bowel and appendix** — a functional or metastatic carcinoid (especially with hepatic mets) releases serotonin/histamine/kinins, and tumor manipulation can trigger a **carcinoid crisis** (bronchospasm, flushing, profound hypotension OR hypertension, arrhythmia). **Octreotide** 25–100 mcg IV bolus is the rescue (relieves symptoms within ~15 s) and is given prophylactically when carcinoid is known; an **octreotide infusion up to 300 mcg/h may be required and is continued up to 48 h postop.** Place an **arterial line before induction** — induction hypotension can itself trigger a crisis — and **propofol blunts the sympathetic response to intubation best** as the induction agent. **Avoid histamine-releasers (morphine, atracurium) and catecholamines/sympathomimetics;** succinylcholine is debated (fasciculation-driven ↑intraabdominal pressure may provoke mediator release). **Continue octreotide perioperatively and monitor glucose** — octreotide antagonizes insulin (watch hyper- and hypoglycemia); these patients can have a prolonged recovery from anesthesia.",
       "**Sepsis/septic shock** may need aggressive hemodynamic support (arterial line ± CVP/TEE in the unstable patient); watch for hemorrhage. Retroperitoneal-tumor resection can involve great vessels → major bleeding."
     ],
     technique: {
@@ -4643,7 +4647,7 @@ const PROCEDURES = [
       "**Polyposis syndromes:** **Peutz-Jeghers** = hamartomatous GI polyps + buccal/perioral **pigmentation** ('Peutz = Pigmentation'); **Gardner's** = colonic adenomas (FAP variant) + osteomas, sebaceous cysts, and desmoids ('SOD')."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.3, p. 521–533, 640–649, and §7.2 ostomy p. 526–528 (appendectomy; Meckel's; small-bowel resection; enterolysis; enteric fistulae; ostomy procedures; exploratory/staging laparotomy; intraabdominal/retroperitoneal tumor; subphrenic abscess; shared intestinal/peritoneal considerations p. 534). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Carcinoid tumors of the small bowel/appendix noted per Jaffe technique; carcinoid-crisis management (octreotide; avoid histamine-releasers/sympathomimetics) per standard practice."
+    source: "Jaffe 5e (2014), General Surgery §7.3, p. 521–533, 640–649, and §7.2 ostomy p. 526–528 (appendectomy; Meckel's; small-bowel resection; enterolysis; enteric fistulae; ostomy procedures; exploratory/staging laparotomy; intraabdominal/retroperitoneal tumor; subphrenic abscess; shared intestinal/peritoneal considerations p. 534). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Carcinoid tumors of the small bowel/appendix noted per Jaffe technique; carcinoid-crisis management per OpenAnesthesia 'Carcinoid Syndrome' (Darwish, updated 2023-04-20): octreotide bolus 25–100 mcg / infusion up to 300 mcg/h continued up to 48 h postop, pre-induction arterial line, propofol induction, succinylcholine caution, perioperative glucose monitoring."
   },
   {
     id: "colorectal-surgery",
@@ -6229,7 +6233,7 @@ const PROCEDURES = [
     comorbid: [
       "Decompensated cirrhosis with recurrent variceal bleeding and/or refractory ascites; hepatorenal syndrome.",
       "Coagulopathy, thrombocytopenia, encephalopathy, malnutrition, cirrhotic cardiomyopathy.",
-      "**MELD score stratifies how sick the liver is** — and it was originally derived to predict mortality *after TIPS* specifically. Higher MELD tracks with worse coagulopathy, encephalopathy, and periprocedural death. Current US standard is **MELD 3.0** (bilirubin, INR, creatinine, sodium, albumin, plus a sex adjustment), which succeeded MELD-Na (sodium added 2016) and the original 3-variable MELD."
+      "**MELD score stratifies how sick the liver is** — and it was originally derived to predict mortality after TIPS specifically. Higher MELD tracks with worse coagulopathy, encephalopathy, and periprocedural death. Current US standard is **MELD 3.0** (bilirubin, INR, creatinine, sodium, albumin, plus a sex adjustment), which succeeded MELD-Na (sodium added 2016) and the original 3-variable MELD."
     ],
     phases: {
       pre: [
@@ -6979,7 +6983,7 @@ const PROCEDURES = [
       mortality: "Low (elective); notably higher (elderly hip fracture)"
     },
     flags: [
-      "**Bone-cement implantation syndrome (BCIS): cementing the femoral component can cause sudden hypotension, hypoxemia, arrhythmia, and even cardiac arrest** — from embolized marrow/cement and mediator release. Warn the team, ensure euvolemia, raise FiO2, and be ready to support BP at the moment of cementing/prosthesis insertion. (BCIS severity: Grade 1 = SpO2 <94% or SBP ↓>20%; Grade 2 = SpO2 <88% or SBP ↓>40% or loss of consciousness; Grade 3 = cardiovascular collapse/arrest — 2023 OA.)",
+      "**Bone-cement implantation syndrome (BCIS): cementing the femoral component can cause sudden hypotension, hypoxemia, arrhythmia, and even cardiac arrest** — from embolized marrow/cement and mediator release. Warn the team, ensure euvolemia, raise FiO2, and be ready to support BP at the moment of cementing/prosthesis insertion. (BCIS severity: Grade 1 = SpO2 <94% or SBP ↓>20%; Grade 2 = SpO2 <88% or SBP ↓>40% or loss of consciousness; Grade 3 = cardiovascular collapse/arrest — 2023 OA.) **Higher risk:** hypertension, obesity, and a previously uninstrumented femoral canal. **Treat it as acute right-heart failure — 100% O2, IV fluids, inotropes, pulmonary vasodilators**; place invasive arterial + central monitoring for high-risk patients, and note volatile anesthetics produced greater hemodynamic instability at similar embolic loads in an animal study.",
       "**The hip-fracture population is elderly and frail with high perioperative mortality** — optimize but don't excessively delay (early repair improves outcomes); they often have CAD, CHF, pulmonary disease, dementia, and are anticoagulated. Treat as full-stomach if recent trauma.",
       "**VTE/PE risk is high — mechanical + pharmacologic prophylaxis is standard**, and the timing of neuraxial anesthesia must respect anticoagulant dosing (ASRA intervals) to avoid spinal hematoma.",
       "**Neuraxial anesthesia is common and may reduce VTE/blood loss/delirium**, but coordinate with anticoagulation; significant blood loss warrants T&C, large-bore access, and a transfusion plan, especially in fracture/revision cases. (For hip fracture, a 2021 RCT found neuraxial NOT superior to GA for 60-day survival or ambulation — choose by patient and anticoagulation status; 2024 OA.)"
@@ -7022,7 +7026,7 @@ const PROCEDURES = [
       "**Reduction & trial, hemostasis:** once the prosthesis is reduced and cement set, the acute hemodynamic window is largely past — reassess volume and blood loss (substantial in revision/fracture).",
       "**Closure / runway:** watch for delayed BCIS and ongoing ooze; multimodal/neuraxial analgesia, anticoagulant-aware VTE prophylaxis timing, and a delirium-aware emergence in the frail elderly.",
     ],
-    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1000–1033 (total hip arthroplasty; hip fracture fixation — ORIF, hemiarthroplasty). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). BCIS grading and hip-fracture GA-vs-neuraxial evidence per OpenAnesthesia (Methyl Methacrylate / Bone Cement Implantation Syndrome 2023; Anesthesia for Orthopedic Surgeries 2024)."
+    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1000–1033 (total hip arthroplasty; hip fracture fixation — ORIF, hemiarthroplasty). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). BCIS grading, risk factors, and RV-failure treatment ladder, plus hip-fracture GA-vs-neuraxial evidence, per OpenAnesthesia (Methyl Methacrylate / Bone Cement Implantation Syndrome 2023; Anesthesia for Orthopedic Surgeries 2024)."
   },
   {
     id: "knee-surgery-orthopedic",
@@ -7039,7 +7043,7 @@ const PROCEDURES = [
       mortality: "Low"
     },
     flags: [
-      "**Total knee arthroplasty: tourniquet + bone cement.** The tourniquet (150 mmHg above SBP, max ~120 min) controls bleeding but its deflation causes a washout (↑ETCO2, ↓BP, transient ↑K+/lactate) and releases accumulated venous thrombus/emboli; cementing can cause a milder BCIS than the hip.",
+      "**Total knee arthroplasty: tourniquet + bone cement.** The tourniquet (150 mmHg above SBP, max ~120 min) controls bleeding but its deflation causes a washout (↑ETCO2, ↓BP, transient ↑K+/lactate) and releases accumulated venous thrombus/emboli; cementing can cause a milder BCIS than the hip — still raise FiO2 at cementation and be ready to support BP, treating any reaction as acute RV failure (O2, fluids, inotropes).",
       "**VTE/PE risk is high after TKA — standard prophylaxis applies, and neuraxial timing must respect anticoagulant intervals (ASRA)** to avoid spinal hematoma.",
       "**Regional analgesia is central: adductor-canal block (motor-sparing, preferred for early mobilization) or femoral block ± a posterior/IPACK block** for TKA; periarticular infiltration is common — coordinate with the surgeon and watch cumulative local-anesthetic dose.",
       "**Arthroscopy and ligament repair are mostly short, lower-pain cases** suitable for neuraxial, regional + sedation, or GA; tourniquet pain emerges over time under regional/sedation."
@@ -7082,7 +7086,7 @@ const PROCEDURES = [
       "**Tourniquet DEFLATION — the washout beat:** releasing the cuff dumps accumulated CO2/K+/lactate and any venous thrombus into the circulation → **↑ETCO2, transient ↓BP, and a PE/embolism window.** Anticipate it; support BP and watch the capnograph and rhythm.",
       "**Closure / runway:** motor-sparing analgesia (adductor canal ± iPACK) for early mobilization, VTE prophylaxis, and 24-h watch for postop blood loss.",
     ],
-    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1034–1052 (total knee arthroplasty; arthrodesis; knee/lower-extremity ORIF; ligament reconstruction; patellar realignment; knee arthroscopy/arthrotomy; tendon repair). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
+    source: "Jaffe 5e (2014), Orthopedic Surgery §10.0, p. 1034–1052 (total knee arthroplasty; arthrodesis; knee/lower-extremity ORIF; ligament reconstruction; patellar realignment; knee arthroscopy/arthrotomy; tendon repair). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). BCIS prevention/treatment per OpenAnesthesia 'Methyl Methacrylate Complications and Bone Cement Implantation Syndrome' (Fakhry & Gravenstein, updated 2023-05-09)."
   },
   {
     id: "tibia-lower-leg-surgery",
@@ -7915,7 +7919,7 @@ const PROCEDURES = [
       "**Have an IM-ketamine plan for the patient who won't cooperate or won't leave the car** \u2014 last resort: consult family for site (deltoid/thigh), long-enough needle, approach slowly, use distraction; be ready in the parking lot with portable monitoring/airway. Standard premed routes: **PO ketamine 2\u20133 mg/kg + midazolam 0.3\u20130.5 mg/kg** in a preferred drink, or **IM ketamine 3\u20135 mg/kg**.",
       "**Don't force the nonessential routine steps:** vitals and height/weight can be deferred to the OR or estimated; allow street clothes; ID band off-arm; **physical restraint is a last resort** (guardian consent \u00b1 institutional policy).",
       "**It's still a shared airway.** Plan a (usually **nasal**) ETT with a **throat pack**, secure it well, suction blood/irrigation, and account for the comorbidities that travel with the population: **epilepsy (~30% of ASD \u2014 continue anticonvulsants)**, GERD/aspiration, OSA, and the home sedatives/antipsychotics.",
-      "**Cerebral palsy brings its own anesthetic load** (now a named population here): **GERD/chronic aspiration** and **copious secretions** (glycopyrrolate + suctioning; reinforce ETT taping), **contractures** (positioning/padding), **epilepsy** (continue anticonvulsants), **OSA/central sleep apnea in 20\u201350%** (judicious sedation/opioids; some use home BiPAP/CPAP), and **poor thermoregulation** (active warming \u2014 hypothermia \u2192 platelet dysfunction/coagulopathy and delayed emergence; MAC may run ~20% lower). Verify any **intrathecal baclofen pump** \u2014 abrupt interruption (pump failure) can cause life-threatening withdrawal."
+      "**Cerebral palsy brings its own anesthetic load** (now a named population here): **GERD/chronic aspiration** and **copious secretions** (glycopyrrolate + suctioning; reinforce ETT taping), **contractures** (positioning/padding), **epilepsy** (continue anticonvulsants), **OSA/central sleep apnea in 20\u201350%** (judicious sedation/opioids; some use home BiPAP/CPAP), and **poor thermoregulation** (active warming \u2014 hypothermia \u2192 platelet dysfunction/coagulopathy and delayed emergence; MAC may run ~20% lower). Verify any **intrathecal baclofen pump** — **abrupt interruption (catheter kink/dislodgement, pump failure, reservoir depletion, battery failure) triggers a life-threatening withdrawal** (rebound spasticity → agitation, autonomic instability, hyperthermia, rhabdomyolysis, seizures, and progression to multiorgan failure) that can mimic sepsis, NMS, or autonomic dysreflexia; the priority is to **reestablish delivery as fast as possible** (high-dose oral baclofen as a bridge if the pump can't be restored), with benzodiazepines/dexmedetomidine/dantrolene/propofol as supportive cover. Conversely **baclofen toxicity** (pump/dosing error, or accumulation in renal impairment — it is ~70–80% renally cleared, unchanged) causes CNS and respiratory depression, hypotonia, bradycardia, and seizures, with **no antidote — supportive care** (atropine for bradycardia, benzodiazepines first-line for seizures)."
     ],
     technique: {
       summary: "General anesthesia (commonly **nasal ETT**) for full-mouth dental rehabilitation \u2014 restorations, extractions, cleanings \u2014 bundled into a single anesthetic for patients who cannot tolerate awake dental care: children, and teens/adults with autism spectrum disorder and intellectual disability. The anesthetic challenge is overwhelmingly the **behavioral approach to a safe induction**, not the dentistry itself.",
@@ -7951,7 +7955,7 @@ const PROCEDURES = [
         "Cerebral palsy: treat pain to a normal requirement despite nonverbal status (watch opioid-induced respiratory depression with OSA/CSA); return to respiratory/neurologic baseline; watch hypothermia and delayed emergence."
       ]
     },
-    source: "OpenAnesthesia: 'Preparation and Preoperative Considerations for Neurodiverse Patients' (Antosh & Atteri, updated 2024-04-03) \u2014 coping plan, premedication routes/doses (Table 1), 'one voice' induction, environmental adaptations, ASD comorbidities. Dental shared-airway/nasal-ETT specifics per the project's Dental entries (general practice). Cerebral-palsy considerations per OpenAnesthesia 'Cerebral Palsy' (Kanjia, updated 2024-05-15) and 'Spasticity Management' (2026; intrathecal baclofen pump/withdrawal). Not in Jaffe 5e."
+    source: "OpenAnesthesia: 'Preparation and Preoperative Considerations for Neurodiverse Patients' (Antosh & Atteri, updated 2024-04-03) \u2014 coping plan, premedication routes/doses (Table 1), 'one voice' induction, environmental adaptations, ASD comorbidities. Dental shared-airway/nasal-ETT specifics per the project's Dental entries (general practice). Cerebral-palsy considerations per OpenAnesthesia 'Cerebral Palsy' (Kanjia, updated 2024-05-15) and 'Spasticity Management' (2026) and 'Baclofen' (Okoro & Lee, updated 2026-03-09; intrathecal-baclofen-pump withdrawal/toxicity — reestablish delivery ASAP, supportive management, ~70–80% renal clearance). Not in Jaffe 5e."
   },
   {
     id: "or-essentials-laparoscopic-robotic",
@@ -8013,7 +8017,7 @@ const PROCEDURES = [
     },
     flags: [
       "**The baseline is the \u201c6-4-2\u201d rule (ASA 2017):** **6 h** for solids or **formula**, **4 h** for **breast milk**, **2 h** for **clear fluids** \u2014 before any GA, regional, or procedural sedation. Fried/fatty/meat meals need **\u22658 h**.",
-      "**The real-world risk runs the other way \u2014 over-fasting.** In children the minimums routinely balloon into 12+ h of actual fasting \u2192 **hunger, thirst, irritability, hypoglycemia, dehydration, and hypotension on induction**. The modern push is to *encourage intake up to the cutoff*, not to pad it.",
+      "**The real-world risk runs the other way \u2014 over-fasting.** In children the minimums routinely balloon into 12+ h of actual fasting \u2192 **hunger, thirst, irritability, hypoglycemia, dehydration, and hypotension on induction**. The modern push is to encourage intake up to the cutoff, not to pad it.",
       "**Clears have moved to 1 h at many centers (do not assume 2 h is current).** A 2018 ADARPEF/ESPA/APAGBI joint statement \u2014 since endorsed by the ESA-IC, Canadian, and SPANZA societies \u2014 backs a **liberal 1-hour clear-fluid policy** (some institutions 0 h) with **no increase in aspiration**. The 2017 ASA number remains 2 h; verify your institution's policy.",
       "**Know what a clear fluid is** \u2014 water, pulp-free juice, clear tea, carbohydrate drinks. **Breast milk and formula are NOT clear fluids** (breast milk 4 h ASA / 3 h ESA-IC incl. fortified; formula 6 h ASA / 4 h ESA-IC)."
     ],
@@ -8139,7 +8143,7 @@ const PROCEDURES = [
       "**The anatomy is the safety case for going caudal.** The infant cord ends low (**~L3/L4** vs adult L1/2), so a lumbar approach risks the cord \u2014 the caudal (sacral hiatus) is the safe neuraxial route. But the **dural sac also ends low (~S3/4** vs adult S1/2), so **unintentional dural puncture is possible** during a caudal.",
       "**Always test-dose \u2014 you cannot rely on neurologic signs in an anesthetized child.** Aspirate (imperfect sensitivity), then **0.1 mL/kg lidocaine 1.5% with epinephrine 1:200,000**, watch 60\u201390 s. Intravascular = **HR \u2191 > 10 bpm**, **SBP \u2191 > 10 mmHg**, or **T-wave changes (especially neonates)**. Circulatory collapse may be the first sign of **LAST**.",
       "**Dose by volume, not concentration \u2014 Armitage formula.** **0.5 mL/kg** = lumbosacral, **1 mL/kg** = thoracolumbar, **1.25 mL/kg** = mid-thoracic (ropivacaine or bupivacaine). CSF rebound over ~15 min can raise the final level. **Limit epinephrine to the test dose** (spinal-ischemia concern with larger amounts).",
-      "**Screen the back and the coags.** Contraindications: refusal, overlying infection, raised ICP, coagulopathy/anticoagulation, and **complex sacral stigmata / tethered cord / open neural-tube defects** \u2014 a *simple* sacral dimple does not preclude placement, but distinguish it from complex stigmata (MRI/US) first."
+      "**Screen the back and the coags.** Contraindications: refusal, overlying infection, raised ICP, coagulopathy/anticoagulation, and **complex sacral stigmata / tethered cord / open neural-tube defects** \u2014 a simple sacral dimple does not preclude placement, but distinguish it from complex stigmata (MRI/US) first."
     ],
     technique: {
       summary: "Reference card for pediatric caudal blockade (the workhorse peds regional technique) and its place in regional-in-children \u2014 anatomy, contraindications, the mandatory test dose, and volume-based dosing. Most often a GA adjunct for sub-umbilical surgery; can be the sole anesthetic to spare volatile/opioid (e.g., the apnea-prone ex-premie). Reference content (not a Jaffe procedure).",
@@ -8181,6 +8185,814 @@ const PROCEDURES = [
       ]
     },
     source: "OpenAnesthesia: 'Caudal Anesthesia in Children' (Speaks & Ambardekar, updated 2023-03-14) \u2014 anatomy, contraindications, technique, test dosing (Tobias), and dosing (Armitage; Takasaki 0.056 mL/kg/dermatome). Regional-vs-apnea framing from the GAS trial. Cross-cutting reference (not a Jaffe procedure)."
+  },
+  {
+    "id": "peds-essentials-pulmonary-hypertension",
+    "name": "Pediatric Pulmonary Hypertension & PH Crisis",
+    "section": "Pediatric Essentials",
+    "page": "OA 2025",
+    "tags": [
+      "Pediatrics",
+      "Pulmonary HTN",
+      "PH crisis",
+      "RV failure",
+      "iNO",
+      "Cross-cutting",
+      "Reference"
+    ],
+    "snapshot": {
+      "position": "—",
+      "time": "—",
+      "ebl": "—",
+      "painScore": "—",
+      "anesthesia": "Reference (any peds case in a child with PH)",
+      "mortality": "High if a crisis is mismanaged"
+    },
+    "flags": [
+      "**The whole anesthetic is built to avoid a pulmonary hypertensive crisis — a sudden ↑PVR until PAP exceeds systemic SBP → acute RV failure, septal bow into the LV, falling CO, acidosis, arrest.** In the anesthetized child it shows as **↓EtCO2 + hypoxia + hypotension**. Treat hard and fast: **100% O2, hyperventilate (hypocarbia), deepen anesthesia/opioid, vasoconstrictor (phenylephrine/norepinephrine/vasopressin) to hold coronary perfusion, inotrope, treat bradycardia, start iNO, correct acidosis, rewarm** — and be ready for ECMO.",
+      "**Everything that raises PVR is the enemy: hypoxia, hypercarbia, acidosis, hypothermia, high PEEP/airway pressure, pain, and catecholamine surges.** Conversely, hold **SVR/normotension** (coronary perfusion of the pressure-loaded RV), keep the child **euvolemic** (avoid prolonged fasting AND volume overload), preserve RV contractility, and **maintain sinus rhythm — atrial kick is essential to fill a stiff RV**.",
+      "**Highest-risk children:** suprasystemic PA pressure, depressed RV function, young age, home oxygen, a brand-new PH diagnosis not yet on therapy, no stable regimen, and emergent/long cases. Optimize first; **never stop chronic PH meds** — and **epoprostenol's half-life is minutes, so its infusion must not be interrupted even briefly**.",
+      "**Technique: least is best.** Local/light sedation when feasible — but oversedation or airway obstruction → hypercarbia/hypoxia → ↑PVR, so a controlled GETA can be safer than deep sedation without an airway. **IV induction (avoid inhalational); blunt the catecholamine surge with anxiolysis; use ketamine/etomidate over agents that drop SVR; caution with spinal (↓SVR); vasopressin for hypotension with preserved function.** An intra-atrial communication (PFO/ASD) is protective early (R→L shunt supports CO) but the resulting hypoxia/acidosis can still spiral to arrest."
+    ],
+    "technique": {
+      "summary": "Reference card for the child with pulmonary hypertension (PH) presenting for any procedure — the comorbidity that converts a routine case into a potential arrest. Pediatric PH is mPAP >20 mmHg with PVR index ≥3 WU·m² in a child >3 months; common etiologies are PPHN, PH from complex CHD, and PH from lung disease. The anesthetic mission is to keep PVR down, support the RV, and recognize/treat a PH crisis instantly. Reference content (not a Jaffe procedure).",
+      "steps": [
+        "Confirm PH status is optimized and ALL PH meds are taken on schedule (echo within 6 mo; review cath/vasoreactivity).",
+        "Screen for acute aggravators (infection, reactive airway, dehydration) — optimize or reschedule.",
+        "Avoid ↑PVR triggers throughout (hypoxia, hypercarbia, acidosis, hypothermia, high airway pressure, pain, light anesthesia).",
+        "Have the PH-crisis plan, pressors/inotropes, iNO, and ECMO capability ready before induction."
+      ]
+    },
+    "physiology": [
+      "Elevated PVR loads the RV; the RV hypertrophies and dilates to maintain RV-PA coupling until it uncouples → right heart failure. A stiff, pressure-loaded RV depends on sinus rhythm (atrial kick) and adequate coronary perfusion (systemic diastolic pressure).",
+      "PH pathobiology = deficient vasodilators (↓prostacyclin, ↓NO synthase) + excess vasoconstrictors (↑endothelin-1, ↑serotonin) — the rationale for the drug classes used to treat it."
+    ],
+    "comorbid": [
+      "PPHN (newborn), PH from complex CHD (shunts), and PH from chronic lung disease; aggravated by sleep-disordered breathing, reactive airway/chronic lung disease, chronic aspiration, obesity, sickle cell, neuromuscular disease.",
+      "Eisenmenger syndrome: a large systemic-to-pulmonary shunt that has reversed (R→L) with cyanosis and fixed elevated PVR — saturation <85%, syncope, arrhythmia, and pregnancy mark poor prognosis; treat like fixed, severe PH."
+    ],
+    "phases": {
+      "pre": [
+        "Verify optimization and on-schedule PH meds; review echo (RV size/function, TR-jet PA pressure) and cath/vasoreactivity; screen for acute comorbidities that worsen PH and reschedule if needed.",
+        "Minimize preoperative hypovolemia (consider a pre-induction fluid bolus); plan anxiolysis to blunt the catecholamine surge; ensure iNO and ECMO are available."
+      ],
+      "intra": [
+        "IV induction (avoid inhalational); keep SVR/normotension, euvolemia, sinus rhythm, RV contractility; ventilate to FRC avoiding atelectasis, overdistention, and abrupt intrathoracic-pressure spikes (cough/Valsalva).",
+        "PH-meds menu: **iNO** first-line (precapillary constriction; activates guanylate cyclase→↑cGMP); **milrinone** (PDE-3 — inotropy + selective pulmonary vasodilation, IV or inhaled); **sildenafil** (PDE-5); **bosentan** (endothelin antagonist — chronic, not acute); **prostacyclin analogs** epoprostenol/treprostinil/iloprost (do NOT interrupt epoprostenol); **CCBs** only for vasoreactive responders and NOT under 1 year (negative inotropy).",
+        "Recognize/treat PH crisis immediately (100% O2, hyperventilate, deepen, vasoconstrictor, inotrope, iNO, correct acidosis, rewarm); on CPB, wean with inotrope + milrinone ± vasopressin and start iNO before separation; RVAD/ECMO if weaning fails."
+      ],
+      "post": [
+        "Same concerns as preop — avoid hypoxia, hypercarbia, hypovolemia, hypothermia, pain, and anything that triggers a crisis; watch for RV ischemia/failure, arrhythmia, and pulmonary hemorrhage.",
+        "Recover in a monitored setting with PH expertise; resume home PH meds without interruption."
+      ]
+    },
+    "recall": {
+      "pimps": [
+        "**“Define a PH crisis.”** → ≥2 of: SBP ↓>20%, SpO2 <90% (acyanotic) or ↓>10% (cyanotic), CVP ↑>20%, HR ±20% — acutely over ≤10 min; in the anesthetized child it reads as ↓EtCO2 + hypoxia + hypotension.",
+        "**“First-line for PPHN/acute PH?”** → inhaled nitric oxide (precapillary pulmonary vasodilator).",
+        "**“Why does atrial kick matter in PH?”** → the stiff, pressure-loaded RV depends on the atrial contribution to fill — losing sinus rhythm can collapse output."
+      ],
+      "pearls": [
+        "**Pediatric PH definition:** mPAP >20 mmHg + PVR index ≥3 WU·m² in a child >3 months (transient neonatal elevations exclude <3 mo).",
+        "**Never interrupt epoprostenol** (half-life is minutes); never stop chronic PH therapy perioperatively.",
+        "**Milrinone is the friend drug** — inotropy plus pulmonary vasodilation; vasopressin raises SVR/coronary perfusion without raising PVR."
+      ]
+    },
+    "source": "OpenAnesthesia: 'Pediatric Pulmonary Hypertension: Classification, Pathophysiology, and Diagnosis' and 'Pediatric Pulmonary Hypertension: Anesthetic Considerations' (Ko & Hajmohamed, updated 2025-08; drawing on Wadia et al, J Cardiothorac Vasc Anesth 2022 and the SPA Critical Events Checklist). Cross-cutting reference (not a Jaffe procedure); complements the congenital-cardiac-surgery entry's intraoperative PH-crisis notes."
+  },
+  {
+    "id": "peds-essentials-neonatal-circulation",
+    "name": "Neonatal & Transitional Circulation (incl. PPHN)",
+    "section": "Pediatric Essentials",
+    "page": "OA 2023",
+    "tags": [
+      "Neonate",
+      "HR-dependent CO",
+      "Fetal shunts",
+      "PPHN",
+      "Bradycardia",
+      "Cross-cutting",
+      "Reference"
+    ],
+    "snapshot": {
+      "position": "—",
+      "time": "—",
+      "ebl": "—",
+      "painScore": "—",
+      "anesthesia": "Reference (every neonatal anesthetic)",
+      "mortality": "—"
+    },
+    "flags": [
+      "**Neonatal cardiac output is heart-rate-dependent — the immature myocardium can't augment stroke volume, so bradycardia IS low output.** Parasympathetic tone dominates (sympathetic innervation incomplete), so laryngoscopy, suctioning, hypoxia, or surgical stimulus readily trigger **profound bradycardia → keep atropine drawn up**. Contractility is calcium-dependent (immature SR/T-tubules).",
+      "**The stiff neonatal heart sits on the flat part of the Frank-Starling curve — it tolerates rapid volume poorly** (acute failure) and **volume overload reopens the ductus**: give fluids deliberately, not in a rush. High endogenous catecholamines blunt the response to exogenous pressors.",
+      "**Persistent pulmonary hypertension of the newborn (PPHN) / return to fetal circulation: anything that raises PVR — hypoxia, hypercarbia, acidosis, hypothermia, sepsis, CDH, meconium aspiration — reopens R→L shunting across the PFO/ductus and crashes oxygenation.** Preductal SpO2 runs ~10% higher than postductal. Prevent it: oxygenate, normocarbia-to-mild-hypocarbia, avoid acidosis/hypothermia; rescue with iNO ± ECMO.",
+      "**Shunts change your pharmacology:** a **right-to-left shunt slows inhalational induction** (most with less-soluble agents like sevoflurane) and can **raise arterial levels of IV drugs**; left-to-right shunting theoretically speeds inhalational induction but isn't seen clinically. The immature myocardium is **more sensitive to volatile myocardial depression (worst with halothane), especially <6 months — and MAC peaks at ~6 months.**"
+    ],
+    "technique": {
+      "summary": "Reference card for the physiology under every neonatal anesthetic: a heart-rate-dependent cardiac output, a transitional circulation that can revert to fetal pathways, and the shunt effects that reshape drug uptake. Understanding this is what keeps a routine neonatal case from becoming a desaturation/bradycardia spiral. Reference content (not a Jaffe procedure).",
+      "steps": [
+        "Treat bradycardia as the emergency it is (atropine ready); preserve heart rate and sinus rhythm.",
+        "Give volume deliberately — the neonatal heart can't buffer a rapid bolus and overload reopens the ductus.",
+        "Avoid all PVR-raising triggers to prevent reversion to fetal circulation (PPHN).",
+        "Account for shunt effects on induction speed and titrate volatile carefully (high MAC-relative sensitivity)."
+      ]
+    },
+    "physiology": [
+      "Fetal circulation is a parallel circuit with three shunts (ductus venosus, foramen ovale, ductus arteriosus); HbF (α2γ2) has higher O2 affinity — P50 19 mmHg vs 27 for HbA — and fetal Hct ~55%, all maximizing O2 delivery to brain/heart.",
+      "At birth: first breath drops PVR and raises PaO2; placental clamping raises SVR; the foramen ovale closes as LA pressure exceeds RA, and the ductus arteriosus reverses R→L to L→R then closes (functional closure 24–48 h, anatomic 2–3 weeks). Failure of this transition = PPHN."
+    ],
+    "comorbid": [
+      "Conditions that impair transition / drive PPHN: birth asphyxia, sepsis, meconium aspiration, congenital diaphragmatic hernia, pneumothorax, prematurity/RDS, and cyanotic CHD.",
+      "Drug effects on the immature heart: propofol drops BP, etomidate is hemodynamically stable, benzodiazepines (esp. with opioids) cause depression, dexmedetomidine causes bradycardia/heart block — used with caution in HR-dependent neonates."
+    ],
+    "phases": {
+      "pre": [
+        "Confirm gestational/postconceptual age and any transitional pathology (PPHN risk, CDH, meconium, sepsis); ensure warming, glucose, and atropine are ready.",
+        "Anticipate which shunt physiology is present and how it will affect induction speed and drug levels."
+      ],
+      "intra": [
+        "Maintain heart rate/sinus rhythm (atropine for vagal bradycardia from laryngoscopy/suction/hypoxia); give volume in measured aliquots; avoid PVR-raising triggers to prevent reversion to fetal circulation.",
+        "Titrate volatile cautiously (heightened myocardial depression <6 mo; MAC peaks ~6 mo); use etomidate where hemodynamic stability is needed.",
+        "Preductal SpO2 targets during neonatal resuscitation: **1 min 60–65%, 2 min 65–70%, 3 min 70–75%, 4 min 75–80%, 5 min 80–85%, 10 min 85–95%** — do not chase 100% SpO2 in the first minutes of life."
+      ],
+      "post": [
+        "Keep the neonate warm, glucose-replete, and well-oxygenated to avoid late reversion to fetal circulation; monitor for apnea/bradycardia.",
+        "PPHN management continues (oxygenation, avoid acidosis, iNO ± ECMO) where relevant."
+      ]
+    },
+    "recall": {
+      "pimps": [
+        "**“Why is neonatal CO heart-rate-dependent?”** → the immature myocardium can't augment stroke volume (few/disorganized myofibrils, calcium-dependent contractility, flat Frank-Starling), so HR drives output and bradycardia = low output.",
+        "**“P50 of fetal hemoglobin?”** → 19 mmHg (vs 27 for adult Hb) — higher O2 affinity to pull O2 from maternal blood.",
+        "**“What reopens the ductus / causes PPHN?”** → hypoxia, hypercarbia, acidosis, hypothermia (and volume overload reopens the duct) — all raise PVR."
+      ],
+      "pearls": [
+        "**Atropine within reach for every neonate** — vagal bradycardia from airway manipulation can be sudden and severe.",
+        "**Don't chase 100% SpO2 at birth** — preductal targets climb from 60–65% (1 min) to 85–95% (10 min).",
+        "**R→L shunt slows the gas, speeds the IV** — inhalational induction lags, IV drug levels can overshoot."
+      ]
+    },
+    "source": "OpenAnesthesia: 'Neonatal Cardiovascular Physiology' (Anderson & Vo, updated 2023-04-04) and 'Fetal Circulation, Transition at Birth, and Persistent Fetal Circulation' (Ferschl, updated 2023-06-13). Cross-cutting reference (not a Jaffe procedure); underpins the congenital-cardiac-surgery and neonatal general/thoracic entries."
+  },
+{
+    id: "peds-essentials-difficult-airway",
+    name: "Pediatric Difficult Airway",
+    section: "Pediatric Essentials",
+    page: "OA 2023",
+    tags: ["Pediatrics","Difficult airway","Apneic oxygenation","Limit attempts","SGA rescue","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (any peds airway, anticipated or not)",
+      mortality: "Cardiac arrest in ~2% of difficult intubations (PeDI)"
+    },
+    flags: [
+      "**Children desaturate fast and crash through bradycardia — the failed airway is catastrophic.** Faster O2 consumption + a compliant chest wall (↓FRC, atelectasis) means a short safe-apnea window, and a **dominant parasympathetic tone → hypoxia drives bradycardia and cardiovascular collapse, not tachycardia.** Increased airway reactivity predisposes to **laryngospasm and bronchospasm** (the most common critical respiratory events). In the PeDI registry **hypoxemia preceded every arrest.**",
+      "**LIMIT the number of attempts — repeated instrumentation is the strongest predictor of severe events.** After each failed attempt make **at least one change**: a more experienced provider, a technique adjustment (shoulder roll, stylet, **apneic oxygenation** via nasal cannula/HFNO), or switch DL→videolaryngoscopy/flexible scope. **If difficulty is anticipated, go straight to an advanced technique for the first attempt;** repeat DL only once, and only if you changed something with good reason to expect success.",
+      "**Maintain oxygenation/ventilation above all — abandon the attempt to re-oxygenate before you lose the patient.** Continuous EtCO2 + SpO2, apneic oxygenation when possible, and remember the **SGA seals better in children** (compliant chest wall) — placing one can rescue ventilation and buy time to call for help or set up advanced equipment. Rule out **laryngospasm at a light plane** quickly as a cause of 'can't ventilate.'",
+      "**Anticipate it from the anatomy and the syndrome.** Pediatric features that make it hard: **large occiput → neck flexion/obstruction in neutral** (shoulder roll to align axes), large tongue/tonsils, **cephalad larynx**, long floppy epiglottis, small glottis (edema from repeated tries → obstruction). Classic difficult-airway syndromes: **Pierre-Robin, Treacher-Collins, Goldenhar, Apert, Crouzon** (mic/maxillary hypoplasia, limited mouth opening/neck mobility). In the uncooperative child, **micrognathia + short thyromental distance** are the most useful predictors; Mallampati 3–4 carries a 43% PPV for poor view in kids >4 yr. Have **advanced equipment in multiple sizes, experienced help, and (usually) IV access before induction.**"
+    ],
+    technique: {
+      summary: "Reference card for the difficult pediatric airway — anticipated or unanticipated. Children's anatomic and physiologic differences both increase the chance of a difficult intubation and shorten the time you have to fix it. The mission is to maintain oxygenation, anticipate from anatomy/syndrome, and rigorously limit attempts. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Anticipate: airway exam every case; screen anatomy (occiput, tongue/tonsils, micrognathia, thyromental distance, mouth opening, neck mobility) and syndromes.",
+        "Prepare: multiple-size ETTs/SGAs/oral airways, videolaryngoscope/flexible scope, the most experienced provider, IV access, and apneic-oxygenation set up before induction if difficulty is expected.",
+        "Execute: continuous EtCO2/SpO2, apneic oxygenation, first attempt with an advanced technique if difficulty anticipated; one change after every failed attempt; abandon to re-oxygenate (mask/SGA) before desaturation.",
+        "Rescue: SGA for a better seal/ventilation; treat laryngospasm/bronchospasm; escalate to the Vortex/CICO pathway if oxygenation fails."
+      ]
+    },
+    physiology: [
+      "Faster O2 consumption + reduced FRC (compliant, collapsible chest wall → atelectasis) = a short safe-apnea time and rapid arterial desaturation.",
+      "Dominant parasympathetic tone makes hypoxia present as bradycardia and collapse; increased airway reactivity predisposes to laryngospasm/bronchospasm.",
+      "A small glottis and lower airway mean even modest edema from repeated attempts causes clinically significant obstruction."
+    ],
+    comorbid: [
+      "Syndromic difficult airway: Pierre-Robin, Treacher-Collins, Goldenhar, Apert, Crouzon — maxillary/mandibular hypoplasia, facial asymmetry, large obstructive tongue, glottic/subglottic abnormalities, limited mouth opening and neck mobility.",
+      "Acquired airway compromise even in healthy children: croup/epiglottitis, peritonsillar abscess, airway foreign body, burns, anaphylaxis, airway trauma, post-tonsillectomy hemorrhage. Highest-risk by data: age <6 mo, <12 mo and <10 kg, micrognathia, repeated instrumentation, ICU patients."
+    ],
+    phases: {
+      pre: [
+        "Focused airway exam; identify anticipated difficulty from anatomy/syndrome/acquired pathology; assemble multiple-size equipment, advanced devices, experienced help, and (usually) IV access before induction.",
+        "Plan the first technique (advanced if difficulty anticipated), the apneic-oxygenation strategy, and the rescue/CICO pathway."
+      ],
+      intra: [
+        "Continuous EtCO2 + SpO2 and apneic oxygenation; mind anesthetic depth (laryngospasm at a light plane is a common 'can't ventilate' cause if NMB not used).",
+        "Limit attempts: ≥1 change after each failure (provider, positioning/shoulder roll, stylet, DL→advanced); repeat DL only once with a deliberate change; SGA to rescue ventilation; abandon and re-oxygenate before desaturation."
+      ],
+      post: [
+        "Watch for post-instrumentation airway edema/obstruction (small airway), laryngospasm/bronchospasm on emergence; extubate awake with full reversal.",
+        "Document the difficult airway and the successful technique for the next anesthetic."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cWhy do kids desaturate so fast?\u201d** \u2192 high O2 consumption + low FRC (compliant chest wall) = short safe-apnea time; and hypoxia \u2192 **bradycardia** (parasympathetic dominance), not tachycardia.",
+        "**\u201cWhat's the single most important thing in a pediatric difficult airway?\u201d** \u2192 maintain oxygenation and **limit the number of attempts** \u2014 repeated instrumentation is the strongest predictor of severe events.",
+        "**\u201cWhich syndromes flag a difficult pediatric airway?\u201d** \u2192 Pierre-Robin, Treacher-Collins, Goldenhar, Apert, Crouzon (the mandibular/maxillary-hypoplasia group)."
+      ],
+      pearls: [
+        "**SGAs seal better in children** than adults (compliant chest wall) \u2014 a strong rescue for 'can't ventilate.'",
+        "**Micrognathia + short thyromental distance** are the best bedside predictors in a child too young to cooperate; Mallampati 3\u20134 \u2192 43% PPV for poor view in kids >4 yr.",
+        "**PeDI registry:** 20% of difficult intubations were unanticipated; cardiac arrest in ~2% (most common severe complication), and **hypoxemia preceded all arrests** \u2014 the case for apneic oxygenation and fewer attempts."
+      ]
+    },
+    source: "OpenAnesthesia: 'Pediatric Difficult Airway' (Morris & Burjek, updated 2023-01-25), drawing on the APRICOT and NECTARINE studies, the PeDI Registry, and the 2022 ASA Difficult Airway Practice Guidelines. Cross-cutting reference (not a Jaffe procedure); complements the pediatric-airway-ent entry."
+  },
+  {
+    id: "anesthesia-essentials-osa",
+    name: "Obstructive Sleep Apnea \u2014 Perioperative Management",
+    section: "Anesthesia Essentials",
+    page: "OA 2023",
+    tags: ["OSA","Difficult airway","Opioid-sensitive","Extubate awake","Postop monitoring","CPAP","Cross-cutting","Reference"],
+    snapshot: {
+      position: "Semi-sitting / head-up for airway management & recovery",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (any case in a patient with OSA)",
+      mortality: "—"
+    },
+    flags: [
+      "**OSA patients are exquisitely sensitive to respiratory depressants and at high risk of opioid-induced respiratory depression** \u2014 sedatives/hypnotics, opioids, and inhaled agents all increase upper-airway collapsibility and depress ventilation, and the risk compounds when CNS depressants are stacked. **Anticipate increased opioid potency and altered pain perception;** lean on **multimodal/opioid-sparing** analgesia and **avoid continuous background infusions on PCA.**",
+      "**OSA is an independent risk factor for BOTH difficult mask ventilation AND difficult intubation.** Predictors: high score on screening (e.g. STOP-Bang), crowded oropharynx, large neck circumference, short neck, moderate\u2013severe OSA, head-and-neck surgery. **Prepare for the difficult airway** (consider awake intubation for known/strongly suspected difficulty); preoxygenate, head-up positioning, apneic oxygenation, two-handed mask ventilation, and **sugammadex available for immediate rocuronium reversal in a CICO scenario.**",
+      "**Extubate fully awake, sitting up, and only after complete, objectively-confirmed reversal of neuromuscular blockade** \u2014 OSA patients are at high risk of residual blockade, postoperative apnea/hypopnea, hypoxemia, and respiratory failure. Recover in the semi-sitting or lateral position.",
+      "**Technique hierarchy: regional > GA-with-secure-airway > deep sedation without an airway.** Use local/peripheral/neuraxial when feasible; **avoid sedative premedication;** use short-acting agents (remifentanil, propofol); **capnography is mandatory during moderate sedation.** Low-dose intrathecal morphine (100 mcg) can cut systemic opioid \u2014 but neuraxial opioids mandate enhanced delayed-respiratory-depression monitoring."
+    ],
+    technique: {
+      summary: "Reference card for the patient with obstructive sleep apnea presenting for any procedure \u2014 the comorbidity that converts routine sedation into an airway and respiratory-depression hazard. The anesthetic mission is to anticipate a difficult airway, minimize respiratory depressants, secure the airway when sedation would otherwise be unprotected, and extend postoperative monitoring. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Screen and risk-stratify (STOP-Bang / known OSA severity); continue home CPAP plan; avoid sedative premedication.",
+        "Plan the airway for difficulty (preoxygenate, head-up, apneic O2, awake intubation if indicated, sugammadex on hand).",
+        "Prefer regional/local or GA with a secure airway over deep sedation without an airway; capnography during any moderate sedation.",
+        "Extubate awake/sitting after full objective NMB reversal; arrange the postoperative monitoring level by OSA severity, opioid need, and PACU events."
+      ]
+    },
+    physiology: [
+      "OSA increases susceptibility to upper-airway collapse and to respiratory depression from propofol, benzodiazepines, opioids, and inhaled agents; the effect is amplified by combining CNS depressants.",
+      "Chronic intermittent hypoxia drives altered pain perception and increased opioid potency, and predisposes to postoperative hypoxemia, residual blockade, and respiratory failure."
+    ],
+    comorbid: [
+      "OSA travels with obesity, hypertension, pulmonary hypertension/cor pulmonale, ischemic heart disease, arrhythmia (AF), and metabolic syndrome \u2014 each raises perioperative cardiopulmonary risk.",
+      "Undiagnosed OSA is common; a positive screen (STOP-Bang) in a patient with a crowded oropharynx/large neck should be managed as OSA even without a sleep study."
+    ],
+    phases: {
+      pre: [
+        "Avoid sedative premedication; continue/plan CPAP (bring the home machine); screen severity; anticipate a difficult airway and assemble equipment, help, and sugammadex.",
+        "Choose the least-depressant technique that protects the airway; consider regional/neuraxial; weigh neuraxial-opioid benefit against the need for enhanced delayed-respiratory-depression monitoring."
+      ],
+      intra: [
+        "Preoxygenate, head-up; awake intubation for known/strongly suspected difficult airway with judicious sedation by an independent provider, topicalization, supplemental O2; apneic oxygenation, two-handed mask ventilation as needed.",
+        "Short-acting agents (remifentanil, propofol); minimize and objectively monitor NMB; capnography during any sedation; GA with a secure airway is safer than deep sedation without one."
+      ],
+      post: [
+        "Extubate awake, sitting up, after complete objective NMB reversal; recover semi-sitting/lateral; continuous pulse oximetry and supplemental O2 until back to room-air baseline; reinstitute CPAP.",
+        "Multimodal/opioid-sparing analgesia; no continuous background PCA infusions; escalate disposition (telemetry/step-down/ICU) for severe OSA, high parenteral-opioid need, or respiratory events in PACU."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cBiggest anesthetic risks in OSA?\u201d** \u2192 difficult mask ventilation AND difficult intubation, plus heightened sensitivity to opioids/sedatives \u2192 postop respiratory depression.",
+        "**\u201cHow do you extubate the OSA patient?\u201d** \u2192 fully awake, sitting up, after objective confirmation of complete NMB reversal; recover non-supine on continuous SpO2.",
+        "**\u201cSedation plan for OSA?\u201d** \u2192 avoid premed, prefer regional or a secured airway over deep sedation, capnograph everything, opioid-sparing multimodal, no background PCA infusion."
+      ],
+      pearls: [
+        "**Sugammadex available** for immediate rocuronium reversal in a CICO scenario.",
+        "**Low-dose intrathecal morphine (100 mcg)** reduces systemic opioid and is reasonably safe \u2014 but mandates monitoring for delayed respiratory depression.",
+        "**Regional > GA-with-airway > deep sedation without an airway** is the standing technique hierarchy."
+      ]
+    },
+    source: "OpenAnesthesia: 'Obstructive Sleep Apnea: Perioperative Management' (Pappu & Singh, updated 2023-08-23), drawing on the 2018 Society of Anesthesia and Sleep Medicine intraoperative guideline (Memtsoudis et al.) and Cozowicz & Memtsoudis 2021. Cross-cutting reference (not a Jaffe procedure)."
+  },
+  {
+    id: "anesthesia-essentials-acid-base",
+    name: "Perioperative Acid\u2013Base Disorders (Metabolic Acidosis \u00b7 Metabolic Alkalosis \u00b7 Mixed)",
+    section: "Anesthesia Essentials",
+    page: "OA 2026",
+    tags: ["Acid-base","Anion gap","Winter's formula","Metabolic acidosis","Metabolic alkalosis","Mixed disorder","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (ABG interpretation, any case)",
+      mortality: "Severe non-DKA metabolic acidosis (pH <7.2) \u2014 ICU mortality ~57%"
+    },
+    flags: [
+      "**Treat the cause, not the number.** Acute metabolic acidosis depresses the cardiovascular system \u2014 **\u2193contractility, \u2193cardiac output, arterial vasodilation/hypotension, and (when severe) resistance to infused catecholamines** \u2014 but the etiology, not the pH itself, drives mortality (lactic acidosis at pH <6.9 predicts death; the same pH in DKA does not). **Bicarbonate is generally avoided** (no mortality benefit; paradoxical intracellular acidosis, hypernatremia, overshoot); reserve it for severe acidemia (pH <7.1, or 7.1\u20137.2 with severe AKI) or toxic alcohol/salicylate.",
+      "**Classify metabolic acidosis by the anion gap, and correct the gap for albumin.** Normal AG is **6\u201312 mEq/L** (albumin is the dominant unmeasured anion) \u2192 add **~2.5 mEq/L to the expected AG for every 1 g/dL the albumin is below normal**, or HAGMA hides behind hypoalbuminemia. **HAGMA** = added acids (lactate, ketones, toxic alcohols, urate); **NAGMA** = relative chloride excess (GI losses, large-volume 0.9% NaCl, RTA).",
+      "**Check respiratory compensation against Winter's formula: expected PaCO2 = 1.5\u00d7[HCO3\u207b] + 8 \u00b1 2.** A PaCO2 outside that band means a **co-existing respiratory disorder \u2014 a mixed disturbance.** Suspect mixed disorders whenever the labs are internally inconsistent or PaCO2 and HCO3\u207b don't move in parallel; clinical context decides.",
+      "**Metabolic alkalosis (pH >7.45, HCO3\u207b >26 mmol/L) is chloride- and volume-driven \u2014 fix it with chloride/volume + potassium + magnesium.** Classify by **urine chloride: <20 mmol/L = chloride-responsive** (vomiting/NG suction, diuretics, volume contraction \u2192 give 0.9% NaCl + K\u207a/Mg\u00b2\u207a); **>20 mmol/L = chloride-resistant** (mineralocorticoid excess; acetazolamide if persistent). It matters for us: **alkalosis (and the hypokalemia that rides with it) reduces nondepolarizing NMB potency and \u2191arrhythmia risk** \u2014 correct K\u207a before induction and avoid excessive hypocapnia worsening the alkalemia on controlled ventilation.",
+      "**Fluid choice IS acid-base management (the Stewart/SID view).** Normal saline has a strong-ion difference of **0**, so large volumes lower plasma SID and cause a **hyperchloremic NAGMA**; **balanced crystalloids (lactated Ringer's, Plasma-Lyte)** sit closer to plasma SID and better preserve acid-base stability in large-volume resuscitation. Henderson-Hasselbalch/anion-gap tells you what the disorder is; the **Stewart model (pH set by PaCO2, SID, and total weak acids Atot)** tells you why — a falling SID (hyperchloremia) drives acidosis, a rising SID drives alkalosis."
+    ],
+    technique: {
+      summary: "Reference card for interpreting and managing perioperative acid\u2013base disturbances at the head of the bed \u2014 acidosis, alkalosis, and the mixed disorders that are common in surgical and critically-ill patients. Two complementary frameworks exist (traditional Henderson-Hasselbalch / anion gap, and physicochemical Stewart / strong-ion difference); combined, they classify the disturbance and point to the cause. The governing principle is to correct the underlying process, not the pH. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Identify the primary disorder from pH, PaCO2, and HCO3\u207b; acidemia <7.35, alkalemia >7.45.",
+        "Metabolic acidosis: calculate the anion gap (correct for albumin) \u2192 HAGMA vs NAGMA; check Winter's (expected PaCO2 = 1.5\u00d7HCO3 + 8 \u00b1 2) for a mixed picture.",
+        "Metabolic alkalosis: confirm HCO3\u207b >26 with appropriate hypoventilation; send urine chloride \u2192 chloride-responsive (<20) vs chloride-resistant (>20).",
+        "Look for a mixed disorder whenever PaCO2/HCO3 are discordant or labs are internally inconsistent; treat the underlying cause(s)."
+      ]
+    },
+    physiology: [
+      "Metabolic acidosis = \u2191H\u207a / \u2193HCO3\u207b; the respiratory response is hyperventilation (\u2193PaCO2), full within hours; renal compensation takes hours\u2013days. Acute acidosis impairs myocardial contractility and catecholamine responsiveness.",
+      "Metabolic alkalosis = primary \u2191HCO3\u207b; compensatory hypoventilation raises PaCO2 but is limited by the need to oxygenate, so pH rarely fully normalizes. Sustained by chloride depletion, volume contraction, and hypokalemia impairing renal HCO3\u207b excretion.",
+      "Acid\u2013base status alters drug behavior: pH/electrolyte shifts change neuromuscular-junction sensitivity (nondepolarizing NMBs less potent in alkalosis) and the activity of pH-dependent agents.",
+      "Normal plasma values: pH 7.35–7.45, HCO3⁻ 24 ± 2 mEq/L, [H⁺] 35–45 nmol/L. In the Stewart model pH is set by three independent variables — PaCO2, the strong-ion difference (SID), and total weak acids (Atot, mainly albumin and phosphate); the bicarbonate and hemoglobin/imidazole systems do the immediate buffering."
+    ],
+    comorbid: [
+      "Metabolic acidosis is common in the critically ill (~64% of US ICU patients in one series), with toxic ingestions, large-volume saline, sepsis/shock (lactic), DKA, and CKD/RTA/chronic diarrhea as drivers.",
+      "Metabolic alkalosis is common perioperatively: vomiting/NG suction (H\u207a and Cl\u207b loss), diuretics, post-hypercapnic correction (suspect after rapid PaCO2 normalization in chronic CO2 retainers), and mineralocorticoid excess."
+    ],
+    phases: {
+      pre: [
+        "Interpret the ABG systematically (don't read pH alone); identify and start correcting the underlying process; replete K\u207a and Mg\u00b2\u207a in alkalosis before induction (hypokalemia \u2192 arrhythmia + altered NMB).",
+        "For chloride-responsive alkalosis, restore volume/chloride with 0.9% NaCl; reconsider contributing diuretics; for severe acidosis, address the cause and weigh bicarbonate/THAM only at the extremes."
+      ],
+      intra: [
+        "On controlled ventilation, match minute ventilation to the patient's compensatory PaCO2 \u2014 don't normalize the PaCO2 of a chronically-compensated patient (and avoid excessive hypocapnia that worsens alkalemia).",
+        "Anticipate altered NMB potency and pH-dependent drug effects; remember acute acidosis blunts catecholamine pressors \u2014 correct the driver rather than escalating vasopressors blindly."
+      ],
+      post: [
+        "Recheck gas/electrolytes; continue treating the cause; watch for post-hypercapnic alkalosis after weaning a chronic CO2 retainer and for rebound as the primary process resolves.",
+        "Severe/refractory cases (e.g. metabolic alkalosis or acidosis unresponsive to medical therapy) may need acetazolamide or renal replacement therapy."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cWinter's formula?\u201d** \u2192 expected PaCO2 = **1.5 \u00d7 [HCO3\u207b] + 8 \u00b1 2**; PaCO2 outside the band = a mixed (added respiratory) disorder.",
+        "**\u201cNormal anion gap, and how does albumin change it?\u201d** \u2192 6\u201312 mEq/L; add ~2.5 to expected AG per 1 g/dL drop in albumin \u2014 hypoalbuminemia masks a HAGMA.",
+        "**\u201cChloride-responsive vs chloride-resistant alkalosis?\u201d** \u2192 urine Cl\u207b <20 (volume/Cl depletion \u2192 saline + K/Mg) vs >20 (mineralocorticoid excess \u2192 acetazolamide if persistent)."
+      ],
+      pearls: [
+        "**Bicarbonate rarely helps and often harms** \u2014 reserve for pH <7.1 (or 7.1\u20137.2 with severe AKI) and toxic-alcohol/salicylate; THAM is an alternative that needs intact renal function.",
+        "**Alkalosis + hypokalemia reduce nondepolarizing NMB potency and raise arrhythmia risk** \u2014 correct K\u207a before paralysis.",
+        "**It's the cause, not the pH:** lactic acidosis at pH <6.9 predicts mortality; identical pH in DKA does not \u2014 chase the etiology."
+      ]
+    },
+    source: "OpenAnesthesia: 'Metabolic Acidosis' (Anderson & Chatterjee, updated 2026-04-06) and 'Metabolic Alkalosis and Mixed Acid-Base Disorders' (Sahoo & Chatterjee, updated 2026-04-06), drawing on Park et al. (BJA Educ 2024), Tinawi (Kidney Int Rep 2021), and Radkowski et al. (Anesthesiol Res Pract 2024). Cross-cutting reference (not a Jaffe procedure). (CPB-specific alpha-stat vs pH-stat management is not covered here \u2014 see the ABG / alpha-stat·pH-stat card.) Stewart/SID framework, fluid-choice effects, and normal values per OpenAnesthesia 'Normal Acid-Base Balance' (Jardak & Collins, updated 2026-02-19)."
+  },
+{
+    id: "anesthesia-essentials-coagulopathy",
+    name: "Perioperative Coagulopathy & Massive Transfusion",
+    section: "Anesthesia Essentials",
+    page: "OA 2026",
+    tags: ["Coagulopathy","Lethal triad","MTP 1:1:1","TXA","Viscoelastic/TEG","Anticoagulant reversal","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (any high-blood-loss / bleeding case)",
+      mortality: "Driven by the lethal triad and under-resuscitation"
+    },
+    flags: [
+      "**Prevent the lethal triad — hypothermia, acidosis, coagulopathy — because each one feeds the other.** Hold the line on hard targets: **core temp ≥36°C** (hypothermia slows the cascade and impairs platelets), **pH >7.30** (acidosis impairs thrombin generation and fibrin polymerization — avoid excess normal saline), **ionized Ca²⁺ >1.1 mmol/L checked q15–30 min** in moderate-to-severe hemorrhage (citrate in stored products chelates calcium), and **MAP >65** with pressors. **Minimize crystalloid** — it dilutes platelets and factors and worsens edema; resuscitate with balanced components.",
+      "**Massive transfusion: start empiric 1:1:1 (RBC : plasma : platelets), then pivot to goal-directed therapy.** Activate the MTP when bleeding **>4 units RBC/h**, shock unresponsive to crystalloid, or trauma criteria are met; communicate clearly with the blood bank for predefined packs. Whole blood is an excellent 1:1:1 substitute when available. After initial control, **recheck Hgb / fibrinogen / platelets / iCa²⁺ / viscoelastic every 20–30 min** and switch to lab- or TEG/ROTEM-guided correction to avoid over-transfusion. Predict the need early with a **shock index (HR/SBP) >0.9** or an **ABC score ≥2** (penetrating mechanism, positive FAST, SBP ≤90, HR ≥120); a functional trigger is **CAT-1 = ≥3 units RBC in 1 h**.",
+      "**Low-titer group O whole blood (LTOWB) is balanced resuscitation in one bag.** Low-titer (≤256 anti-A/anti-B) group O delivers RBCs, plasma, and platelets together with fewer donor exposures and far faster turnaround (median ~15 min vs ~303 min to give one unit each of RBC/plasma/platelets); trauma data show equal-or-better outcomes. There is **no universal whole-blood donor** and shelf life is ~14 days. Peds: LTOWB up to **40 mL/kg**, pediatric MT = **>40 mL/kg components/24 h (or 20 mL/kg RBC over 4–6 h)**, and children mask shock — use a **shock-index-pediatric-adjusted (SIPA)**, not adult vitals.",
+      "**TXA early or not at all — it is most effective inside 3 hours.** **Trauma:** 1 g IV bolus + 1 g over 8 h, given within 3 h of injury (ideally <60 min); late TXA can harm. **PPH:** 1 g IV at diagnosis, repeat once if bleeding persists, within 3 h of onset. **Ortho/cardiac:** 10–15 mg/kg ± infusion. On viscoelastic testing, **LY30 / ML >3–5% signals hyperfibrinolysis** → give TXA.",
+      "**Know the component thresholds and the reversal agents cold.** **Platelets** >50 ×10⁹/L (>**100** for neuro/ocular, >**75** for major obstetric hemorrhage). **Fibrinogen** >150 mg/dL (>**200** in obstetrics) — replace with **2–4 g fibrinogen concentrate or 10 units cryoprecipitate to raise it ~100 mg/dL.** **Hgb** >7 (>8–9 with ischemic heart disease). **Warfarin:** stop 5 d; urgent reversal = **4-factor PCC + vitamin K.** **DOACs:** hold 2–3 d (longer if renal impairment); emergent reversal = **andexanet alfa (Xa inhibitors) / idarucizumab (dabigatran)**, or **4F-PCC 25–50 units/kg** if no specific agent. **Aspirin can usually continue; do NOT stop a P2Y12 inhibitor in the first 1–3 months after a coronary stent** (stent thrombosis)."
+    ],
+    technique: {
+      summary: "Reference card for perioperative coagulopathy and major hemorrhage — a dynamic process best managed by preventing the lethal triad, resuscitating early with balanced components, and steering with point-of-care/viscoelastic data rather than a fixed recipe. Distinct phenotypes (trauma, obstetric, liver disease, cardiac/CPB, chronic anticoagulation) need tailored strategies. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Pre-op: structured bleeding history; selective CBC/PT/aPTT/INR/fibrinogen + TEG in high-loss cases; optimize Hgb and iron; standardized antithrombotic-hold plan.",
+        "Set up for hemorrhage: two 16–14 g IVs or a high-flow central line, arterial line, point-of-care labs (gas/Hgb/lytes/iCa).",
+        "Hold the lethal-triad targets (≥36°C, pH >7.30, iCa >1.1, MAP >65); minimize crystalloid.",
+        "Empiric 1:1:1 early in uncontrolled bleeding → transition to lab/viscoelastic-guided component therapy + TXA."
+      ]
+    },
+    physiology: [
+      "The lethal triad is self-reinforcing: hypothermia slows enzymatic cascade reactions and impairs platelet function; acidosis impairs thrombin generation and weakens fibrin polymerization; the resulting coagulopathy worsens bleeding, hypoperfusion, and acidosis.",
+      "Stored blood is citrated → progressive ionized hypocalcemia (impairs coagulation and cardiac function); large crystalloid volumes cause dilutional coagulopathy.",
+      "Viscoelastic tracings localize the defect: prolonged R/CT = factor deficiency/heparin effect (→ plasma/PCC/protamine); low MCF with normal platelets = hypofibrinogenemia (→ fibrinogen/cryo); low MCF with low platelets = give platelets; elevated LY30/ML = hyperfibrinolysis (→ TXA).",
+      "Awake acute hemorrhage evolves through three acid-base phases: (1) compensatory **respiratory alkalosis** at ~15–30% (750–1500 mL) loss from baroreceptor-driven hyperventilation; (2) **respiratory alkalosis + lactic metabolic acidosis** — pH can look near-normal while both PaCO2 and HCO3⁻ are low; (3) **decompensated mixed acidosis** as respiratory muscles fatigue and renal perfusion falls, with pH ≤7.2 marking the pre-terminal, vasoconstricted, catecholamine-resistant state."
+    ],
+    comorbid: [
+      "Trauma: often arrives already coagulopathic — assume fibrinogen depletion, platelet dysfunction, and hyperfibrinolysis even with near-normal early labs; whole blood, TXA <60 min, permissive hypotension (MAP 50–60) in penetrating torso injury without TBI, damage-control anesthesia.",
+      "Liver disease: 'rebalanced' hemostasis — INR is NOT a reliable bleeding marker or transfusion trigger; cryoprecipitate preferred over FFP (volume/portal pressure); avoid prophylactic plasma. Obstetric: fibrinogen <200 mg/dL predicts severe PPH; keep platelets ≥75. Cardiac/CPB: routine TXA; post-protamine fibrinolysis and hypofibrinogenemia are common refractory-bleeding drivers."
+    ],
+    phases: {
+      pre: [
+        "Structured bleeding history (surgical/dental/menorrhagia/family); medication review (anticoagulants, antiplatelets, SSRIs/SNRIs, herbals, chemo); selective labs + TEG for high-loss cases; optimize Hgb >13 with IV iron if surgery <4 weeks out.",
+        "Standardized antithrombotic plan: warfarin stop 5 d; DOAC hold 2–3 d (longer in renal impairment); balance stent/thrombotic risk against bleeding for P2Y12."
+      ],
+      intra: [
+        "High-capacity access (2× 16–14 g or central), arterial line, point-of-care testing; hold the lethal-triad targets (≥36°C forced-air/fluid warmers, pH >7.30, iCa >1.1 q15–30 min, MAP >65); minimize crystalloid.",
+        "Empiric 1:1:1 early in uncontrolled hemorrhage → lab/viscoelastic-guided components; TXA per setting; permissive hypotension and damage-control anesthesia in unstable trauma.",
+        "Vasopressors are a temporizing bridge only (prolonged use → ischemia): **norepinephrine first-line** (epinephrine works but causes more arrhythmias). An MTP is a defined activation — **≥10 units RBC/whole blood in 24 h** (ultra-massive ≥**20 units in 24–48 h**); for refractory hemorrhagic-shock acidosis, bicarbonate is reserved for pH <7.1 and renal replacement considered at pH <7.15 without severe respiratory acidosis.",
+        "Calcium: 1 g calcium chloride after the first ~4 units (keep iCa²⁺ >1.1); **minimize crystalloid** — a crystalloid:RBC ratio >1.5:1 (or >1.5 L) independently worsens outcomes (multi-organ failure, ARDS); **permissive hypotension SBP 80–90 (no TBI)** until hemorrhage control; warm all products (≥36°C)."
+      ],
+      post: [
+        "Hemorrhage surveillance: hourly drains (re-explore for sustained >~3 mL/kg/h bright-red output), watch tachycardia/hypotension/rising O2 need before Hgb falls; POC Hgb within 1–2 h for high-risk; repeat coags/TEG q4–6 h after massive transfusion.",
+        "Resume pharmacologic VTE prophylaxis once hemostasis is secure (~12–24 h), full-dose anticoagulation 24–72 h by bleeding/thrombotic balance; avoid NSAIDs with residual coagulopathy; cautious neuraxial/deep blocks with fluctuating coagulation."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cName the lethal triad.\u201d** \u2192 hypothermia, acidosis, coagulopathy \u2014 targets: temp \u226536\u00b0C, pH >7.30, iCa >1.1 mmol/L, MAP >65.",
+        "**\u201cWhat's the initial MTP ratio and when do you activate?\u201d** \u2192 1:1:1 RBC:plasma:platelets; activate for >4 units RBC/h, crystalloid-refractory shock, or trauma criteria.",
+        "**\u201cTrauma TXA dose and timing?\u201d** \u2192 1 g IV bolus + 1 g over 8 h, within 3 h of injury (ideally <60 min)."
+      ],
+      pearls: [
+        "**Cirrhosis trap:** INR overstates bleeding risk (rebalanced hemostasis) \u2014 don't transfuse plasma off the INR alone; use viscoelastic data, prefer cryoprecipitate for fibrinogen.",
+        "**Fibrinogen math:** 2\u20134 g concentrate or 10 units cryo raises fibrinogen ~100 mg/dL; target >150 (>200 in OB/late cirrhosis).",
+        "**Calcium gets forgotten** \u2014 citrate-driven ionized hypocalcemia during massive transfusion impairs both coagulation and the heart; check q15\u201330 min, keep >1.1 mmol/L.",
+        "**ATLS hemorrhage classes:** I = <15% loss; II = 15–30% (tachypnea/tachycardia); III = 30–40% (mental-status change); IV = >40% (severe decompensation) — acid-base derangement can begin by ~15% loss.",
+        "**DCR / the ‘7 Ts’:** damage-control tenets — control hemorrhage, avoid hypotension, ensure oxygen delivery, limit crystalloid, warm products, and move quickly from ratio-based to goal-directed transfusion. **MT = 10 u/24 h; ultra-massive ≥20 u; CAT-1 = ≥3 u RBC in 1 h.**"
+      ]
+    },
+    source: "OpenAnesthesia: 'Management of Perioperative Coagulopathies' (Sammeta & Ayad, updated 2026-03-04), drawing on the 2017 ESA severe-bleeding guideline (Kozek-Langenecker), the 2022 CHEST perioperative antithrombotic guideline (Douketis), CRASH-2/WOMAN (TXA), and AABB platelet guidance. Awake-hemorrhage acid-base trajectory, ATLS classes, MTP/ultra-massive definitions, and norepinephrine-first vasopressor per OpenAnesthesia 'Awake Acute Blood Loss: Acid-Base Disorders' (Sinibaldi & Potestio, updated 2026-02-26). Whole-blood/LTOWB, MTP/MHP definitions, activation scores (shock index, ABC, CAT-1), DCR/7Ts, and pediatric MT thresholds per OpenAnesthesia 'Hemorrhagic Shock in Trauma' (Cheng & Perlman 2023-03-22), 'Massive Hemorrhage Protocol' (Sadacharam & Murto 2024-09-06), and 'Whole Blood Transfusions in Pediatric Anesthesia' (Craft, Khan & Gangadharan 2026-04-02). Cross-cutting reference (not a Jaffe procedure)."
+  },
+  {
+    id: "anesthesia-essentials-glp1-aspiration",
+    name: "GLP-1 Receptor Agonists & Aspiration Risk",
+    section: "Anesthesia Essentials",
+    page: "OA 2023",
+    tags: ["GLP-1 RA","Delayed gastric emptying","Aspiration","Full stomach","Gastric ultrasound","ASA 2023","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (any patient on a GLP-1 agonist)",
+      mortality: "—"
+    },
+    flags: [
+      "**GLP-1 receptor agonists delay gastric emptying — a patient can have a full stomach despite following fasting guidelines.** Semaglutide/tirzepatide/liraglutide/exenatide etc. (for T2DM and, since 2021, weight loss). Case reports describe **aspiration and solid food found on endoscopy after >18 h of fasting**; standard ASA fasting times do not reliably empty these stomachs.",
+      "**ASA June-2023 hold guidance, by half-life: hold a DAILY GLP-1 RA on the day of surgery; hold a WEEKLY GLP-1 RA for one week before surgery.** Weigh the aspiration benefit of holding against worsened glycemic control in diabetics on an individual basis.",
+      "**If it was NOT held, treat the patient as a full stomach — plan RSI with cricoid, and consider gastric ultrasound to assess residual contents.** A point-of-care gastric ultrasound showing solid/thick fluid content confirms the risk and supports full-stomach precautions or delay.",
+      "**Delay elective surgery if there are GI symptoms — nausea, vomiting, retching, bloating, or abdominal pain** — which suggest retained gastric contents regardless of the hold interval."
+    ],
+    technique: {
+      summary: "Reference card for the rapidly-growing population on GLP-1 receptor agonists — incretin mimetics whose delayed gastric emptying creates an aspiration hazard that ordinary fasting does not eliminate. The anesthetic decisions are whether the drug was appropriately held, whether to treat as a full stomach, and whether to use gastric ultrasound or delay. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Identify the agent and dosing frequency (daily vs weekly) and when the last dose was taken.",
+        "Apply the ASA hold: daily held the day of surgery, weekly held one week prior.",
+        "Screen for GI symptoms (nausea/vomiting/retching/bloating/abdominal pain) → delay elective surgery if present.",
+        "If not held or symptomatic: full-stomach precautions / RSI; gastric ultrasound to assess residual contents; balance against glycemic control."
+      ]
+    },
+    physiology: [
+      "GLP-1 is an incretin: it enhances glucose-dependent insulin secretion, suppresses glucagon, slows gastric emptying, and reduces appetite. Synthetic agonists resist DPP-4 degradation, extending the half-life and the gastric-emptying effect far beyond native GLP-1 (half-life 1–2 min).",
+      "Delayed gastric emptying is the anesthetic problem: residual gastric solids/fluid persist despite adequate NPO time, raising aspiration risk on induction."
+    ],
+    comorbid: [
+      "Type 2 diabetes and obesity (often with the comorbid cardiopulmonary disease of those populations); the diabetic patient also needs glycemic management when the drug is held.",
+      "Class cautions/contraindications: history of pancreatitis (contraindication); personal/family history of medullary thyroid carcinoma or MEN 2A/2B (avoid); also associated with cholelithiasis and AKI from GI losses."
+    ],
+    phases: {
+      pre: [
+        "Determine agent, frequency, and last dose; apply the ASA hold (daily = day of surgery, weekly = 1 week prior); screen for GI symptoms and delay elective surgery if present.",
+        "In diabetics, plan glycemic management for the hold period; weigh aspiration risk vs glucose control individually."
+      ],
+      intra: [
+        "If not held or symptomatic, treat as full stomach: RSI with cricoid, suction ready; gastric ultrasound can confirm residual contents and guide the airway plan.",
+        "Standard induction is reasonable only when appropriately held, asymptomatic, and otherwise low-risk."
+      ],
+      post: [
+        "Standard aspiration vigilance on emergence; resume the agent and diabetes regimen per the surgical/endocrine plan."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cHow long to hold a GLP-1 agonist before surgery?\u201d** \u2192 daily = day of surgery; weekly = one week before (ASA 2023, by half-life).",
+        "**\u201cPatient on weekly semaglutide didn't hold it \u2014 now what?\u201d** \u2192 full stomach: RSI, consider gastric ultrasound; delay if GI symptoms.",
+        "**\u201cWhy is a fasted GLP-1 patient still at risk?\u201d** \u2192 the drug delays gastric emptying \u2014 solids can remain despite >18 h NPO."
+      ],
+      pearls: [
+        "**Gastric ultrasound** is the bedside tiebreaker for uncertain residual volume in these patients.",
+        "**GI symptoms (N/V, retching, bloating, abdominal pain)** override the hold interval \u2014 delay elective surgery.",
+        "**Class flags:** pancreatitis history is a contraindication; avoid with medullary thyroid cancer / MEN 2A-2B history."
+      ]
+    },
+    source: "OpenAnesthesia: 'Glucagon-Like Peptide 1 Receptor Agonists and Aspiration Risk' (Nunez & Leavitt, updated 2023-08-23), based on the June-2023 ASA consensus-based guidance on preoperative management of patients on GLP-1 receptor agonists and the Henshaw et al. algorithm. Cross-cutting reference (not a Jaffe procedure)."
+  },
+  {
+    id: "anesthesia-essentials-abg-temperature",
+    name: "Arterial Blood Gas: Measurement, Temperature Correction & Alpha-stat vs pH-stat",
+    section: "Anesthesia Essentials",
+    page: "OA 2026",
+    tags: ["ABG","Measured vs calculated","Temperature correction","Alpha-stat","pH-stat","CPB/hypothermia","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (ABG interpretation, CPB, hypothermia)",
+      mortality: "—"
+    },
+    flags: [
+      "**Only pH, PaCO2, and PaO2 are measured — everything else on the printout is calculated.** Glass electrode (pH), Severinghaus electrode (PaCO2), Clark polarographic electrode (PaO2); **bicarbonate, base excess, and SaO2 are derived** (Henderson-Hasselbalch + a standard dissociation curve assuming normal Hb/temp/pH). Those calculated values become **unreliable in dyshemoglobinemias, hypothermia, severe acid-base derangement, fetal hemoglobin, and abnormal 2,3-DPG** — measure SaO2 by co-oximetry when it matters.",
+      "**The analyzer warms every sample to 37°C regardless of the patient's temperature — so a hypothermic patient's printout misreads the in-vivo picture.** Because gases are more soluble when cold, the patient's true (temperature-corrected) PaCO2 and PaO2 are **lower**, and true pH is **higher** (~**+0.015 pH units per 1°C of cooling**), than the uncorrected 37°C values suggest — i.e., the 37°C report overstates the cold patient's partial pressures and understates the in-vivo alkalosis. Decide deliberately whether to act on corrected or uncorrected values.",
+      "**Alpha-stat vs pH-stat is the CPB/deep-hypothermia management choice.** **Alpha-stat** uses **uncorrected 37°C values** (target pH 7.4 / PaCO2 40 at 37°C) — preserves cerebral autoregulation and enzyme (imidazole/histidine) function; favored in adults and deep hypothermic circulatory arrest. **pH-stat** uses **temperature-corrected values and ADDS CO2** to keep pH ~7.4 / PaCO2 ~40 at the patient's actual temperature — gives more uniform cerebral perfusion and cooling; favored in neonates/cyanotic infants and pediatric circulatory arrest.",
+      "**Send it fast and mind the syringe:** analyze within **15 minutes** (ongoing RBC metabolism shifts gas values; cooling slows glycolysis but lets gas diffuse through plastic), and a **glass syringe is more accurate than plastic for PO2** (similar for pH/PCO2)."
+    ],
+    technique: {
+      summary: "Reference card for what an arterial blood gas actually measures versus calculates, how temperature distorts the numbers, and the alpha-stat vs pH-stat strategies used during cardiopulmonary bypass and deep hypothermia. Relevant well beyond cardiac surgery — hypothermia, targeted temperature management, neonatal care, and prolonged low-flow states all hinge on the same physics. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Read the three measured values (pH, PaCO2, PaO2) first; treat HCO3/BE/SaO2 as calculated and suspect in dyshemoglobinemia/hypothermia/HbF.",
+        "In hypothermia, decide whether to interpret corrected or uncorrected values; remember pH shifts ~0.015/°C.",
+        "On CPB/DHCA, pick alpha-stat (uncorrected, adults) vs pH-stat (corrected + added CO2, neonates/cyanotic).",
+        "Analyze within 15 min; use a glass syringe when PO2 accuracy is critical."
+      ]
+    },
+    physiology: [
+      "Gas solubility rises as temperature falls (Henry's law), so cooling lowers the partial pressure of dissolved O2 and CO2; the analyzer's fixed 37°C measurement therefore diverges from the cold patient's true in-vivo values.",
+      "The neutral pH of water rises as temperature falls, so a cooling patient becomes intrinsically more alkalotic (~+0.015 pH units/°C) — the basis of the alpha-stat (imidazole buffering preserved across temperature) vs pH-stat debate."
+    ],
+    comorbid: [
+      "Highest-stakes settings for temperature correction: cardiopulmonary bypass and deep hypothermic circulatory arrest, therapeutic/targeted temperature management, neonatal and cyanotic-CHD care, and prolonged low-flow states.",
+      "Dyshemoglobinemias (carboxy-/methemoglobin), fetal hemoglobin, and abnormal 2,3-DPG make calculated SaO2 unreliable — co-oximetry is required."
+    ],
+    phases: {
+      pre: [
+        "Know your institution's temperature-correction practice and which CPB strategy (alpha-stat vs pH-stat) is in use for the case/population.",
+        "For accurate gases, draw cleanly, analyze within 15 min, and use a glass syringe when PO2 precision matters."
+      ],
+      intra: [
+        "On CPB/DHCA, manage to the chosen strategy: alpha-stat (uncorrected 37°C; adults/DHCA) or pH-stat (corrected + added CO2; neonates/cyanotic for uniform cooling/perfusion).",
+        "In any hypothermic patient, interpret PaCO2/PaO2/pH with the temperature offset in mind rather than reflexively normalizing the 37°C numbers."
+      ],
+      post: [
+        "During rewarming or targeted temperature management, re-interpret gases as temperature changes; verify SaO2 by co-oximetry if dyshemoglobinemia or HbF is in play."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cWhich ABG values are measured vs calculated?\u201d** \u2192 measured: pH, PaCO2, PaO2; calculated: HCO3, base excess, SaO2.",
+        "**\u201cAlpha-stat vs pH-stat \u2014 the one-liner?\u201d** \u2192 alpha-stat = uncorrected 37°C values (adults, DHCA, preserves autoregulation/enzymes); pH-stat = temperature-corrected + add CO2 (neonates/cyanotic, better cerebral perfusion).",
+        "**\u201cHow much does pH change with temperature?\u201d** \u2192 about +0.015 units per 1°C of cooling (the patient is more alkalotic than the 37°C printout shows)."
+      ],
+      pearls: [
+        "**Co-oximetry for true SaO2** \u2014 the calculated saturation is wrong in carboxy-/methemoglobinemia, HbF, and abnormal 2,3-DPG.",
+        "**15-minute rule + glass syringe** for accurate gases (especially PO2).",
+        "**Mnemonic:** pH-stat 'corrects' to the **P**atient's temperature and adds CO2; alpha-stat leaves it at 37°C."
+      ]
+    },
+    source: "OpenAnesthesia: 'Arterial Blood Gas Analysis' (Obrinsky & Zhang, updated 2026-03-05) and 'pH Stat vs Alpha Stat' (Goldstein & Richter, updated 2026-03-05). Cross-cutting reference (not a Jaffe procedure). NOTE: the ABG summary text states the hypothermia partial-pressure direction as 'reported lower than actual'; the framing here follows standard temperature-correction teaching (37°C measurement overstates the cold patient's partial pressures), which is consistent with the summary's own +0.015 pH/°C rule and the alpha-stat/pH-stat physiology."
+  },
+{
+    id: "anesthesia-essentials-glucose-insulin",
+    name: "Perioperative Glucose & Insulin Management (the discrete algorithm)",
+    section: "Anesthesia Essentials",
+    page: "OA 2023-2025",
+    tags: ["Diabetes","Insulin algorithm","IV insulin infusion","Hypoglycemia rescue","D50","Preop holds","Autonomic neuropathy","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (any diabetic / dysglycemic patient)",
+      mortality: "—"
+    },
+    flags: [
+      "**Target BG ~140–180 mg/dL (most surgical and critically-ill adults; 80–180 if very stable, 90–180 in children) — and do NOT chase tight control.** Perioperative hypoglycemia while fasting is the bigger danger, so **give a correction dose only when BG >250 mg/dL** (the SPA/peds rule that prevents fasting hypoglycemia); for adults intraop, start treating sustained BG >180. **Recheck q1–2 h on insulin, q30 min after any insulin/dextrose change, q15 min if hypoglycemic.**",
+      "**Choose the route by case length and stability, then run it identically every time.** **SQ** correction for short (<4 h), stable, minor cases. **IV infusion** for long cases, large fluid shifts, hemodynamic instability, or critical illness. **IV insulin algorithm:** start at the patient's basal rate (weight-based, units/kg/h) — if unknown, ~0.02–0.05 u/kg/h; **titrate by 0.01–0.03 u/kg/h, give NO boluses, and run dextrose through the SAME line.** Because IV regular insulin's half-life is ~5 min, **give the SQ basal/rapid dose ≥15 min BEFORE stopping the drip** so there is no uncovered gap.",
+      "**Hypoglycemia (BG <70 or symptomatic): give glucose first — don't just hold insulin (stopping basal risks ketosis).** Awake, tolerating PO: **15–20 g oral glucose** (tabs/gel/juice). IV access, NPO: **adult 25 g D50 IV (50 mL = 1 amp); child D10 5 mL/kg or D25 2–4 mL/kg** (avoid D50 in small children). **BG <60, obtunded, or no IV access: glucagon 1 mg IM (0.5 mg if <20–25 kg).** **Recheck q15 min until BG >80**, then run a maintenance dextrose infusion. (Rescue doses are standard practice; thresholds per the OA summaries.)",
+      "**Hold the right drugs — but NEVER stop basal insulin in type 1 diabetes (absolute deficiency → ketosis/DKA within hours).** Day of surgery: stop **oral agents (metformin, sulfonylureas) and non-insulin injectables (GLP-1 RAs)**; **SGLT-2 inhibitors stop 3–4 days before** (euglycemic DKA — see the SGLT-2 card). **Insulin:** long-acting basal ~**80% the morning of** (cut another 20–30% if hypo-prone); **NPH/premixed 50% the morning of**; hold short-acting while NPO. A T1DM patient on a pump must stay on basal or be converted to an IV infusion — never left with no insulin on board."
+    ],
+    technique: {
+      summary: "Reference card for the common pain point of perioperative glucose control — written as a discrete algorithm rather than vague guidance. It fixes the BG targets and the correction threshold, decides SQ vs IV insulin, gives an explicit IV-infusion and hypoglycemia-rescue recipe, and lists the preoperative drug holds. Reference content (not a Jaffe procedure); doses are a study aid, not an order.",
+      steps: [
+        "Set the target (~140–180 adult, 90–180 peds) and the correction threshold (treat BG >250 perioperatively, >180 adult intraop).",
+        "Choose SQ (short/stable/minor) vs IV infusion (long, fluid shifts, unstable, critically ill).",
+        "Run IV insulin: start at basal (units/kg/h; ~0.02–0.05 if unknown), titrate 0.01–0.03 u/kg/h, no boluses, dextrose same line, bridge with SQ ≥15 min before stopping.",
+        "Treat hypoglycemia with discrete glucose (PO 15–20 g / D50 25 g adult / D10 5 mL/kg peds / glucagon if no access) and recheck q15 min."
+      ]
+    },
+    physiology: [
+      "Surgical stress releases cortisol, glucagon, and catecholamines → insulin resistance, gluconeogenesis, and glycogenolysis → stress hyperglycemia even in non-diabetics; insulin secretion and glucose uptake are suppressed.",
+      "Type 1 diabetes is absolute insulin deficiency — basal insulin is required at all times (even fasting) or ketosis/DKA follows; type 2 is insulin resistance plus relative deficiency.",
+      "Hyperglycemia drives osmotic diuresis, electrolyte/fluid shifts, impaired wound healing, infection, and higher mortality; hypoglycemia risks rapid neuroglycopenic injury — the reason for a moderate (not tight) target."
+    ],
+    comorbid: [
+      "Diabetic autonomic neuropathy is the high-yield anesthetic comorbidity: **gastroparesis → full-stomach aspiration risk (consider RSI)**, plus orthostatic hypotension, resting tachycardia, a blunted heart-rate response, and silent myocardial ischemia → hemodynamic lability and cardiac risk. Distal symmetric polyneuropathy → document deficits before regional/positioning.",
+      "Diagnostic criteria (context for severity): FPG ≥126 mg/dL, 2-h OGTT ≥200, random ≥200 with symptoms, or HbA1c ≥6.5%. CKD, CAD/heart failure, and retinopathy track with longer/poorly-controlled disease; review HbA1c and recent control."
+    ],
+    phases: {
+      pre: [
+        "Schedule first/early to minimize fasting; verify last oral intake, home regimen, last basal/bolus, and current BG; apply the drug holds; involve endocrinology for complex disease, pumps, or NPH users.",
+        "Postpone elective surgery for very poor control if a delay would improve it; treat pre-existing hypo/hyperglycemia before induction; consider preop admission for IV dextrose/insulin in brittle or fasting-hypoglycemia patients."
+      ],
+      intra: [
+        "Run the chosen route (SQ short/stable; IV infusion long/unstable) with q1–2 h checks (q30 min after changes); co-administer dextrose with any IV insulin; treat BG >250 (or >180 adult intraop) and hypoglycemia per the discrete steps.",
+        "Anticipate autonomic-neuropathy hemodynamic lability and aspiration risk (gastroparesis); CGM/pump values must be confirmed by point-of-care BG before acting, and closed-loop pumps switched to manual or removed."
+      ],
+      post: [
+        "Resume oral intake and the home regimen as soon as tolerated; continue checks for 24–48 h (insulin needs shift with nausea, stress, pain, inactivity).",
+        "Admit for persistent hypo/hyperglycemia, ketosis, or inability to tolerate PO; for inpatients, basal + correctional insulin (add nutritional insulin once eating)."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cPerioperative BG target?\u201d** \u2192 ~140\u2013180 mg/dL (adult/critically ill), 90\u2013180 in children; correct only BG >250 while fasting to avoid hypoglycemia.",
+        "**\u201cWhen IV insulin vs SQ?\u201d** \u2192 IV infusion for long/unstable/critically-ill or big fluid shifts; SQ for short, stable, minor cases.",
+        "**\u201cAdult hypoglycemia, has an IV \u2014 what do you give?\u201d** \u2192 25 g D50 (one 50 mL amp); glucagon 1 mg IM if no IV access/obtunded; recheck q15 min."
+      ],
+      pearls: [
+        "**Never stop basal insulin in type 1 diabetes** \u2014 give glucose for hypoglycemia rather than withholding basal (ketosis risk).",
+        "**IV insulin half-life ~5 min** \u2014 overlap SQ dosing \u226515 min before stopping the drip; dextrose runs in the same line; titrate 0.01\u20130.03 u/kg/h, no boluses.",
+        "**Autonomic neuropathy = aspiration + hemodynamic lability** \u2014 gastroparesis (consider RSI), orthostatic hypotension, blunted HR response, silent ischemia."
+      ]
+    },
+    source: "OpenAnesthesia: 'Perioperative Management of Patients with Type 1 Diabetes Mellitus' (Duggar & Hoagland, updated 2023-08-15; ISPAD/SPA peds), 'Perioperative Management of Patients with Type 2 Diabetes Mellitus' (Mootz & Tombul, updated 2025-07-18), and 'Diabetes Mellitus: Classification, Pathophysiology, Complications, and Management' (Stanley & Mootz, updated 2025-10-20). Hypoglycemia rescue doses (D50 25 g / D10 / D25 / glucagon) per standard practice; targets, correction thresholds, IV titration, and drug-hold timing per the cited summaries. Cross-cutting reference (not a Jaffe procedure)."
+  },
+  {
+    id: "anesthesia-essentials-sglt2",
+    name: "SGLT-2 Inhibitors & Euglycemic DKA",
+    section: "Anesthesia Essentials",
+    page: "OA 2026",
+    tags: ["SGLT-2 inhibitor","-flozins","Euglycemic DKA","Hold 3-4 days","Anion-gap acidosis","Check ketones","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (any patient on a '-flozin')",
+      mortality: "eDKA, if unrecognized, → respiratory failure / coma / death"
+    },
+    flags: [
+      "**Hold SGLT-2 inhibitors ('-flozins') for at least 3 days before surgery — 4 days for ertugliflozin (FDA).** Canagliflozin, dapagliflozin, empagliflozin, ertugliflozin, bexagliflozin, and sotagliflozin are used for type 2 diabetes, CKD, and heart failure (both reduced and preserved EF). Continuing them through surgery is linked to worse outcomes and longer stays.",
+      "**The danger is euglycemic DKA — an anion-gap metabolic acidosis with a NORMAL or near-normal glucose, so a reassuring fingerstick will not catch it.** Surgical stress + fasting drive ketogenesis without hyperglycemia; infection, critical illness, and a prolonged postoperative fast raise the risk further. eDKA is easily treated but frequently missed — keep a high index of suspicion.",
+      "**If the drug was NOT held (or the case is prolonged/septic): screen with blood gases — any unexplained anion-gap metabolic acidosis should trigger a serum ketone measurement, and positive ketones at a normal glucose = eDKA.** Consider it intraoperatively during long cases in a patient who took an SGLT-2 inhibitor as an outpatient.",
+      "**Treat eDKA by correcting dehydration and giving insulin WITH glucose-containing fluids** (the patient is often not hyperglycemic, so dextrose is needed to run insulin and clear ketones), with serial ketones and blood gases. Heart-failure-only patients have a lower eDKA risk than diabetics but the hold recommendation does not differentiate by indication — hold them too."
+    ],
+    technique: {
+      summary: "Reference card for the increasingly common SGLT-2 inhibitor patient — the drug class now mentioned in the same breath as GLP-1 agonists, but with a different perioperative hazard: euglycemic DKA rather than aspiration. The anesthetic job is to hold the drug long enough, keep eDKA on the differential for any anion-gap acidosis, and treat it correctly. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Identify the '-flozin' and hold it ≥3 days preop (4 days for ertugliflozin), regardless of T2DM vs HF indication.",
+        "Keep eDKA on the differential — normal glucose does NOT exclude it.",
+        "If not held / prolonged / septic: blood-gas screening; anion-gap metabolic acidosis → check serum ketones.",
+        "Treat eDKA: rehydrate + insulin WITH glucose-containing fluids; serial ketones/gases until cleared."
+      ]
+    },
+    physiology: [
+      "SGLT-2 blockade in the proximal tubule causes glucosuria and natriuresis → insulin-independent glucose lowering (low intrinsic hypoglycemia risk) and preload/afterload reduction (the heart-failure and renal benefits).",
+      "The same metabolic shift, combined with the fasting/stress of surgery, promotes ketogenesis at normal or near-normal blood glucose — the substrate for euglycemic DKA."
+    ],
+    comorbid: [
+      "Type 2 diabetes, chronic kidney disease, and heart failure (HFrEF and HFpEF; sotagliflozin is HF-specific without a glycemic indication).",
+      "eDKA risk is amplified by infection, critical illness, and a prolonged postoperative fast — and is independent of how good the glucose looks."
+    ],
+    phases: {
+      pre: [
+        "Confirm the agent and hold it ≥3 days (4 for ertugliflozin); this applies to HF-only patients as well, since guidance does not differentiate by indication.",
+        "Plan interim glycemic management as needed; flag prolonged or septic cases as higher eDKA risk."
+      ],
+      intra: [
+        "If not appropriately held, screen with blood gases; treat any anion-gap metabolic acidosis as possible eDKA → measure ketones.",
+        "During long cases, consider eDKA in an SGLT-2 patient who develops metabolic acidosis even with unremarkable glucose."
+      ],
+      post: [
+        "If the drug was not held, monitor with regular blood-gas screening; an anion-gap metabolic acidosis prompts serum ketones and, if positive, eDKA treatment.",
+        "Treat eDKA with rehydration + insulin and glucose-containing fluids, serial ketones/gases; resume the SGLT-2 inhibitor only once eating and metabolically stable."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cHow long to hold an SGLT-2 inhibitor?\u201d** \u2192 \u22653 days (4 days for ertugliflozin) \u2014 to prevent euglycemic DKA.",
+        "**\u201cWhy is SGLT-2 DKA dangerous to miss?\u201d** \u2192 it's euglycemic \u2014 anion-gap acidosis with a normal glucose, so the fingerstick is falsely reassuring; check ketones.",
+        "**\u201cHow do you treat eDKA?\u201d** \u2192 fluids + insulin WITH glucose-containing fluids (not hyperglycemic), serial ketones/gases."
+      ],
+      pearls: [
+        "**Normal glucose does NOT rule out DKA** in an SGLT-2 patient \u2014 the defining trap of this class.",
+        "**Hold applies even for heart-failure-only use** (sotagliflozin, empagliflozin) \u2014 guidance isn't indication-specific.",
+        "**Pairs with the GLP-1 card:** both are held preoperatively, but GLP-1 \u2192 aspiration (delayed emptying), SGLT-2 \u2192 euglycemic DKA."
+      ]
+    },
+    source: "OpenAnesthesia: 'SGLT-2 Inhibitors' (Smoroda & Selzer, updated 2026-02-13), with FDA preoperative-hold guidance and Madhok & Vanneman (J Cardiothorac Vasc Anesth 2022). Cross-cutting reference (not a Jaffe procedure)."
+  },
+{
+    id: "anesthesia-essentials-rapid-infusion-cell-salvage",
+    name: "Rapid Infusion Devices & Cell Salvage",
+    section: "Anesthesia Essentials",
+    page: "OA 2026",
+    tags: ["Rapid infuser","Belmont","Vascular access","Warming","Cell salvage","Jehovah's Witness","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (massive transfusion / high-blood-loss cases)",
+      mortality: "Hemorrhage = >80% of intraoperative trauma deaths"
+    },
+    flags: [
+      "**Vascular access — not the pump — is the single biggest determinant of flow.** A **9-Fr introducer carries >7× the conductance of an 18-g IV**; a **7-Fr-or-larger catheter reaches ~1000 mL/min**, and severe hemorrhage often needs >300 (up to 500) mL/min. **IO is a temporizing bridge** (humeral/sternal > lower-limb), not equivalent to large-bore IV. **Connect the circuit DIRECTLY to the catheter hub** — extension tubing, stopcocks, connectors, and inline filters add resistance and crush both flow and warming.",
+      "**Rapid infusers (Belmont FMS, Level 1, ThermaCor) integrate high-flow pumping + active warming + air elimination (500–1200 mL/min); warming-only devices cannot do massive transfusion.** **Warming efficiency falls above ~500 mL/min** — at 500 mL/min the Belmont FMS held ≥37°C while the Level 1 dropped to ~32°C. Inline warmers (**Hotline** = countercurrent water bath; **3M Ranger** = dry-heat plate) maintain temperature at routine rates only. **Human factors — not device failure — cause most adverse events** (priming errors, alarm overrides, missed infiltration); **never override an air-in-line alarm.**",
+      "**Cell salvage = washed autologous RBCs (Hct ~50–80%), but it has NO platelets or clotting factors** — monitor and supplement coagulation during large-volume autotransfusion. Collected at **low suction (~150 mmHg)** with heparin/citrate anticoagulation, then centrifuged and washed. **Patient refusal is the only absolute contraindication;** it is safe during **cemented arthroplasty** and, with a **leukocyte-depletion filter**, in obstetrics (the LDF removes fetal squamous cells / mitigates the theoretical AFE risk). **Jehovah's Witnesses** may accept it only as a **continuous, closed-circuit** connection — consent specifically.",
+      "**Rapid/massive transfusion drives ionized hypocalcemia and hyperkalemia — give calcium and monitor.** Stored-product citrate (plus citrate/heparin spillover from salvage) chelates calcium: **1 g calcium chloride after the first ~4 units**, keep **iCa²⁺ >1.1 mmol/L**, and watch K⁺. **Children <20 kg are at risk of over-transfusion, volume overload, and thermal instability** — use warmed syringe pumps for small volumes, start a RID low (50–100 mL/min) with continuous visual monitoring, and bolus 10–20 mL/kg with reassessment between boluses."
+    ],
+    technique: {
+      summary: "Reference card for the hardware of hemorrhage resuscitation — rapid infusion devices, fluid warmers, and cell salvage. The clinical performance of any infuser is governed by vascular access and circuit resistance far more than by the pump, and the commonest failures are human, not mechanical. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Secure large-bore, low-resistance access first (7-Fr+ for ~1000 mL/min; IO only as a bridge); connect the circuit directly to the hub.",
+        "Use a true RID (Belmont/Level 1) for massive transfusion — warming-only devices can't keep up; expect warming to fade above ~500 mL/min.",
+        "Run cell salvage for predictably high-loss cases (low suction, anticoagulate, wash); remember it lacks platelets/factors.",
+        "Give calcium (1 g CaCl per ~4 units), monitor iCa/K, and scale flow/volume down for small children."
+      ]
+    },
+    physiology: [
+      "Cold, large-volume transfusion drives the lethal triad — warming products to body temperature is independently protective; warming capacity is the limiting factor at the highest flows.",
+      "Cell-salvaged blood is high-quality (no storage lesion, no immunologic/infectious donor risk) but plasma-depleted — washing removes platelets and coagulation factors, so it must be paired with hemostatic monitoring in large volumes."
+    ],
+    comorbid: [
+      "Obstetric hemorrhage mirrors trauma in urgency — RIDs are standard, and cell salvage with a leukocyte-depletion filter is safe (no confirmed AFE with modern equipment). Orthopedic cementing cases can use cell salvage safely (washing/filtration mitigate BCIS risk).",
+      "Jehovah's Witnesses: cell salvage acceptance is individual and usually contingent on a continuous closed circuit. Pediatric and small patients: high over-transfusion/volume-overload risk — favor warmed syringe pumps and low-flow initiation."
+    ],
+    phases: {
+      pre: [
+        "Plan access and devices for anticipated loss: large-bore/introducer, the RID, and cell salvage set up before incision in high-loss cases; obtain Jehovah's-Witness consent specifics.",
+        "Prime and purge the circuit fully; verify air-detection/occlusion/temperature alarms are active."
+      ],
+      intra: [
+        "Connect directly to the hub; minimize tubing/stopcocks; reassess circuit integrity when changing products. Inspect high-pressure access sites frequently for infiltration.",
+        "Warm all products; monitor iCa²⁺ and K⁺ and give calcium; for cell salvage, watch coagulation (no platelets/factors) and reinfusion hypotension."
+      ],
+      post: [
+        "Discard blood-primed circuits per manufacturer limits; continue calcium/electrolyte and hemostatic monitoring after large-volume salvage or rapid transfusion.",
+        "Document volumes given (allogeneic vs salvaged) for blood-management tracking."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cWhat limits rapid-transfusion flow most?\u201d** \u2192 vascular access caliber \u2014 a 9-Fr introducer >7\u00d7 an 18-g IV; 7-Fr+ \u2248 1000 mL/min; the pump can't overcome a small/long line.",
+        "**\u201cWhat does cell salvage NOT give back?\u201d** \u2192 platelets and clotting factors (washed out) \u2014 supplement in large-volume autotransfusion.",
+        "**\u201cCell salvage in a Jehovah's Witness?\u201d** \u2192 often acceptable only as a continuous closed circuit \u2014 ask and consent specifically."
+      ],
+      pearls: [
+        "**Warming fades >500 mL/min** \u2014 Belmont FMS held \u226537°C at 500; Level 1 fell to ~32°C.",
+        "**Human factors cause most infuser adverse events** \u2014 priming errors, alarm overrides, missed infiltration; never silence an air-in-line alarm.",
+        "**Calcium after ~4 units** (1 g CaCl), keep iCa >1.1; small children (<20 kg) \u2192 syringe pumps + low-flow start to avoid over-transfusion."
+      ]
+    },
+    source: "OpenAnesthesia: 'Rapid Infusion Devices and Cell Salvage in Trauma Resuscitation' (Gallagher & Nathwani, updated 2026-03-23), with AAST/ACS damage-control resuscitation guidance and cell-salvage review (Carroll & Young, BJA Educ 2021). Cross-cutting reference (not a Jaffe procedure). Complements the coagulopathy/massive-transfusion card."
+  },
+  {
+    id: "anesthesia-essentials-blood-management",
+    name: "Patient Blood Management & Transfusion Thresholds",
+    section: "Anesthesia Essentials",
+    page: "OA 2025",
+    tags: ["PBM","Anemia optimization","Restrictive transfusion","Hb 7/8","ANH","Cell salvage","TRALI/TACO","Cross-cutting","Reference"],
+    snapshot: {
+      position: "—",
+      time: "—",
+      ebl: "—",
+      painScore: "—",
+      anesthesia: "Reference (elective + major blood-loss surgery)",
+      mortality: "—"
+    },
+    flags: [
+      "**Patient blood management rests on three pillars: (1) detect and treat anemia before surgery, (2) minimize blood loss and coagulopathy, (3) maximize the patient's tolerance to anemia.** The preoperative window is the highest-yield: **screen for anemia 2–4 weeks before major surgery,** correct iron deficiency (oral or IV iron; ESAs in high-risk), and replace B12/folate — preoperative anemia independently raises transfusion need and worsens outcomes.",
+      "**Transfuse to a restrictive threshold, not a number that feels comfortable.** **Hb <7 g/dL** for stable patients; **<8 g/dL** for major surgery, acute coronary syndrome, ischemic heart disease, and trauma; postoperative target **Hb 7–8 / Hct 24–27%** unless symptomatic. Hemostatic triggers: **INR >1.5, platelets <50 ×10⁹/L, fibrinogen <1.5–2.0 g/L** (guided by labs + viscoelastic testing).",
+      "**Intraoperative blood conservation is part of the anesthetic plan, not an afterthought:** cell salvage, **acute normovolemic hemodilution** (withdraw blood after induction → replace with crystalloid/colloid → reinfuse the autologous whole blood), **retrograde autologous priming** (on CPB), antifibrinolytics (TXA), normothermia, meticulous hemostasis, and permissive hypotension when appropriate.",
+      "**Know the transfusion reactions — especially the two big killers, TACO and TRALI.** **TACO** = transfusion-associated circulatory overload (hydrostatic/volume — hypertension, dyspnea; treat with diuresis/slower rates); **TRALI** = immune acute lung injury within 6 h (non-cardiogenic edema, normal filling pressures; supportive). Others: acute/delayed hemolytic, febrile non-hemolytic, allergic/anaphylactic, septic (bacterial contamination). Special populations: **SCD** (hydrate, oxygenate, transfuse to lower HbS), **hemophilia** (factor VIII for A / factor IX for B + antifibrinolytic), **liver disease** (FFP/vitamin K/platelets, VET-guided)."
+    ],
+    technique: {
+      summary: "Reference card for patient blood management — the patient-centered framework that treats the patient's own blood as an organ to preserve, rather than a deficit to top up. It spans preoperative anemia optimization, intraoperative conservation, restrictive transfusion thresholds, and recognition of transfusion reactions. Reference content (not a Jaffe procedure).",
+      steps: [
+        "Pre-op: screen/treat anemia 2–4 wk out (iron, ESA, B12/folate); risk-stratify; plan conservation; consent (including religious/cultural).",
+        "Intra-op: minimize loss (cell salvage, ANH, retrograde autologous priming, TXA, normothermia, hemostasis, permissive hypotension).",
+        "Transfuse to restrictive thresholds (Hb <7, <8 for cardiac/ACS/trauma) with lab/VET triggers (INR >1.5, plt <50, fibrinogen <1.5–2.0).",
+        "Recognize/treat reactions (TACO vs TRALI, hemolytic, febrile, allergic, septic); tailor to special populations."
+      ]
+    },
+    physiology: [
+      "Blood is treated as an organ system; preserving the patient's own blood improves oxygen delivery and outcomes while avoiding the immunologic, infectious, and overload risks of allogeneic transfusion.",
+      "Acute normovolemic hemodilution lowers hematocrit/viscosity so a given volume of surgical blood loss sheds fewer red cells, and the withdrawn autologous whole blood (with platelets and factors) is reinfused after the major loss."
+    ],
+    comorbid: [
+      "High-transfusion-risk surgery where PBM pays off: cardiac/vascular, cystectomy/nephrectomy/prostatectomy, spinal fusion/femur fracture, major hepatopancreatic and tumor resections, hysterectomy/myomectomy.",
+      "Anemia, iron deficiency, CKD, and chronic disease amplify transfusion risk; sickle cell, hemophilia, and liver disease need hematology-guided, population-specific plans."
+    ],
+    phases: {
+      pre: [
+        "Screen all major surgical candidates for anemia 2–4 weeks out; correct iron deficiency (oral/IV iron, ESA in high-risk), replace B12/folate; stop herbals that increase bleeding; reconcile antiplatelet/anticoagulant therapy.",
+        "Risk-stratify with bleeding tools and procedure-specific calculators; type & screen (crossmatch if high risk); hematology input for SCD/hemophilia/thrombocytopenia/liver disease; consent with religious/cultural considerations."
+      ],
+      intra: [
+        "Deploy conservation: cell salvage, ANH, retrograde autologous priming, antifibrinolytics, normothermia, meticulous hemostasis, permissive hypotension; tolerate anemia with physiologic monitoring (e.g., NIRS) + VET-guided hemostasis.",
+        "Transfuse to restrictive thresholds; in major hemorrhage run the MHP (see the coagulopathy/massive-transfusion card) then transition to goal-directed therapy."
+      ],
+      post: [
+        "Restrictive thresholds (Hb 7–8 / Hct 24–27% unless symptomatic); continue iron/folate/B12 ± ESA; limit iatrogenic phlebotomy (small tubes, fewer draws); early nutrition and mobilization.",
+        "Monitor drains/perfusion for bleeding and return to OR promptly if hemostasis is needed; watch for delayed transfusion reactions."
+      ]
+    },
+    recall: {
+      pimps: [
+        "**\u201cThe three pillars of PBM?\u201d** \u2192 treat anemia, minimize blood loss/coagulopathy, maximize tolerance to anemia.",
+        "**\u201cRestrictive transfusion thresholds?\u201d** \u2192 Hb <7 stable; <8 for cardiac/ACS/ischemic-heart-disease/trauma; postop 7\u20138 / Hct 24\u201327%.",
+        "**\u201cTACO vs TRALI?\u201d** \u2192 TACO = volume overload (hydrostatic, hypertensive \u2192 diurese); TRALI = immune lung injury within 6 h (normal filling pressures \u2192 supportive)."
+      ],
+      pearls: [
+        "**Treat anemia 2\u20134 weeks pre-op** \u2014 the single highest-yield PBM intervention; IV iron when surgery is imminent (<4 wk).",
+        "**ANH** = withdraw whole blood after induction, replace with crystalloid/colloid, reinfuse after the major loss (gives back platelets + factors).",
+        "**Lab/VET triggers:** INR >1.5, platelets <50 \u00d710\u2079/L, fibrinogen <1.5\u20132.0 g/L."
+      ]
+    },
+    source: "OpenAnesthesia: 'Perioperative Patient Blood Management' (Turnipseed & Martini, updated 2025-10-07), with the 2022 global PBM definition (Shander) and WHO 2021 PBM policy brief. Cross-cutting reference (not a Jaffe procedure). Acute-hemorrhage management is in the coagulopathy/massive-transfusion card; device detail in the rapid-infusion/cell-salvage card."
   }
 ];
 
@@ -8747,6 +9559,58 @@ renderNav();
 const hash = (location.hash || "").replace('#','');
 if(hash && PROCEDURES.find(p => p.id === hash)){ selectProcedure(hash); }
 else { renderWelcome(); }
+</script>
+<!-- Service-worker registration + "new version" banner.
+     No-ops on file:// (double-click) and where SW is unsupported, so local use is unaffected. -->
+<script>
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  var host = location.hostname;
+  if (location.protocol !== 'https:' && host !== 'localhost' && host !== '127.0.0.1') return;
+
+  function showUpdateBanner(onUpdate) {
+    if (document.getElementById('apr-update-banner')) return;
+    var bar = document.createElement('div');
+    bar.id = 'apr-update-banner';
+    bar.setAttribute('role', 'status');
+    bar.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:99999;'
+      + 'background:#1f5f5b;color:#fffefb;font:500 14px/1.3 system-ui,-apple-system,sans-serif;'
+      + 'padding:10px 14px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.25);'
+      + 'display:flex;gap:12px;align-items:center;max-width:92vw;';
+    var msg = document.createElement('span'); msg.textContent = 'New version available';
+    var btn = document.createElement('button'); btn.textContent = 'Refresh';
+    btn.style.cssText = 'background:#fffefb;color:#1f5f5b;border:0;border-radius:7px;'
+      + 'font:600 14px system-ui,sans-serif;padding:6px 12px;cursor:pointer;';
+    btn.onclick = onUpdate;
+    var x = document.createElement('button'); x.textContent = '\u00d7'; x.setAttribute('aria-label','Dismiss');
+    x.style.cssText = 'background:transparent;color:#fffefb;border:0;font:600 18px system-ui,sans-serif;cursor:pointer;line-height:1;';
+    x.onclick = function () { bar.remove(); };
+    bar.appendChild(msg); bar.appendChild(btn); bar.appendChild(x);
+    document.body.appendChild(bar);
+  }
+
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').then(function (reg) {
+      if (reg.waiting && navigator.serviceWorker.controller) {
+        showUpdateBanner(function () { reg.waiting.postMessage({ type: 'APR_SKIP_WAITING' }); });
+      }
+      reg.addEventListener('updatefound', function () {
+        var nw = reg.installing; if (!nw) return;
+        nw.addEventListener('statechange', function () {
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+            showUpdateBanner(function () { nw.postMessage({ type: 'APR_SKIP_WAITING' }); });
+          }
+        });
+      });
+      reg.update().catch(function () {});
+    }).catch(function () { /* first load offline — fine, app still runs */ });
+
+    var reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (reloaded) return; reloaded = true; window.location.reload();
+    });
+  });
+})();
 </script>
 </body>
 </html>
