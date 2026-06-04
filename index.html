@@ -2185,7 +2185,9 @@ const PROCEDURES = [
       ],
       intra: [
         "DLT/BB with bronchoscopic confirmation; OLV with FiO2/HPV management; fluid restriction with colloid replacement.",
-        "Volatile ≤0.5–0.7 MAC with neuraxial; nerve-stimulator monitoring (Eaton-Lambert); continuous oximetry through OLV."
+        "Volatile ≤0.5–0.7 MAC with neuraxial; nerve-stimulator monitoring (Eaton-Lambert); continuous oximetry through OLV.",
+        "Lung-isolation device & sizing: left-sided DLT is default (35–37 Fr female, 39–41 Fr male; depth ~29 cm at the teeth if height ≥170 cm; endobronchial cuff ≤3 mL, tip 5–10 mm below carina, confirm the RUL by FOB). Right-sided DLT for left pneumonectomy/sleeve or left-mainstem distortion (e.g., descending thoracic aneurysm). A bronchial blocker (Arndt/Cohen/Fuji/EZ; needs a ≥7.5–8.0 mm ETT, cuff 4–8 mL) suits a difficult airway, an in-situ ETT/tracheostomy, or planned postop ventilation. (2023 OA.)",
+        "OLV-hypoxemia ladder (SpO2 <85–90% or PaO2 <60 on FiO2 1.0; HPV is biphasic, peaking ~20–30 min): raise FiO2, FOB to reconfirm isolation, recruit + apply ~5 cmH2O PEEP to the dependent lung (lung-protective TV 4–6 mL/kg, permissive hypercapnia), CPAP or apneic O2 (~3 L) to the nondependent lung, and resume two-lung ventilation if needed. Volatiles (dose-dependent), nitrates, CCBs, and inhaled NO blunt HPV; propofol does not. Right-sided surgery, higher FEV1, and BMI >30 predict desaturation. (2023/2026 OA.)"
       ],
       post: [
         "Extubate in OR when warm/awake; head-up transfer; multimodal analgesia via the regional catheter.",
@@ -2198,7 +2200,13 @@ const PROCEDURES = [
       "**Most common thyroid cancer is papillary** ('Papillary = Popular,' ~80%) — recognized by **psammoma bodies** on histology (a classic surgeon's-eye pathology zinger)."
     ]
   },
-    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 281–292 (lobectomy/pneumonectomy; wedge resection; shared OLV considerations)."
+    caseFlow: [
+      "**Isolation up, lateral, OLV started — settle the dependent lung:** reconfirm DLT/BB position by FOB after turning lateral (it migrates), then ride out the **OLV-hypoxemia window** as HPV builds (peaks ~20–30 min) — FiO2 up, recruit + dependent-lung PEEP, CPAP to the up lung if needed.",
+      "**Hilar dissection is the crux:** the surgeon works around the pulmonary artery/veins and bronchus — **sudden PA hemorrhage** is the dreaded event; for pneumonectomy the stapled stump and the abrupt loss of a vascular bed (RV strain) are the beats. Calling for blood, packing, or a vascular clamp is the tell the case has turned.",
+      "**Re-expansion and runway:** specimen out → recruit the dependent lung and resume two-lung ventilation (watch the bronchial-stump/staple line for air leak); fluid-restricted throughout to spare the remaining lung. **Aim to extubate awake in the OR**, head-up.",
+      "**Past the resection = watch the back half:** post-pneumonectomy especially — pulmonary edema (do not overhydrate), new atrial fibrillation, herniation/RV failure, and bleeding; epidural/paravertebral analgesia is what keeps them breathing.",
+    ],
+    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 281–292 (lobectomy/pneumonectomy; wedge resection; shared OLV considerations). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018). Lung-isolation device sizing/selection per OpenAnesthesia 'Double-Lumen Endotracheal Tubes' and 'Bronchial Blockers for One-Lung Ventilation' (Campos, 2023); OLV-hypoxemia management per 'Hypoxia During One-Lung Ventilation' (Campos, 2023); PEEP / lung-protective ventilation per 'Optimizing PEEP' (2026)."
   },
   {
     id: "chest-wall-pectus",
@@ -2250,7 +2258,12 @@ const PROCEDURES = [
         "Watch for pneumothorax, bar displacement, bleeding, and flail-segment ventilation needs."
       ]
     },
-    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 293–298 (chest-wall resection; pectus excavatum/carinatum repair)."
+    caseFlow: [
+      "**Pectus (Nuss) — the bar pass is the dangerous beat:** a substernal tunnel is dissected and the bar flipped behind the sternum — **cardiac/great-vessel injury and arrhythmia** can happen right here; watch the trace and pressure closely as the bar passes and turns.",
+      "**Chest-wall resection — the blood-loss beat:** wide resections bleed (up to ~2000 mL) and may need OLV for exposure; large prosthetic reconstructions can leave a **paradoxical/flail segment** → plan postop ventilation.",
+      "**Runway:** bar seated / closure → intensely painful (epidural/multimodal is make-or-break); watch for pneumothorax, bar displacement, and the flail segment on emergence.",
+    ],
+    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 293–298 (chest-wall resection; pectus excavatum/carinatum repair). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "pleural-surgery",
@@ -2355,7 +2368,12 @@ const PROCEDURES = [
         "Watch for anastomotic disruption (emergency), RLN injury/airway obstruction; reintubation may be difficult."
       ]
     },
-    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 304–308; also covered in Otolaryngology-Head and Neck Surgery §3.0, p. 200 (tracheal/cricotracheal resection) — same shared-airway considerations, kept as this single merged entry."
+    caseFlow: [
+      "**Induction on a critical airway — keep them breathing:** for a tight/proximal lesion, no sedation; inhalational or awake-FOI induction **maintaining spontaneous ventilation** until the airway is controlled — losing it here is the catastrophe.",
+      "**Open trachea / cross-field ventilation:** once the trachea is opened the surgeon passes a sterile ETT into the distal stump (or HFJV) — the **tube handoff across the field** is the choreographed crux; FiO2 1.0, apneic-oxygenation backup, talk continuously.",
+      "**Anastomosis and the neck-flexed wake-up:** the suture line is completed with the neck flexed; **extubate early** to protect it (guardian chin-to-chest suture) — a reintubation here threatens the anastomosis. Runway = awake, breathing, head-flexed, ICU.",
+    ],
+    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 304–308; also covered in Otolaryngology-Head and Neck Surgery §3.0, p. 200 (tracheal/cricotracheal resection) — same shared-airway considerations, kept as this single merged entry. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "mediastinal-mass",
@@ -2414,7 +2432,12 @@ const PROCEDURES = [
       "**Horner's syndrome** (cervical sympathetic injury) — 'MAP': **Miosis, Anhidrosis (ipsilateral face), Ptosis**."
     ]
   },
-    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 308–319 (excision of mediastinal tumor; mediastinoscopy)."
+    caseFlow: [
+      "**Induction is the whole danger — can the patient lie flat?** an anterior mass can collapse the airway or great vessels on induction/paralysis. Keep **spontaneous ventilation**, induce in a position they tolerate (often semi-sitting), and have the rescue position (lateral/prone) and rigid bronch ready before you start.",
+      "**The compression crux:** if airway or cardiovascular collapse occurs, **reposition (lateral/prone) immediately** — that, not drugs, is the rescue; femoral-vessel/CPB standby for the highest-risk masses. Mediastinoscopy adds innominate-artery compression — a right-radial line/oximeter reads it.",
+      "**Runway:** the risk does not end at the skin — **post-extubation airway collapse** from residual mass effect/edema is real; extubate awake with the rescue position available, watch in a monitored bed.",
+    ],
+    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 308–319 (excision of mediastinal tumor; mediastinoscopy). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "bronchoscopy",
@@ -2523,7 +2546,12 @@ const PROCEDURES = [
       "**The classic thoracic-surgeon joke — 'the four birds of the chest':** the **azygos** vein, the **hemiazygos** vein, the **'esopha-goose'** (esophagus), the **thoracic duck** (thoracic duct), and the **'vagoose'** (vagus nerve). The thoracic duct is the real one to remember — injury → **chylothorax**."
     ]
   },
-    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 326–329."
+    caseFlow: [
+      "**OLV and full collapse — the camera needs it:** confirm isolation and complete operative-lung collapse (the surgeon cannot work without it); ride the OLV-hypoxemia window as for any thoracoscopy.",
+      "**The convert-to-open trigger:** **sudden major vascular bleeding** is the event that turns a VATS into an emergent thoracotomy — large-bore access and blood ready, low threshold to open. CO2 insufflation can drop venous return as a second stressor.",
+      "**Runway:** ports closed = on the back half; lower pain than open but paravertebral/regional still earns its keep — extubate awake, watch for air leak and bleeding.",
+    ],
+    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 326–329. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "thymectomy",
@@ -2575,7 +2603,12 @@ const PROCEDURES = [
         "Monitor for respiratory failure and crisis; resume MG meds."
       ]
     },
-    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 329–333."
+    caseFlow: [
+      "**Relaxant-free (or minimal) induction:** myasthenics are **exquisitely sensitive to nondepolarizers** — favor a sevoflurane/remifentanil technique to intubate without (or with tiny, twitch-guided) relaxant; aspiration precautions if bulbar weakness.",
+      "**The gland comes out — the mass is the wildcard:** a large thymoma carries **anterior-mediastinal-mass physiology** (compression on induction/supine); otherwise it is a sternotomy or VATS dissection of the thymus.",
+      "**Runway = the airway you give back:** the crux is **postoperative respiratory/bulbar weakness** — judge extubation against disease severity/duration, anticholinesterase dosing, and twitches; plan for possible reintubation and watch for cholinergic vs myasthenic crisis.",
+    ],
+    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 329–333. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "bullae-lvrs",
@@ -2628,7 +2661,12 @@ const PROCEDURES = [
         "Watch for prolonged air leak/bronchopleural fistula and respiratory failure."
       ]
     },
-    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 333–339 (excision of blebs/bullae; lung-volume reduction surgery)."
+    caseFlow: [
+      "**Gentle from induction — the bulla is a bomb:** **avoid N2O** and keep airway pressures low; positive pressure can expand or rupture a bulla → **tension pneumothorax**. Allow a long expiratory time for air-trapping (auto-PEEP) and be ready to disconnect the circuit to let the chest empty.",
+      "**Resection/staple beat:** giant-bulla excision or LVRS staples out the worst lung — **buttressed staple lines** and the persistent air leak/bronchopleural fistula are the dominant morbidity; a sudden desat/hypotension on PPV is a tension pneumo until proven otherwise.",
+      "**Runway:** marginal reserve = postop respiratory failure is the real story — epidural/multimodal to keep them breathing, plan a slow wean, expect a prolonged air leak.",
+    ],
+    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 333–339 (excision of blebs/bullae; lung-volume reduction surgery). Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
   {
     id: "bronchopulmonary-lavage",
@@ -2680,7 +2718,12 @@ const PROCEDURES = [
         "Watch for aspiration of lavage fluid and hypoxemia."
       ]
     },
-    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 340–343."
+    caseFlow: [
+      "**Seal first — a perfect DLT is non-negotiable:** the case depends on isolating one lung while the other is flooded; confirm the seal by FOB before a drop of saline goes in (spillage drowns the ventilated lung).",
+      "**Fill–drain cycles on one-lung oxygenation:** the patient oxygenates on one lung while the other takes 500–1000 mL aliquots — **hypoxemia during the fills** is expected; chest percussion/physiotherapy aids clearance and you balance fluid in-vs-out carefully.",
+      "**Runway:** effluent clearing → drain, re-expand, and treat one lung at a time (often staged); watch for residual fluid, hypoxemia, and fluid shifts on emergence.",
+    ],
+    source: "Jaffe 5e (2014), Thoracic Surgery §5.0, p. 340–343. Operative-sequence / case-flow per Jaffe technique + Surgical Recall 8e (Blackbourne 2018)."
   },
 {
     id: "airway-endoscopy",
@@ -5309,7 +5352,8 @@ const PROCEDURES = [
         "Crash RSI with in-line stabilization; balanced massive transfusion; TXA; aggressive warming.",
         "For the hypotensive patient: etomidate 0.1–0.2 mg/kg or ketamine 0.25–1 mg/kg; sux 1–1.5 mg/kg (avoid >48 h after burn/SCI — hyperkalemia) or roc 1–1.2 mg/kg; avoid neuraxial in hypovolemia and avoid N2O (bowel/air). (2023 OA update.)",
         "Decompress tamponade; DLT/BB for thoracotomy; damage-control (abbreviated) surgery if unstable.",
-        "Permissive (hypotensive) resuscitation: target SBP ~80–90 mmHg until major bleeding is controlled — EXCEPT in TBI, where hypotension worsens outcome (keep normotensive). REBOA can temporize exsanguinating sub-diaphragmatic hemorrhage as a bridge to control. (2023 OA.)"
+        "Permissive (hypotensive) resuscitation: target SBP ~80–90 mmHg until major bleeding is controlled — EXCEPT in TBI, where hypotension worsens outcome (keep normotensive). REBOA can temporize exsanguinating sub-diaphragmatic hemorrhage as a bridge to control. (2023 OA.)",
+        "Chest-trauma specifics: a tracheobronchial injury (usually within 2 cm of the carina) needs lung isolation with the cuff placed DISTAL to the tear; suspect a tension pneumothorax if hypotension/bradycardia follow intubation/PPV (decompress immediately); a hemothorax draining >1500 mL at once or >200 mL/h for 4 h is a surgical indication. (2023 OA.)"
       ],
       post: [
         "ICU; continued resuscitation/rewarming/coagulation correction; planned re-exploration.",
@@ -5324,7 +5368,7 @@ const PROCEDURES = [
       "**Basilar skull fracture signs: 'raccoon eyes'** (periorbital bruising) and **Battle's sign** (mastoid bruising) — a relative contraindication to nasal tubes/NG (cribriform-plate risk)."
     ]
   },
-    source: "Jaffe 5e (2014), General Surgery §7.14 Trauma, p. 730–751 (tube thoracostomy; ED thoracotomy; neck-trauma exploration; chest trauma — tamponade/great-vessel/tracheobronchial; abdominal trauma — damage control/hepatic-splenic/vascular). Chest-trauma airway/OLV overlaps Thoracic and Cardiovascular sections. Enriched with dated OpenAnesthesia updates: TXA dosing/window (Tranexamic Acid in Trauma, 2026; Trauma-Induced Coagulopathy, 2023), FAST/E-FAST/TEE (Ultrasound in Trauma, 2026), shock induction agents (Anesthesia for Abdominal Trauma, 2023). Permissive-hypotension target (SBP 80–90; normotensive in TBI) and REBOA per OpenAnesthesia (Trauma-Induced Coagulopathy 2023; Anesthesia for Abdominal Trauma 2023)."
+    source: "Jaffe 5e (2014), General Surgery §7.14 Trauma, p. 730–751 (tube thoracostomy; ED thoracotomy; neck-trauma exploration; chest trauma — tamponade/great-vessel/tracheobronchial; abdominal trauma — damage control/hepatic-splenic/vascular). Chest-trauma airway/OLV overlaps Thoracic and Cardiovascular sections. Enriched with dated OpenAnesthesia updates: TXA dosing/window (Tranexamic Acid in Trauma, 2026; Trauma-Induced Coagulopathy, 2023), FAST/E-FAST/TEE (Ultrasound in Trauma, 2026), shock induction agents (Anesthesia for Abdominal Trauma, 2023). Permissive-hypotension target (SBP 80–90; normotensive in TBI) and REBOA per OpenAnesthesia (Trauma-Induced Coagulopathy 2023; Anesthesia for Abdominal Trauma 2023). Chest-trauma specifics per OpenAnesthesia 'Anesthesia for Thoracic Trauma' (2023)."
   },
 {
     id: "office-facial-laser-rf",
@@ -8085,7 +8129,7 @@ function renderNav(filter="", navId="nav"){
 }
 
 /* Build stamp — bump on each delivery so "am I on the latest?" is a one-glance check. */
-const BUILD_VERSION = "v1.0 beta · 2026-05-22"  /* internal build R24 (v1.0 beta; accordion nav in browse mode) */;
+const BUILD_VERSION = "v1.0 beta · 2026-06-04"  /* internal build R25 (v1.0 beta; caseFlow across all active service lines) */;
 
 /* Default landing: quiet prompt that defers to the sidebar (the real landing).
    The full explainer lives in the How-to-use panel, opened from the corner button. */
