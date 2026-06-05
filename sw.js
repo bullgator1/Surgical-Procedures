@@ -17,7 +17,7 @@
    the registration script in index.html no-ops there, so local use still works.
    ============================================================================= */
 
-const VERSION   = 'apr-2026-06-04';        // <-- BUMP THIS ON EVERY DEPLOY (e.g. apr-2026-07-01)
+const VERSION   = 'apr-2026-06-04-r35';        // <-- BUMP THIS ON EVERY DEPLOY (e.g. apr-2026-07-01)
 const APP_CACHE  = `apr-app-${VERSION}`;    // versioned: wiped & rebuilt on each bump
 const FONT_CACHE = 'apr-fonts-v1';          // versionless: fonts rarely change, keep across bumps
 

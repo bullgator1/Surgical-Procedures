@@ -8738,7 +8738,7 @@ const PROCEDURES = [
     name: "Perioperative Glucose & Insulin Management (the discrete algorithm)",
     section: "Anesthesia Essentials",
     page: "OA 2023-2025",
-    tags: ["Diabetes","Insulin algorithm","IV insulin infusion","Hypoglycemia rescue","D50","Preop holds","Autonomic neuropathy","Cross-cutting","Reference"],
+    tags: ["Diabetes","Insulin algorithm","1800 rule","ISF","Correction dose","IV insulin infusion","Hypoglycemia rescue","D50","Preop holds","Autonomic neuropathy","Cross-cutting","Reference"],
     snapshot: {
       position: "—",
       time: "—",
@@ -8749,6 +8749,7 @@ const PROCEDURES = [
     },
     flags: [
       "**Target BG ~140–180 mg/dL (most surgical and critically-ill adults; 80–180 if very stable, 90–180 in children) — and do NOT chase tight control.** Perioperative hypoglycemia while fasting is the bigger danger, so **give a correction dose only when BG >250 mg/dL** (the SPA/peds rule that prevents fasting hypoglycemia); for adults intraop, start treating sustained BG >180. **Recheck q1–2 h on insulin, q30 min after any insulin/dextrose change, q15 min if hypoglycemic.**",
+      "**Don’t eyeball the correction — compute it with the 1800 rule.** **ISF (mg/dL dropped per 1 unit of rapid-acting insulin) = 1800 ÷ TDD**, and **correction dose = (current BG − target) ÷ ISF** with target **150** (mid-range, leaves room to fall). TDD = total daily insulin (basal + bolus) from the history or pump — knowing it self-corrects for sensitivity (T1DM on TDD 30 → ISF 60; T2DM on TDD 150 → ISF 12, both right). **Use the 1500 rule instead if the insulin is regular, not a rapid analog.** **TDD unknown → default ISF: T1DM 60, T2DM 40** (T1DM 70 if lean, BMI <22) — err toward the higher ISF / smaller dose; slight undertreatment is the safe error while fasting. **Hard ceiling: cap a single SQ bolus at ~10 units, then recheck and re-dose — never stack.**",
       "**Choose the route by case length and stability, then run it identically every time.** **SQ** correction for short (<4 h), stable, minor cases. **IV infusion** for long cases, large fluid shifts, hemodynamic instability, or critical illness. **IV insulin algorithm:** start at the patient's basal rate (weight-based, units/kg/h) — if unknown, ~0.02–0.05 u/kg/h; **titrate by 0.01–0.03 u/kg/h, give NO boluses, and run dextrose through the SAME line.** Because IV regular insulin's half-life is ~5 min, **give the SQ basal/rapid dose ≥15 min BEFORE stopping the drip** so there is no uncovered gap.",
       "**Hypoglycemia (BG <70 or symptomatic): give glucose first — don't just hold insulin (stopping basal risks ketosis).** Awake, tolerating PO: **15–20 g oral glucose** (tabs/gel/juice). IV access, NPO: **adult 25 g D50 IV (50 mL = 1 amp); child D10 5 mL/kg or D25 2–4 mL/kg** (avoid D50 in small children). **BG <60, obtunded, or no IV access: glucagon 1 mg IM (0.5 mg if <20–25 kg).** **Recheck q15 min until BG >80**, then run a maintenance dextrose infusion. (Rescue doses are standard practice; thresholds per the OA summaries.)",
       "**Hold the right drugs — but NEVER stop basal insulin in type 1 diabetes (absolute deficiency → ketosis/DKA within hours).** Day of surgery: stop **oral agents (metformin, sulfonylureas) and non-insulin injectables (GLP-1 RAs)**; **SGLT-2 inhibitors stop 3–4 days before** (euglycemic DKA — see the SGLT-2 card). **Insulin:** long-acting basal ~**80% the morning of** (cut another 20–30% if hypo-prone); **NPH/premixed 50% the morning of**; hold short-acting while NPO. A T1DM patient on a pump must stay on basal or be converted to an IV infusion — never left with no insulin on board."
@@ -8778,7 +8779,9 @@ const PROCEDURES = [
       ],
       intra: [
         "Run the chosen route (SQ short/stable; IV infusion long/unstable) with q1–2 h checks (q30 min after changes); co-administer dextrose with any IV insulin; treat BG >250 (or >180 adult intraop) and hypoglycemia per the discrete steps.",
-        "Anticipate autonomic-neuropathy hemodynamic lability and aspiration risk (gastroparesis); CGM/pump values must be confirmed by point-of-care BG before acting, and closed-loop pumps switched to manual or removed."
+        "Anticipate autonomic-neuropathy hemodynamic lability and aspiration risk (gastroparesis); CGM/pump values must be confirmed by point-of-care BG before acting, and closed-loop pumps switched to manual or removed.",
+        "**Dose math (1800 rule):** ISF = 1800 ÷ TDD; dose = (BG − 150) ÷ ISF; cap 10 U SQ. **Lower the ISF (bigger dose) for resistance** — obese BMI >35, chronic steroids or intraop dexamethasone, sepsis, 3rd-trimester (T2DM with BMI >35 or on steroids → ISF 20–30). **Raise the ISF (smaller dose) for sensitivity** — lean BMI <22, elderly >70, renal (eGFR <45, ↓insulin clearance), hepatic or adrenal insufficiency, recent severe hypo, post-bariatric. **Worked (target 150):** T1DM TDD 50, BG 320 → ISF 36, ~5 U; lean T1DM TDD unknown, BG 340 → ISF 60, ~3 U; T2DM TDD 100, BG 350 → ISF 18, 11 → capped 10 U; T2DM BMI 40 on steroids, BG 350 → ISF 25, 8 U.",
+        "**SQ correction is approximate intraop** (unreliable subcutaneous perfusion) — don’t redose SQ more often than **q2–3 h**, and switch to an **IV infusion** for tight control, long or unstable cases, or when serial SQ corrections aren’t holding. The 10-unit ceiling + recheck is what protects against late hypoglycemia, especially in an ambulatory patient headed for discharge."
       ],
       post: [
         "Resume oral intake and the home regimen as soon as tolerated; continue checks for 24–48 h (insulin needs shift with nausea, stress, pain, inactivity).",
@@ -8789,15 +8792,18 @@ const PROCEDURES = [
       pimps: [
         "**\u201cPerioperative BG target?\u201d** \u2192 ~140\u2013180 mg/dL (adult/critically ill), 90\u2013180 in children; correct only BG >250 while fasting to avoid hypoglycemia.",
         "**\u201cWhen IV insulin vs SQ?\u201d** \u2192 IV infusion for long/unstable/critically-ill or big fluid shifts; SQ for short, stable, minor cases.",
-        "**\u201cAdult hypoglycemia, has an IV \u2014 what do you give?\u201d** \u2192 25 g D50 (one 50 mL amp); glucagon 1 mg IM if no IV access/obtunded; recheck q15 min."
+        "**\u201cAdult hypoglycemia, has an IV \u2014 what do you give?\u201d** \u2192 25 g D50 (one 50 mL amp); glucagon 1 mg IM if no IV access/obtunded; recheck q15 min.",
+        "**“How do you calculate the correction dose?”** → 1800 rule: ISF = 1800 ÷ TDD, dose = (BG − 150) ÷ ISF; if TDD unknown default ISF T1DM 60 / T2DM 40; cap ~10 U SQ and recheck (1500 rule for regular insulin)."
       ],
       pearls: [
         "**Never stop basal insulin in type 1 diabetes** \u2014 give glucose for hypoglycemia rather than withholding basal (ketosis risk).",
         "**IV insulin half-life ~5 min** \u2014 overlap SQ dosing \u226515 min before stopping the drip; dextrose runs in the same line; titrate 0.01\u20130.03 u/kg/h, no boluses.",
-        "**Autonomic neuropathy = aspiration + hemodynamic lability** \u2014 gastroparesis (consider RSI), orthostatic hypotension, blunted HR response, silent ischemia."
+        "**Autonomic neuropathy = aspiration + hemodynamic lability** \u2014 gastroparesis (consider RSI), orthostatic hypotension, blunted HR response, silent ischemia.",
+        "**1800 rule = ISF for rapid analogs** (1500 for regular): ISF = 1800 ÷ TDD, correction = (BG − target)/ISF, target 150; TDD-unknown defaults T1DM 60 / T2DM 40, 70 if lean.",
+        "**Cap single SQ bolus ~10 U and don’t stack** — SQ q2–3 h max (unreliable perfusion); go IV infusion for tight/long/unstable control. Undertreatment is the safer OR error."
       ]
     },
-    source: "OpenAnesthesia: 'Perioperative Management of Patients with Type 1 Diabetes Mellitus' (Duggar & Hoagland, updated 2023-08-15; ISPAD/SPA peds), 'Perioperative Management of Patients with Type 2 Diabetes Mellitus' (Mootz & Tombul, updated 2025-07-18), and 'Diabetes Mellitus: Classification, Pathophysiology, Complications, and Management' (Stanley & Mootz, updated 2025-10-20). Hypoglycemia rescue doses (D50 25 g / D10 / D25 / glucagon) per standard practice; targets, correction thresholds, IV titration, and drug-hold timing per the cited summaries. Cross-cutting reference (not a Jaffe procedure)."
+    source: "OpenAnesthesia: 'Perioperative Management of Patients with Type 1 Diabetes Mellitus' (Duggar & Hoagland, updated 2023-08-15; ISPAD/SPA peds), 'Perioperative Management of Patients with Type 2 Diabetes Mellitus' (Mootz & Tombul, updated 2025-07-18), and 'Diabetes Mellitus: Classification, Pathophysiology, Complications, and Management' (Stanley & Mootz, updated 2025-10-20). Hypoglycemia rescue doses (D50 25 g / D10 / D25 / glucagon) per standard practice; targets, correction thresholds, IV titration, and drug-hold timing per the cited summaries. Dose-calculation layer: the 1800 rule (ISF = 1800 ÷ TDD) and correction formula are standard (UCSF Diabetes Teaching Center; the 1500 rule applies to regular insulin); ISF ~15–100 mg/dL/unit and the insulin-resistance markers (TDD >80 u, BMI >35, prednisone >20 mg) per StatPearls; SQ-vs-IV route, the q2–3 h no-stacking limit, and unreliable intraop SQ perfusion per BJA Education (2024) and StatPearls. The DM-type ISF defaults (T1DM 60 / T2DM 40; 70 if lean), the 150 target, and the ~10-unit single-bolus ceiling are a practical, evidence-informed framework (clinician synthesis, 2026-06-04) — not a single sourced protocol; verify against your institution’s order set. Cross-cutting reference (not a Jaffe procedure)."
   },
   {
     id: "anesthesia-essentials-sglt2",
