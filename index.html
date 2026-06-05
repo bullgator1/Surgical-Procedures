@@ -9566,55 +9566,15 @@ const hash = (location.hash || "").replace('#','');
 if(hash && PROCEDURES.find(p => p.id === hash)){ selectProcedure(hash); }
 else { renderWelcome(); }
 </script>
-<!-- Service-worker registration + "new version" banner.
-     No-ops on file:// (double-click) and where SW is unsupported, so local use is unaffected. -->
+<!-- Service-worker registration. No-ops on file:// so double-click still works.
+     sw.js is content-agnostic and never needs editing — content updates itself online. -->
 <script>
 (function () {
   if (!('serviceWorker' in navigator)) return;
-  var host = location.hostname;
-  if (location.protocol !== 'https:' && host !== 'localhost' && host !== '127.0.0.1') return;
-
-  function showUpdateBanner(onUpdate) {
-    if (document.getElementById('apr-update-banner')) return;
-    var bar = document.createElement('div');
-    bar.id = 'apr-update-banner';
-    bar.setAttribute('role', 'status');
-    bar.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:99999;'
-      + 'background:#1f5f5b;color:#fffefb;font:500 14px/1.3 system-ui,-apple-system,sans-serif;'
-      + 'padding:10px 14px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.25);'
-      + 'display:flex;gap:12px;align-items:center;max-width:92vw;';
-    var msg = document.createElement('span'); msg.textContent = 'New version available';
-    var btn = document.createElement('button'); btn.textContent = 'Refresh';
-    btn.style.cssText = 'background:#fffefb;color:#1f5f5b;border:0;border-radius:7px;'
-      + 'font:600 14px system-ui,sans-serif;padding:6px 12px;cursor:pointer;';
-    btn.onclick = onUpdate;
-    var x = document.createElement('button'); x.textContent = '\u00d7'; x.setAttribute('aria-label','Dismiss');
-    x.style.cssText = 'background:transparent;color:#fffefb;border:0;font:600 18px system-ui,sans-serif;cursor:pointer;line-height:1;';
-    x.onclick = function () { bar.remove(); };
-    bar.appendChild(msg); bar.appendChild(btn); bar.appendChild(x);
-    document.body.appendChild(bar);
-  }
-
+  var h = location.hostname;
+  if (location.protocol !== 'https:' && h !== 'localhost' && h !== '127.0.0.1') return;
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('sw.js').then(function (reg) {
-      if (reg.waiting && navigator.serviceWorker.controller) {
-        showUpdateBanner(function () { reg.waiting.postMessage({ type: 'APR_SKIP_WAITING' }); });
-      }
-      reg.addEventListener('updatefound', function () {
-        var nw = reg.installing; if (!nw) return;
-        nw.addEventListener('statechange', function () {
-          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-            showUpdateBanner(function () { nw.postMessage({ type: 'APR_SKIP_WAITING' }); });
-          }
-        });
-      });
-      reg.update().catch(function () {});
-    }).catch(function () { /* first load offline — fine, app still runs */ });
-
-    var reloaded = false;
-    navigator.serviceWorker.addEventListener('controllerchange', function () {
-      if (reloaded) return; reloaded = true; window.location.reload();
-    });
+    navigator.serviceWorker.register('sw.js').catch(function () {});
   });
 })();
 </script>
