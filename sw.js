@@ -1,44 +1,42 @@
 /* =============================================================================
-   sw.js — content-agnostic offline cache for the Anesthesia Procedure Reference.
+   sw.js — reusable network-first offline cache for a single-page HTML app.
 
-   NO VERSION TO BUMP. This file never needs editing.
-     • Online  → always serves the freshest file from the network and refreshes
-                 its cached copy in the background.
-     • Offline → serves the last copy it saw (WiFi dead zones / the OR).
+   SAFE TO REUSE across multiple apps, INCLUDING several GitHub Pages projects
+   that share one origin (e.g. bullgator1.github.io/appA/, /appB/, ...).
 
-   The app content ("the food") updates itself on every online load; the butler
-   (this file) stays the same. Deploy ritual is just: commit index.html.
-
-   Runs only over https:// (or localhost) — i.e. the Netlify deploy. Opening
-   index.html by double-click (file://) is unaffected; the registration snippet
-   in index.html no-ops there, so local use still works.
+   >>> THE ONLY LINE YOU CHANGE PER APP IS THE NEXT ONE. <<<
+   Give each app a unique prefix so apps on the same origin never clobber each
+   other's cache.
    ============================================================================= */
 
-const CACHE      = 'apr-runtime';     // static name — intentionally never changes
-const FONT_CACHE = 'apr-fonts';       // Google Fonts, runtime-cached
-const FONT_ORIGINS = ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
+const APP = 'anes-proc';        // <-- CHANGE THIS per app: 'preop-guide', 'tox-ref', etc.
 
-/* Seed the shell so the very first offline open works even before a full load
-   finishes. This is just a starting copy — network-first below keeps it fresh. */
-const SHELL = [
-  './', './index.html', './manifest.json',
-  './favicon32.png', './appletouchicon.png',
-  './icon152.png', './icon167.png', './icon120.png',
-];
+/* -- nothing below needs editing -------------------------------------------- */
+
+const CACHE = APP + '-v1';        // bump to -v2 only if you ever want a hard reset of THIS app
+
+/* Minimal shell so the first offline open works. allSettled => a missing file
+   never breaks install. Relative paths resolve under this app's own folder. */
+const SHELL = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);
     await Promise.allSettled(SHELL.map((u) => cache.add(new Request(u, { cache: 'reload' }))));
-    self.skipWaiting();   // safe: no auto-reload handler, so nobody is reloaded mid-case
+    self.skipWaiting();
   })());
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
-    // Remove any caches from the old versioned design (apr-app-*) on first switchover.
+    // Delete ONLY this app's own old cache versions (e.g. preop-guide-v1 when
+    // we're now preop-guide-v2). Never touches caches belonging to other apps
+    // on the same origin — that's what makes this safe to reuse everywhere.
     const keys = await caches.keys();
-    await Promise.all(keys.map((k) => (k !== CACHE && k !== FONT_CACHE) ? caches.delete(k) : null));
+    await Promise.all(
+      keys.filter((k) => k.startsWith(APP + '-') && k !== CACHE)
+          .map((k) => caches.delete(k))
+    );
     await self.clients.claim();
   })());
 });
@@ -46,30 +44,18 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
-  let url; try { url = new URL(req.url); } catch (e) { return; }
 
-  // Google Fonts: stale-while-revalidate.
-  if (FONT_ORIGINS.includes(url.origin)) {
-    event.respondWith((async () => {
-      const cache = await caches.open(FONT_CACHE);
-      const cached = await cache.match(req);
-      const net = fetch(req).then((res) => {
-        if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone());
-        return res;
-      }).catch(() => null);
-      return cached || (await net) || new Response('', { status: 504 });
-    })());
-    return;
-  }
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;   // leave cross-origin (fonts/CDN) alone
 
-  if (url.origin !== self.location.origin) return;
+  const isDoc = req.mode === 'navigate'
+             || req.destination === 'document'
+             || url.pathname.endsWith('/')
+             || url.pathname.endsWith('index.html');
 
-  // The HTML document: NETWORK-FIRST — online always gets the freshest app, and
-  // the cached copy is refreshed every time; offline falls back to last-seen.
-  const isDoc = req.mode === 'navigate' || req.destination === 'document' ||
-                url.pathname === '/' || url.pathname.endsWith('/') ||
-                url.pathname.endsWith('index.html');
   if (isDoc) {
+    // NETWORK-FIRST for the page — the live deploy is always the source of truth,
+    // so the app can never "freeze" on a stale build when you're online.
     event.respondWith((async () => {
       try {
         const fresh = await fetch(req);
@@ -78,24 +64,23 @@ self.addEventListener('fetch', (event) => {
         return fresh;
       } catch (e) {
         const cache = await caches.open(CACHE);
-        return (await cache.match(req)) || (await cache.match('./index.html')) ||
-               (await cache.match('./')) ||
-               new Response('<h1>Offline</h1><p>Open the app once on WiFi to cache it.</p>',
-                            { status: 503, headers: { 'Content-Type': 'text/html' } });
+        return (await cache.match(req))
+            || (await cache.match('./index.html'))
+            || Response.error();
       }
     })());
     return;
   }
 
-  // Other same-origin assets (icons, manifest): stale-while-revalidate, so they
-  // self-update too with no version to manage.
+  // Other same-folder assets: network-first, fall back to cache when offline.
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
-    const cached = await cache.match(req);
-    const net = fetch(req).then((res) => {
-      if (res && res.ok) cache.put(req, res.clone());
-      return res;
-    }).catch(() => null);
-    return cached || (await net) || new Response('', { status: 504 });
+    try {
+      const fresh = await fetch(req);
+      cache.put(req, fresh.clone());
+      return fresh;
+    } catch (e) {
+      return (await cache.match(req)) || Response.error();
+    }
   })());
 });
