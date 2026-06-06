@@ -247,6 +247,9 @@
   .phase-intra .phase-head { background: var(--accent); }
   .phase-post .phase-head { background: var(--teal); }
 
+.figs-section figure.jfig { margin: 10px 0 4px; }
+  .figs-section .jfig img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); background:#fff; display:block; }
+  .figs-section .jfig figcaption { font-size: 12px; color: var(--ink-faint); margin-top: 6px; font-style: italic; }
   .source-note { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--line-soft); font-size: 11.5px; color: var(--ink-faint); font-family: var(--mono); line-height: 1.5; }
 
   /* Across the Drapes — surgeon's-eye view (Surgical Recall content). Distinct from the four
@@ -713,6 +716,7 @@ const PROCEDURES = [
   },
 {
     id: "craniotomy-aneurysm",
+    figs: [{src:"figs/craniotomy-aneurysm.webp", cap:"Locations of aneurysms of the circle of Willis (Fig 1.1-1)"}],
     name: "Craniotomy for Intracranial Aneurysm (incl. Cerebral Embolectomy)",
     section: "Neurosurgery",
     page: "4",
@@ -844,6 +848,7 @@ const PROCEDURES = [
   },
   {
     id: "ec-ic-bypass",
+    figs: [{src:"figs/ec-ic-bypass.webp", cap:"Typical skin incision for EC-IC bypass (Fig 1.1-6)"}],
     name: "EC-IC Revascularization / Bypass (incl. Moyamoya)",
     section: "Neurosurgery",
     page: "23",
@@ -904,6 +909,7 @@ const PROCEDURES = [
   },
   {
     id: "craniotomy-tumor",
+    figs: [{src:"figs/craniotomy-tumor.webp", cap:"Concorde (modified prone) position for posterior fossa resection (Fig 1.1-3)"}],
     name: "Craniotomy for Tumor (Supratentorial / Posterior Fossa / Skull)",
     section: "Neurosurgery",
     page: "29",
@@ -967,6 +973,7 @@ const PROCEDURES = [
   },
   {
     id: "craniotomy-trauma",
+    figs: [{src:"figs/craniotomy-trauma.webp", cap:"Precautions during craniotomy for subdural hematoma (Fig 1.1-13)"}],
     name: "Craniotomy for Trauma (Hematoma Evacuation / Decompression)",
     section: "Neurosurgery",
     page: "37",
@@ -1037,6 +1044,7 @@ const PROCEDURES = [
   },
   {
     id: "mvd-trigeminal",
+    figs: [{src:"figs/mvd-trigeminal.webp", cap:"Microvascular decompression: incision and exposure (Fig 1.1-14)"}],
     name: "Microvascular Decompression & Percutaneous Procedures for Cranial Nerves",
     section: "Neurosurgery",
     page: "44",
@@ -1161,6 +1169,7 @@ const PROCEDURES = [
   },
   {
     id: "csf-leak-transoral",
+    figs: [{src:"figs/csf-leak-transoral.webp", cap:"The transoral approach to the cervicomedullary junction (Fig 1.3-1)"}],
     name: "CSF Leak Repair (Bifrontal) & Transoral Approach to Cervicomedullary Junction / Odontoid",
     section: "Neurosurgery",
     page: "47",
@@ -1213,6 +1222,7 @@ const PROCEDURES = [
   },
   {
     id: "ventricular-shunt",
+    figs: [{src:"figs/ventricular-shunt.webp", cap:"Pathways of CSF flow and sites of obstruction (Fig 1.1-20)"}],
     name: "Ventricular Shunt Procedures (VP / VA Shunt)",
     section: "Neurosurgery",
     page: "57",
@@ -1265,6 +1275,7 @@ const PROCEDURES = [
   },
   {
     id: "chiari-decompression",
+    figs: [{src:"figs/chiari-decompression.webp", cap:"Basilar impression: dens in the foramen magnum (Fig 1.1-17)"}],
     name: "Craniocervical (Chiari) Decompression",
     section: "Neurosurgery",
     page: "61",
@@ -1325,6 +1336,7 @@ const PROCEDURES = [
   },
   {
     id: "functional-neurosurgery",
+    figs: [{src:"figs/functional-neurosurgery.webp", cap:"Anatomical targets for therapeutic lesions, thalamotomy (Fig 1.2-2)"}],
     name: "Functional Neurosurgery (Stereotactic · DBS · Epilepsy · Spasticity · Pain Stimulators/Pumps)",
     section: "Neurosurgery",
     page: "64",
@@ -1387,6 +1399,7 @@ const PROCEDURES = [
   },
   {
     id: "cervical-spine-surgery",
+    figs: [{src:"figs/cervical-spine-surgery.webp", cap:"Upper C-spine: cross-section, anteromedial approach (Fig 1.3-6)"}],
     name: "Cervical Spine Surgery (Anterior & Posterior, Upper & Lower)",
     section: "Neurosurgery",
     page: "94",
@@ -1448,6 +1461,7 @@ const PROCEDURES = [
   },
   {
     id: "thoracolumbar-spine-surgery",
+    figs: [{src:"figs/thoracolumbar-spine-surgery.webp", cap:"Denis spinal three-column model (Fig 1.3-14)"}],
     name: "Thoracolumbar Spine Surgery & Fusion / Instrumentation",
     section: "Neurosurgery",
     page: "114",
@@ -1509,6 +1523,7 @@ const PROCEDURES = [
   },
   {
     id: "carotid-endarterectomy-neuro",
+    figs: [{src:"figs/carotid-endarterectomy-neuro.webp", cap:"Exposure and control of the carotid artery (Fig 1.4-1)"}],
     name: "Carotid Endarterectomy",
     section: "Neurosurgery",
     page: "134",
@@ -1577,6 +1592,7 @@ const PROCEDURES = [
   },
 {
     id: "cardiopulmonary-bypass",
+    figs: [{src:"figs/cardiopulmonary-bypass.webp", cap:"Schematic of the cardiopulmonary bypass circuit (Fig 6.1-2)"}],
     name: "Cardiopulmonary Bypass (CPB) — Conduct & Management",
     section: "Cardiovascular Surgery",
     page: "348",
@@ -1639,6 +1655,7 @@ const PROCEDURES = [
   },
   {
     id: "cabg",
+    figs: [{src:"figs/cabg.webp", cap:"Coronary artery circulation, anterior view (Fig 6.1-3)"}],
     name: "Coronary Artery Bypass Graft (CABG) ± LV Aneurysmectomy",
     section: "Cardiovascular Surgery",
     page: "354",
@@ -1698,6 +1715,7 @@ const PROCEDURES = [
   },
   {
     id: "valve-surgery",
+    figs: [{src:"figs/valve-surgery.webp", cap:"Transseptal approach to the mitral valve (Fig 6.2-10)"}],
     name: "Valve Surgery (Aortic · Mitral · Tricuspid · Septal Myectomy)",
     section: "Cardiovascular Surgery",
     page: "361",
@@ -1875,6 +1893,7 @@ const PROCEDURES = [
   },
   {
     id: "opcab-micab",
+    figs: [{src:"figs/opcab-micab.webp", cap:"Off-pump: mechanical stabilizer on the beating heart (Fig 6.2-1)"}],
     name: "Off-Pump / Minimally Invasive Coronary Bypass (OPCAB / MICAB)",
     section: "Cardiovascular Surgery",
     page: "384",
@@ -1933,6 +1952,7 @@ const PROCEDURES = [
   },
   {
     id: "port-access-cardiac",
+    figs: [{src:"figs/port-access-cardiac.webp", cap:"The port-access (femoro-femoral) CPB system (Fig 6.2-6)"}],
     name: "Port-Access & Minimally Invasive Valve / Coronary Surgery",
     section: "Cardiovascular Surgery",
     page: "389",
@@ -1993,6 +2013,7 @@ const PROCEDURES = [
   },
   {
     id: "transcatheter-valve",
+    figs: [{src:"figs/transcatheter-valve.webp", cap:"TAVI: retrograde transcatheter aortic valve approach (Fig 6.2-11)"}],
     name: "Transcatheter Valve Replacement (TAVR) & Percutaneous Valve Procedures",
     section: "Cardiovascular Surgery",
     page: "394",
@@ -2054,6 +2075,7 @@ const PROCEDURES = [
   },
   {
     id: "thoracic-aortic-surgery",
+    figs: [{src:"figs/thoracic-aortic-surgery.webp", cap:"Classification systems of aortic dissection (Fig 6.3-3)"}],
     name: "Thoracic & Thoracoabdominal Aortic Aneurysm / Dissection Repair",
     section: "Cardiovascular Surgery",
     page: "409",
@@ -2124,6 +2146,7 @@ const PROCEDURES = [
   },
   {
     id: "endovascular-aortic-repair",
+    figs: [{src:"figs/endovascular-aortic-repair.webp", cap:"Aneurysm of the abdominal aorta (Fig 6.3-7)"}],
     name: "Endovascular Aortic Stent-Grafting (EVAR / TEVAR)",
     section: "Cardiovascular Surgery",
     page: "412",
@@ -2182,6 +2205,7 @@ const PROCEDURES = [
   },
   {
     id: "peripheral-vascular-surgery",
+    figs: [{src:"figs/peripheral-vascular-surgery.webp", cap:"Fogarty catheter embolectomy (Fig 6.3-10)"}],
     name: "Peripheral & Visceral Vascular Surgery (Aortic · Infrainguinal Bypass · Embolectomy · Access · Venous)",
     section: "Cardiovascular Surgery",
     page: "428",
@@ -3918,6 +3942,7 @@ const PROCEDURES = [
   },
 {
     id: "cesarean-obstetric",
+    figs: [{src:"figs/cesarean-obstetric.webp", cap:"Typical cesarean-section incisions (Fig 8.3-1)"}],
     name: "Cesarean Section & Obstetric Emergencies (incl. Uterine Rupture, Placenta Accreta, Obstetric Hysterectomy)",
     section: "Obstetric/Gynecologic Surgery",
     page: "835",
@@ -3988,6 +4013,7 @@ const PROCEDURES = [
   },
   {
     id: "gyn-oncology-laparotomy",
+    figs: [{src:"figs/gyn-oncology-laparotomy.webp", cap:"Aortic node dissection, ovarian-cancer staging (Fig 8.1-1)"}],
     name: "Gynecologic Oncology Laparotomy (Staging · Cytoreduction · Radical Hysterectomy · Exenteration · Vulvectomy)",
     section: "Obstetric/Gynecologic Surgery",
     page: "760",
@@ -4046,6 +4072,7 @@ const PROCEDURES = [
   },
   {
     id: "minor-uterine-procedures",
+    figs: [{src:"figs/minor-uterine-procedures.webp", cap:"Uterine aspiration (Fig 8.2-2)"}],
     name: "Minor Uterine Procedures (D&C · D&E · GTD Suction · Hysteroscopy · Conization · Cervical Cerclage)",
     section: "Obstetric/Gynecologic Surgery",
     page: "801",
@@ -4100,6 +4127,7 @@ const PROCEDURES = [
   },
   {
     id: "hysterectomy-benign",
+    figs: [{src:"figs/hysterectomy-benign.webp", cap:"Surgical anatomy for vaginal hysterectomy (Fig 8.2-4)"}],
     name: "Hysterectomy — Vaginal · Abdominal · Laparoscopic / Robotic (Benign)",
     section: "Obstetric/Gynecologic Surgery",
     page: "820",
@@ -4153,6 +4181,7 @@ const PROCEDURES = [
   },
   {
     id: "prolapse-incontinence-repair",
+    figs: [{src:"figs/prolapse-incontinence-repair.webp", cap:"Anatomy of cystocele and rectocele (Fig 8.2-5)"}],
     name: "Pelvic Prolapse Repair & Stress Incontinence Surgery (Colporrhaphy · Sacrocolpopexy · Slings)",
     section: "Obstetric/Gynecologic Surgery",
     page: "824",
@@ -4264,6 +4293,7 @@ const PROCEDURES = [
   },
   {
     id: "brachytherapy-implants",
+    figs: [{src:"figs/brachytherapy-implants.webp", cap:"Fletcher-Suit tandem and ovoid applicators (Fig 8.1-11)"}],
     name: "Gynecologic Brachytherapy / Interstitial Perineal Implants",
     section: "Obstetric/Gynecologic Surgery",
     page: "796",
@@ -4316,6 +4346,7 @@ const PROCEDURES = [
   },
 {
     id: "esophageal-surgery",
+    figs: [{src:"figs/esophageal-surgery.webp", cap:"Nissen fundoplication (Fig 7.1-6)"}],
     name: "Esophageal Surgery (Diverticulectomy · Myotomy · Fundoplication · Perforation · Esophagostomy)",
     section: "General Surgery",
     page: "482",
@@ -4386,6 +4417,7 @@ const PROCEDURES = [
   },
   {
     id: "esophagectomy",
+    figs: [{src:"figs/esophagectomy.webp", cap:"Thoracoabdominal esophagogastrectomy (Fig 7.1-7)"}],
     name: "Esophagectomy",
     section: "General Surgery",
     page: "492",
@@ -4452,6 +4484,7 @@ const PROCEDURES = [
   },
   {
     id: "gastroduodenal-surgery",
+    figs: [{src:"figs/gastroduodenal-surgery.webp", cap:"Billroth I and Billroth II anatomy (Fig 7.2-1)"}],
     name: "Gastroduodenal Surgery (Peptic Ulcer · Perforation · Gastric Resection · Gastrostomy)",
     section: "General Surgery",
     page: "505",
@@ -4518,6 +4551,7 @@ const PROCEDURES = [
   },
   {
     id: "bariatric-surgery",
+    figs: [{src:"figs/bariatric-surgery.webp", cap:"Proximal Roux-en-Y gastric bypass (Fig 7.2-4)"}],
     name: "Bariatric Surgery (Open & Laparoscopic — Bypass · Sleeve)",
     section: "General Surgery",
     page: "511",
@@ -4584,6 +4618,7 @@ const PROCEDURES = [
   },
 {
     id: "small-bowel-appendix",
+    figs: [{src:"figs/small-bowel-appendix.webp", cap:"Relevant anatomy for appendectomy (Fig 7.3-2)"}],
     name: "Small Bowel, Appendix & Exploratory Laparotomy (Resection · Enterolysis · Fistulae · Appendectomy · Ostomy · Retroperitoneal Tumor)",
     section: "General Surgery",
     page: "521",
@@ -4658,6 +4693,7 @@ const PROCEDURES = [
   },
   {
     id: "colorectal-surgery",
+    figs: [{src:"figs/colorectal-surgery.webp", cap:"Anatomy of the colon (Fig 7.4-1)"}],
     name: "Colorectal Surgery (Proctocolectomy · Colectomy · Stoma — Open & Laparoscopic)",
     section: "General Surgery",
     page: "539",
@@ -4730,6 +4766,7 @@ const PROCEDURES = [
   },
   {
     id: "anorectal-surgery",
+    figs: [{src:"figs/anorectal-surgery.webp", cap:"Anorectal anatomy with landmarks (Fig 7.4-2)"}],
     name: "Anorectal Surgery (Hemorrhoidectomy · Fistula · Sphincterotomy · Rectal Prolapse · Fecal Incontinence)",
     section: "General Surgery",
     page: "549",
@@ -4791,6 +4828,7 @@ const PROCEDURES = [
   },
 {
     id: "hepatic-resection",
+    figs: [{src:"figs/hepatic-resection.webp", cap:"Types of anatomic liver resection (Fig 7.5-1)"}],
     name: "Hepatic Resection & Hepatorrhaphy",
     section: "General Surgery",
     page: "563",
@@ -4857,6 +4895,7 @@ const PROCEDURES = [
   },
   {
     id: "biliary-cholecystectomy",
+    figs: [{src:"figs/biliary-cholecystectomy.webp", cap:"Anatomy for laparoscopic cholecystectomy (Fig 7.7-3)"}],
     name: "Cholecystectomy & Biliary Tract Surgery (Open & Laparoscopic · CBD Exploration · Bile Duct Tumor)",
     section: "General Surgery",
     page: "572",
@@ -4929,6 +4968,7 @@ const PROCEDURES = [
   },
   {
     id: "pancreatic-surgery",
+    figs: [{src:"figs/pancreatic-surgery.webp", cap:"Standard pancreaticoduodenectomy, Whipple (Fig 7.8-7)"}],
     name: "Pancreatic Surgery (Whipple · Pancreatectomy · Pseudocyst Drainage · Pancreatitis)",
     section: "General Surgery",
     page: "624",
@@ -5001,6 +5041,7 @@ const PROCEDURES = [
   },
   {
     id: "splenectomy",
+    figs: [{src:"figs/splenectomy.webp", cap:"Anatomy of the spleen (Fig 7.7-4)"}],
     name: "Splenectomy (Open & Laparoscopic)",
     section: "General Surgery",
     page: "595",
@@ -5066,6 +5107,7 @@ const PROCEDURES = [
   },
 {
     id: "thyroid-parathyroid-surgery",
+    figs: [{src:"figs/thyroid-parathyroid-surgery.webp", cap:"Vascular relationships to the thyroid gland (Fig 7.11-4)"}],
     name: "Thyroidectomy & Parathyroidectomy",
     section: "General Surgery",
     page: "670–682",
@@ -5152,6 +5194,7 @@ const PROCEDURES = [
   },
   {
     id: "adrenalectomy-pheochromocytoma",
+    figs: [{src:"figs/adrenalectomy-pheochromocytoma.webp", cap:"Laparoscopic adrenalectomy: positioning and ports (Fig 7.7-6)"}],
     name: "Adrenalectomy (incl. Pheochromocytoma · Conn's · Cushing's)",
     section: "General Surgery",
     page: "683",
@@ -5225,6 +5268,7 @@ const PROCEDURES = [
   },
   {
     id: "hernia-abdominal-wall",
+    figs: [{src:"figs/hernia-abdominal-wall.webp", cap:"The inguinal region (Fig 7.7-9)"}],
     name: "Hernia & Abdominal Wall Repair (Inguinal · Femoral · Incisional · Dehiscence — Open & Laparoscopic)",
     section: "General Surgery",
     page: "651",
@@ -5349,6 +5393,7 @@ const PROCEDURES = [
   },
 {
     id: "kidney-pancreas-transplant",
+    figs: [{src:"figs/kidney-pancreas-transplant.webp", cap:"Simultaneous pancreas-kidney transplantation (Fig 7.12-2)"}],
     name: "Kidney & Kidney-Pancreas Transplantation",
     section: "General Surgery",
     page: "694",
@@ -5414,6 +5459,7 @@ const PROCEDURES = [
   },
   {
     id: "liver-transplant",
+    figs: [{src:"figs/liver-transplant.webp", cap:"Venovenous bypass during liver transplantation (Fig 7.12-4)"}],
     name: "Liver Transplantation",
     section: "General Surgery",
     page: "705",
@@ -5480,6 +5526,7 @@ const PROCEDURES = [
   },
   {
     id: "organ-donor-operations",
+    figs: [{src:"figs/organ-donor-operations.webp", cap:"Anatomy for laparoscopic live-donor nephrectomy (Fig 7.12-3)"}],
     name: "Living-Donor Nephrectomy & Multiorgan Procurement",
     section: "General Surgery",
     page: "700",
@@ -5539,6 +5586,7 @@ const PROCEDURES = [
   },
   {
     id: "trauma-surgery",
+    figs: [{src:"figs/trauma-surgery.webp", cap:"Incision for ED (resuscitative) thoracotomy (Fig 7.13-4)"}],
     name: "Trauma Surgery (Chest & Abdominal — ED Thoracotomy · Tamponade · Damage Control)",
     section: "General Surgery",
     page: "730",
@@ -6100,6 +6148,7 @@ const PROCEDURES = [
   },
   {
     id: "cardiac-electrophysiology-procedures",
+    figs: [{src:"figs/cardiac-electrophysiology-procedures.webp", cap:"Laser-sheath lead extraction (Fig 13.1-3)"}],
     name: "Cardiac EP Lab (DC Cardioversion · ICD/CRT-D Implant · Lead Extraction · AF Ablation)",
     section: "Out-of-Operating Room Procedures",
     page: "1495",
@@ -6209,6 +6258,7 @@ const PROCEDURES = [
   },
   {
     id: "tips-procedure",
+    figs: [{src:"figs/tips-procedure.webp", cap:"TIPS placement with Colapinto needle (Fig 13.1-6)"}],
     name: "Transjugular Intrahepatic Portosystemic Shunt (TIPS)",
     section: "Out-of-Operating Room Procedures",
     page: "1507",
@@ -6369,6 +6419,7 @@ const PROCEDURES = [
   },
   {
     id: "pediatric-remote-radiation-cath-ecmo",
+    figs: [{src:"figs/pediatric-remote-radiation-cath-ecmo.webp", cap:"ECMO veno-arterial cannulation circuit (Fig 13.2-3)"}],
     name: "Pediatric Remote-Location Anesthesia (Radiation Therapy · Cardiac Cath/EP · ECMO Cannulation)",
     section: "Out-of-Operating Room Procedures",
     page: "1536",
@@ -6422,6 +6473,7 @@ const PROCEDURES = [
   },
 {
     id: "facial-cosmetic-surgery",
+    figs: [{src:"figs/facial-cosmetic-surgery.webp", cap:"Anatomic layers of the face, SMAS (Fig 11.1-1)"}],
     name: "Facial Cosmetic Surgery (Facelift/Necklift · Browlift/Blepharoplasty · Rhinoplasty)",
     section: "Plastic and Reconstructive Surgery",
     page: "1090",
@@ -6475,6 +6527,7 @@ const PROCEDURES = [
   },
   {
     id: "aesthetic-body-contouring",
+    figs: [{src:"figs/aesthetic-body-contouring.webp", cap:"Abdominoplasty incision markings (Fig 11.2-3)"}],
     name: "Aesthetic Body Surgery (Mammoplasty · Mastopexy · Brachioplasty · Abdominoplasty · Body Lifts)",
     section: "Plastic and Reconstructive Surgery",
     page: "1108",
@@ -6529,6 +6582,7 @@ const PROCEDURES = [
   },
   {
     id: "facial-fractures-craniofacial",
+    figs: [{src:"figs/facial-fractures-craniofacial.webp", cap:"LeFort fracture lines (Fig 11.3-2)"}],
     name: "Facial Fractures & Craniofacial/Orthognathic Surgery (LeFort · Mandibular Osteotomies)",
     section: "Plastic and Reconstructive Surgery",
     page: "1128",
@@ -6588,6 +6642,7 @@ const PROCEDURES = [
   },
   {
     id: "microsurgery-free-flap-replantation",
+    figs: [{src:"figs/microsurgery-free-flap-replantation.webp", cap:"Locations of commonly used flaps (Fig 11.4-1)"}],
     name: "Microsurgery: Free-Flap Reconstruction & Replantation",
     section: "Plastic and Reconstructive Surgery",
     page: "1148",
@@ -6641,6 +6696,7 @@ const PROCEDURES = [
   },
   {
     id: "breast-reconstruction-plastic",
+    figs: [{src:"figs/breast-reconstruction-plastic.webp", cap:"TRAM flap breast reconstruction (Fig 11.4-5)"}],
     name: "Breast Reconstruction (Implant & Autologous Flap — TRAM/DIEP/Lat Dorsi)",
     section: "Plastic and Reconstructive Surgery",
     page: "1155",
@@ -6747,6 +6803,7 @@ const PROCEDURES = [
   },
   {
     id: "pressure-sore-burn-grafting",
+    figs: [{src:"figs/pressure-sore-burn-grafting.webp", cap:"Flap designs for sacral/ischial pressure sores (Fig 11.4-6)"}],
     name: "Pressure Sore Reconstruction & Burn Wound Grafting",
     section: "Plastic and Reconstructive Surgery",
     page: "1162",
@@ -6808,6 +6865,7 @@ const PROCEDURES = [
   },
 {
     id: "hand-wrist-surgery",
+    figs: [{src:"figs/hand-wrist-surgery.webp", cap:"Zone classification of flexor tendon injuries (Fig 10.1-3)"}],
     name: "Hand & Wrist Surgery (Darrach · Arthroplasty · Carpal Tunnel · Tendon/Nerve Repair · Replantation)",
     section: "Orthopedic Surgery",
     page: "928",
@@ -6861,6 +6919,7 @@ const PROCEDURES = [
   },
   {
     id: "shoulder-arm-surgery",
+    figs: [{src:"figs/shoulder-arm-surgery.webp", cap:"Beach-chair positioning for shoulder surgery (Fig 10.2-7)"}],
     name: "Shoulder & Arm Surgery (Arthroscopy · Arthroplasty · Instability · Brachial Plexus · Humerus)",
     section: "Orthopedic Surgery",
     page: "956",
@@ -6921,6 +6980,7 @@ const PROCEDURES = [
   },
   {
     id: "spine-surgery-orthopedic",
+    figs: [{src:"figs/spine-surgery-orthopedic.webp", cap:"Measuring the Cobb angle (Fig 10.3-5)"}],
     name: "Spine Surgery (Lumbar Discectomy · Thoracolumbar & Lumbosacral Fusion · Scoliosis)",
     section: "Orthopedic Surgery",
     page: "984",
@@ -6981,6 +7041,7 @@ const PROCEDURES = [
   },
   {
     id: "hip-surgery-arthroplasty-fracture",
+    figs: [{src:"figs/hip-surgery-arthroplasty-fracture.webp", cap:"Classification of proximal femur fractures (Fig 10.4-9)"}],
     name: "Hip Surgery (Total Hip Arthroplasty & Hip Fracture Fixation)",
     section: "Orthopedic Surgery",
     page: "1000",
@@ -7041,6 +7102,7 @@ const PROCEDURES = [
   },
   {
     id: "knee-surgery-orthopedic",
+    figs: [{src:"figs/knee-surgery-orthopedic.webp", cap:"The cruciate ligaments, posterior view (Fig 10.5-1)"}],
     name: "Knee Surgery (Total Knee Arthroplasty · Arthroscopy · Ligament/Tendon Repair · Arthrodesis)",
     section: "Orthopedic Surgery",
     page: "1034",
@@ -7101,6 +7163,7 @@ const PROCEDURES = [
   },
   {
     id: "tibia-lower-leg-surgery",
+    figs: [{src:"figs/tibia-lower-leg-surgery.webp", cap:"Cross-section of the leg: the four compartments (Fig 10.6-6)"}],
     name: "Tibia & Lower-Leg Surgery (Plateau Fracture · IM Nailing · External Fixation · Nonunion)",
     section: "Orthopedic Surgery",
     page: "1053",
@@ -7218,6 +7281,7 @@ const PROCEDURES = [
   },
   {
     id: "lower-extremity-amputation",
+    figs: [{src:"figs/lower-extremity-amputation.webp", cap:"Common lower-extremity amputation levels (Fig 10.6-3)"}],
     name: "Lower-Extremity Amputation (Syme · Transmetatarsal · Below/Above Knee)",
     section: "Orthopedic Surgery",
     page: "1066",
@@ -7271,6 +7335,7 @@ const PROCEDURES = [
   },
 {
     id: "pediatric-neurosurgery",
+    figs: [{src:"figs/pediatric-neurosurgery.webp", cap:"Endoscopic third ventriculostomy (Fig 12.1-1)"}],
     name: "Pediatric Neurosurgery (Myelomeningocele · Dysraphism · Vein of Galen · Ventriculoscopy · Shunts)",
     section: "Pediatric Surgery",
     page: "1178",
@@ -7324,6 +7389,7 @@ const PROCEDURES = [
   },
   {
     id: "congenital-cardiac-surgery",
+    figs: [{src:"figs/congenital-cardiac-surgery.webp", cap:"Anatomic features of tetralogy of Fallot (Fig 12.4-6)"}],
     name: "Congenital Cardiac Surgery (ASD · VSD · AV Canal · PDA · Coarctation · TOF · TGA · Truncus · Single-Ventricle)",
     section: "Pediatric Surgery",
     page: "1230",
@@ -7387,6 +7453,7 @@ const PROCEDURES = [
   },
   {
     id: "pediatric-ophthalmology",
+    figs: [{src:"figs/pediatric-ophthalmology.webp", cap:"Anatomy of the oculocardiac reflex (Fig 12.2-2)"}],
     name: "Pediatric Ophthalmology (Strabismus · ROP Laser · Vitrectomy)",
     section: "Pediatric Surgery",
     page: "1198",
@@ -7443,6 +7510,7 @@ const PROCEDURES = [
   },
   {
     id: "pediatric-neonatal-general-thoracic",
+    figs: [{src:"figs/pediatric-neonatal-general-thoracic.webp", cap:"Types of esophageal atresia (Fig 12.5-1)"}],
     name: "Neonatal General & Thoracic Surgery (Omphalocele/Gastroschisis · CDH · TEF · NEC · Pyloric Stenosis · Bronchoscopy)",
     section: "Pediatric Surgery",
     page: "1326",
@@ -7518,6 +7586,7 @@ const PROCEDURES = [
   },
   {
     id: "pediatric-airway-ent",
+    figs: [{src:"figs/pediatric-airway-ent.webp", cap:"Developmental abnormalities of the tracheobronchial tree (Fig 12.5-3)"}],
     name: "Pediatric Airway & ENT (Tonsillectomy · Adenoidectomy · Foreign Body · Laryngeal/Tracheal)",
     section: "Pediatric Surgery",
     page: "1355",
@@ -7586,6 +7655,7 @@ const PROCEDURES = [
   },
   {
     id: "pediatric-craniofacial-cleft",
+    figs: [{src:"figs/pediatric-craniofacial-cleft.webp", cap:"Unilateral cleft-lip rotation-advancement repair (Fig 12.8-4)"}],
     name: "Pediatric Craniofacial & Cleft Surgery (Craniosynostosis · Cleft Lip/Palate · Pharyngoplasty · Otoplasty)",
     section: "Pediatric Surgery",
     page: "1436",
@@ -14164,7 +14234,7 @@ function renderNav(filter="", navId="nav"){
 }
 
 /* Build stamp — bump on each delivery so "am I on the latest?" is a one-glance check. */
-const BUILD_VERSION = "v1.0 beta · 2026-06-05"  /* internal build R52 (round-2 OA grab: Heritable Syndromes +7 rows [Marfan, Ehlers-Danlos, Osteogenesis Imperfecta, Achondroplasia, Turner, DiGeorge, Klippel-Feil] + connective-tissue flag; +5 cards: Methemoglobinemia, Hypothyroidism & Myxedema Coma, Cystic Fibrosis, Periodic Paralysis, Guillain-Barre) [prev R51 (2nd OA gap-fill from re-added summaries: +2 reference cards — Antiarrhythmic Drugs [Vaughan-Williams], Local Anesthetics: Pharmacology & Adjuvants; folded pearls — eFAST into Trauma Surgery, constrictive physiology into Pericardiectomy, sync-cardioversion-vs-defib energies into Cardiac EP Lab, acromegaly into Adult Difficult Airway, CO2-absorbent CO/Compound-A hazards into Surgical Fires) [prev R50 (OA gap-fill: +3 Anesthesia Essentials cards — Heritable & Genetic Syndromes [MPS/EB/Williams/Noonan/NF1/Trisomy13&18/Porphyria], Remimazolam, Intraoperative Neuromonitoring [SSEP/MEP/EEG/NIRS]; folded pearls — CYP2D6/BChE/RYR1 pharmacogenetics into Opioids/NMB/MH, perioperative DNR into Geriatric, organophosphate cholinergic crisis into ANS, WPW pre-excitation into Cardiac EP Lab) [prev R49 (OA figure-review pass, batch 1 of the 161-figure sweep: +2 Anesthesia Essentials cards — Autonomic Nervous System & Key Cardiovascular Reflexes, Burn Injury Resuscitation & Anesthetic Management; NMB card enriched with the muscle-sensitivity hierarchy + AMG-vs-EMG caveat; AFE flag in the Cesarean card gains the A-OK protocol) [was R48 (v1.0 beta; OA cardiac-comorbidity close-out — 3 new Anesthesia Essentials cards: heart failure, HOCM (noncardiac), perioperative myocardial ischemia (ACS/MI/MINS combined); + medication-management enriched in place with the PCI-to-surgery stent-timing ladder; coronary-anatomy/CPP + CABG deliberately skipped) */;
+const BUILD_VERSION = "v1.0 beta · 2026-06-05"  /* internal build R53 (Jaffe figures: +67 surgical figures embedded as lazy-loaded external WebP via new figs field + renderProcedure figBlock; positioning/classification/key-anatomy, one per figure-rich surgical card) [prev R52 (round-2 OA grab: Heritable Syndromes +7 rows [Marfan, Ehlers-Danlos, Osteogenesis Imperfecta, Achondroplasia, Turner, DiGeorge, Klippel-Feil] + connective-tissue flag; +5 cards: Methemoglobinemia, Hypothyroidism & Myxedema Coma, Cystic Fibrosis, Periodic Paralysis, Guillain-Barre) [prev R51 (2nd OA gap-fill from re-added summaries: +2 reference cards — Antiarrhythmic Drugs [Vaughan-Williams], Local Anesthetics: Pharmacology & Adjuvants; folded pearls — eFAST into Trauma Surgery, constrictive physiology into Pericardiectomy, sync-cardioversion-vs-defib energies into Cardiac EP Lab, acromegaly into Adult Difficult Airway, CO2-absorbent CO/Compound-A hazards into Surgical Fires) [prev R50 (OA gap-fill: +3 Anesthesia Essentials cards — Heritable & Genetic Syndromes [MPS/EB/Williams/Noonan/NF1/Trisomy13&18/Porphyria], Remimazolam, Intraoperative Neuromonitoring [SSEP/MEP/EEG/NIRS]; folded pearls — CYP2D6/BChE/RYR1 pharmacogenetics into Opioids/NMB/MH, perioperative DNR into Geriatric, organophosphate cholinergic crisis into ANS, WPW pre-excitation into Cardiac EP Lab) [prev R49 (OA figure-review pass, batch 1 of the 161-figure sweep: +2 Anesthesia Essentials cards — Autonomic Nervous System & Key Cardiovascular Reflexes, Burn Injury Resuscitation & Anesthetic Management; NMB card enriched with the muscle-sensitivity hierarchy + AMG-vs-EMG caveat; AFE flag in the Cesarean card gains the A-OK protocol) [was R48 (v1.0 beta; OA cardiac-comorbidity close-out — 3 new Anesthesia Essentials cards: heart failure, HOCM (noncardiac), perioperative myocardial ischemia (ACS/MI/MINS combined); + medication-management enriched in place with the PCI-to-surgery stent-timing ladder; coronary-anatomy/CPP + CABG deliberately skipped) */;
 
 /* Default landing: quiet prompt that defers to the sidebar (the real landing).
    The full explainer lives in the How-to-use panel, opened from the corner button. */
@@ -14242,6 +14312,16 @@ function openHowTo(){
   panel.addEventListener('click', e => { if(e.target === panel) close(); });
 }
 
+function figBlock(figs){
+  if(!figs || !figs.length) return "";
+  const items = figs.map(f => `<figure class="jfig"><img loading="lazy" src="${f.src}" alt="${(f.cap||'').replace(/"/g,'&quot;')}"><figcaption>${mdBold(f.cap||'')}</figcaption></figure>`).join("");
+  return `
+    <section class="section figs-section">
+      <div class="section-head"><span class="bar" style="background:${PILLARS.technique.color}"></span><h3>Surgical figure</h3><span class="pill-tag">Jaffe 5e</span></div>
+      ${items}
+    </section>`;
+}
+
 function renderProcedure(p){
   const c = document.getElementById('content');
   const snap = p.snapshot;
@@ -14288,6 +14368,8 @@ function renderProcedure(p){
         <p>${mdBold(p.technique.summary)}</p>
         <ul>${techSteps}</ul>
       </section>
+
+      ${figBlock(p.figs)}
 
       ${caseFlowBlock(p.caseFlow)}
 
