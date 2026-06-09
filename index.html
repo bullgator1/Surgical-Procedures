@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anesthesia Procedure Reference</title>
+<script>/* boot-error safety net: if the page fails to parse/boot, show a recovery card instead of a blank screen */
+window.addEventListener('error',function(e){if(window.__oracleBooted)return;var b=document.getElementById('oracle-boot-error');if(!b)return;b.style.display='block';var d=document.getElementById('oracle-boot-detail');if(d)d.textContent=((e&&e.message)||'Error')+(e&&e.lineno?(' (line '+e.lineno+')'):'');});</script>
+<script>/* keep search results clear of the on-screen keyboard (no effect when keyboard is down) */
+(function(){var vv=window.visualViewport;if(!vv)return;function u(){var kb=Math.max(0,window.innerHeight-vv.height-vv.offsetTop);['#nav','.search-results'].forEach(function(s){var el=document.querySelector(s);if(el)el.style.paddingBottom=kb?kb+'px':'';});}vv.addEventListener('resize',u);vv.addEventListener('scroll',u);})();</script>
 <!-- App icon. NOTE: iOS "Add to Home Screen" requires apple-touch-icon to be a real,
      hosted FILE (a data: URI is ignored on iOS). When this app is served over http(s),
      place the PNGs (apple-touch-icon.png etc.) next to index.html and iOS will use them.
@@ -50,6 +54,25 @@
     --sans: 'IBM Plex Sans', system-ui, sans-serif;
     --serif: 'Newsreader', Georgia, serif;
   }
+  /* ---- dark palette (auto when system is dark, or when ORacle forces it) ---- */
+  :root[data-theme="dark"] {
+    --ink: #e7e4dd; --ink-soft: #b8bcc4; --ink-faint: #888e98;
+    --paper: #15171b; --paper-2: #1e2127; --line: #33373f; --line-soft: #272b32;
+    --accent: #e0876e; --accent-soft: #c97a62;
+    --teal: #5cb3aa; --gold: #cdab53; --slate: #90a9c6; --rose: #d18b99;
+    --flag-bg: #2b1e1c; --flag-border: #6e4d44;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 6px 22px rgba(0,0,0,0.5);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --ink: #e7e4dd; --ink-soft: #b8bcc4; --ink-faint: #888e98;
+      --paper: #15171b; --paper-2: #1e2127; --line: #33373f; --line-soft: #272b32;
+      --accent: #e0876e; --accent-soft: #c97a62;
+      --teal: #5cb3aa; --gold: #cdab53; --slate: #90a9c6; --rose: #d18b99;
+      --flag-bg: #2b1e1c; --flag-border: #6e4d44;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 6px 22px rgba(0,0,0,0.5);
+    }
+  }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -89,10 +112,10 @@
   .search-wrap { padding: 16px 20px 12px; border-bottom: 1px solid var(--line-soft); position: relative; }
   #search {
     width: 100%; padding: 9px 34px 9px 12px; border: 1px solid var(--line);
-    border-radius: var(--radius); font-family: var(--sans); font-size: 13.5px;
+    border-radius: var(--radius); font-family: var(--sans); font-size: 16px;
     background: var(--paper); color: var(--ink); transition: border-color .15s, box-shadow .15s;
   }
-  #search:focus { outline: none; border-color: var(--accent-soft); box-shadow: 0 0 0 3px rgba(138,51,36,0.08); background: #fff; }
+  #search:focus { outline: none; border-color: var(--accent-soft); box-shadow: 0 0 0 3px rgba(138,51,36,0.08); background: var(--paper-2); }
   #search::placeholder { color: var(--ink-faint); }
   /* hide native search clear (we provide our own) */
   #search::-webkit-search-cancel-button, #landSearch::-webkit-search-cancel-button { -webkit-appearance: none; }
@@ -110,10 +133,10 @@
   .land-search-wrap { position: relative; margin: 22px 0 6px; max-width: 560px; }
   #landSearch {
     width: 100%; padding: 12px 40px 12px 15px; border: 1px solid var(--line);
-    border-radius: var(--radius); font-family: var(--sans); font-size: 15px;
+    border-radius: var(--radius); font-family: var(--sans); font-size: 16px;
     background: var(--paper-2); color: var(--ink); transition: border-color .15s, box-shadow .15s;
   }
-  #landSearch:focus { outline: none; border-color: var(--accent-soft); box-shadow: 0 0 0 3px rgba(138,51,36,0.08); background: #fff; }
+  #landSearch:focus { outline: none; border-color: var(--accent-soft); box-shadow: 0 0 0 3px rgba(138,51,36,0.08); background: var(--paper-2); }
   #landSearch::placeholder { color: var(--ink-faint); }
   .land-search-wrap .land-clear { right: 12px; }
   .land-nav { max-width: 560px; margin-bottom: 8px; max-height: 46vh; overflow-y: auto;
@@ -281,9 +304,9 @@
     .app { grid-template-columns: 1fr; }
     .sidebar { position: fixed; left: 0; top: 0; width: 86%; max-width: 340px; height: 100%; transform: translateX(-100%); transition: transform .25s; z-index: 60; box-shadow: var(--shadow); background: var(--paper-2); -webkit-overflow-scrolling: touch; }
     .sidebar.open { transform: none; }
-    .topbar-mobile { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--line); background: var(--paper-2); position: sticky; top: 0; z-index: 40; }
-    .topbar-mobile button { background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 7px 11px; font-size: 18px; cursor: pointer; line-height: 1; }
-    .topbar-mobile .tb-title { font-family: var(--serif); font-size: 17px; font-weight: 500; }
+    .topbar-mobile { display: flex; align-items: center; gap: 12px; padding: 7px 14px; border-bottom: 1px solid var(--line); background: var(--paper-2); position: sticky; top: 0; z-index: 40; }
+    .topbar-mobile button { background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 11px; font-size: 18px; cursor: pointer; line-height: 1; }
+    .topbar-mobile .tb-title { display: none; }
     .main-inner { padding: 26px 22px 90px; }
     .welcome h2 { font-size: 28px; }
     .welcome .pillars { grid-template-columns: 1fr; }
@@ -296,6 +319,14 @@
 </style>
 </head>
 <body>
+<div id="oracle-boot-error" role="alert" style="display:none;position:fixed;inset:0;z-index:99999;background:#3d1414;color:#fff;font-family:-apple-system,system-ui,sans-serif;padding:28px 22px;overflow:auto;-webkit-overflow-scrolling:touch">
+  <div style="max-width:560px;margin:0 auto">
+    <h2 style="margin:0 0 10px;font-size:20px">This screen didn’t load fully</h2>
+    <p style="margin:0 0 14px;line-height:1.5;font-size:15px">Usually a typo from a recent content edit. Your other tabs still work — switch tabs, or reload to retry.</p>
+    <p id="oracle-boot-detail" style="font:12px/1.5 ui-monospace,monospace;opacity:.85;margin:0 0 18px;word-break:break-word"></p>
+    <button onclick="location.reload()" style="background:#fff;color:#3d1414;border:0;border-radius:10px;padding:11px 18px;font-size:15px;font-weight:600;cursor:pointer">Reload</button>
+  </div>
+</div>
 <div class="app">
   <aside class="sidebar" id="sidebar">
     <div class="brand">
@@ -15068,6 +15099,7 @@ function matchScore(p, needles){
 }
 
 function renderNav(filter="", navId="nav"){
+  window.__oracleBooted = 1;   // reaching the first render means the data array parsed OK
   const nav = document.getElementById(navId);
   if(!nav) return;
   const f = filter.trim().toLowerCase();
@@ -15370,13 +15402,27 @@ function closeMobileNav(){
     sc.style.display = 'none';
   }
 })();
-document.getElementById('menuBtn').addEventListener('click', () => {
+function openMobileNav(){
   const sb = document.getElementById('sidebar');
   sb.classList.add('open');
-  const scrim = document.createElement('div'); scrim.className = 'scrim';
-  scrim.addEventListener('click', closeMobileNav);
-  document.body.appendChild(scrim);
-});
+  if(!document.querySelector('.scrim')){
+    const scrim = document.createElement('div'); scrim.className = 'scrim';
+    scrim.addEventListener('click', closeMobileNav);
+    document.body.appendChild(scrim);
+  }
+}
+document.getElementById('menuBtn').addEventListener('click', openMobileNav);
+
+/* Hooks the ORacle shell calls so Procedures matches the other apps' search/home tools */
+window.ORACLE_TOOLS = {
+  search(){ openMobileNav(); const ss=document.getElementById('search'); if(ss){ ss.focus(); } },
+  home(){
+    closeMobileNav();
+    if(history.replaceState){ history.replaceState(null,'',location.pathname+location.search); }
+    renderWelcome();
+    const m=document.querySelector('.main'); if(m) m.scrollTop=0; window.scrollTo(0,0);
+  }
+};
 
 renderNav();
 const hash = (location.hash || "").replace('#','');
